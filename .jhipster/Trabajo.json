@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "cargo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaInicio",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "fechaFin",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "actualmente",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "descripcionCargo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "multimedia",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        }
+    ],
+    "changelogDate": "20160929175627",
+    "entityTableName": "trabajo",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

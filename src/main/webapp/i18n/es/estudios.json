@@ -1,0 +1,30 @@
+{
+    "littletimmyApp": {
+        "estudios" : {
+            "home": {
+                "title": "Estudios",
+                "createLabel": "Crear nuevo Estudios",
+                "createOrEditLabel": "Crear o editar Estudios",
+                "search": "Search for Estudios"
+            },
+            "created": "Un nuevo Estudios ha sido creado con el identificador {{ param }}",
+            "updated": "Un Estudios ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Estudios ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Estudios {{ id }}?"
+            },
+            "detail": {
+                "title": "Estudios"
+            },
+            "centro": "Centro",
+            "fechaInicio": "Fecha Inicio",
+            "fechaFinal": "Fecha Final",
+            "actualmente": "Actualmente",
+            "curso": "Curso",
+            "nota": "Nota",
+            "descripcion": "Descripcion",
+            "archivos": "Archivos",
+            "link": "Link"
+        }
+    }
+}

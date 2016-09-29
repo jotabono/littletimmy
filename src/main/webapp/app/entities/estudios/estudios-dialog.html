@@ -1,0 +1,104 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myEstudiosLabel" data-translate="littletimmyApp.estudios.home.createOrEditLabel">Create or edit a Estudios</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.estudios.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.estudios.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.estudios.centro" for="field_centro">Centro</label>
+            <input type="text" class="form-control" name="centro" id="field_centro"
+                    ng-model="vm.estudios.centro"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.estudios.fechaInicio" for="field_fechaInicio">Fecha Inicio</label>
+                <div class="input-group">
+                    <input id="field_fechaInicio" type="text" class="form-control" name="fechaInicio" datetime-picker="{{dateformat}}" ng-model="vm.estudios.fechaInicio" is-open="vm.datePickerOpenStatus.fechaInicio"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaInicio')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.estudios.fechaFinal" for="field_fechaFinal">Fecha Final</label>
+                <div class="input-group">
+                    <input id="field_fechaFinal" type="text" class="form-control" name="fechaFinal" datetime-picker="{{dateformat}}" ng-model="vm.estudios.fechaFinal" is-open="vm.datePickerOpenStatus.fechaFinal"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaFinal')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.estudios.actualmente" for="field_actualmente">Actualmente</label>
+            <input type="checkbox" class="form-control" name="actualmente" id="field_actualmente"
+                    ng-model="vm.estudios.actualmente"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.estudios.curso" for="field_curso">Curso</label>
+            <input type="text" class="form-control" name="curso" id="field_curso"
+                    ng-model="vm.estudios.curso"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.estudios.nota" for="field_nota">Nota</label>
+            <input type="number" class="form-control" name="nota" id="field_nota"
+                    ng-model="vm.estudios.nota"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.estudios.descripcion" for="field_descripcion">Descripcion</label>
+            <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                    ng-model="vm.estudios.descripcion"
+                     />
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setArchivos($file, vm.estudios)">
+            <label class="control-label" data-translate="littletimmyApp.estudios.archivos" for="field_archivos">Archivos</label>
+            <div>
+                <div ng-if="vm.estudios.archivos" class="help-block clearfix">
+                    <a class="pull-left" ng-click="vm.openFile(vm.estudios.archivosContentType, vm.estudios.archivos)" data-translate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{vm.estudios.archivosContentType}}, {{vm.byteSize(vm.estudios.archivos)}}</span>
+                    <button ng-click="vm.estudios.archivos=null;vm.estudios.archivosContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setArchivos($file, vm.estudios)" data-translate="entity.action.addblob">
+                    Add blob
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="archivos" id="field_archivos"
+                    ng-model="vm.estudios.archivos"
+                     />
+            <input type="hidden" class="form-control" name="archivosContentType" id="field_archivosContentType"
+                    ng-model="vm.estudios.archivosContentType" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.estudios.link" for="field_link">Link</label>
+            <input type="text" class="form-control" name="link" id="field_link"
+                    ng-model="vm.estudios.link"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,86 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTrabajoLabel" data-translate="littletimmyApp.trabajo.home.createOrEditLabel">Create or edit a Trabajo</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.trabajo.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.trabajo.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.trabajo.cargo" for="field_cargo">Cargo</label>
+            <input type="text" class="form-control" name="cargo" id="field_cargo"
+                    ng-model="vm.trabajo.cargo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.trabajo.fechaInicio" for="field_fechaInicio">Fecha Inicio</label>
+                <div class="input-group">
+                    <input id="field_fechaInicio" type="text" class="form-control" name="fechaInicio" datetime-picker="{{dateformat}}" ng-model="vm.trabajo.fechaInicio" is-open="vm.datePickerOpenStatus.fechaInicio"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaInicio')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.trabajo.fechaFin" for="field_fechaFin">Fecha Fin</label>
+                <div class="input-group">
+                    <input id="field_fechaFin" type="text" class="form-control" name="fechaFin" datetime-picker="{{dateformat}}" ng-model="vm.trabajo.fechaFin" is-open="vm.datePickerOpenStatus.fechaFin"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaFin')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.trabajo.actualmente" for="field_actualmente">Actualmente</label>
+            <input type="checkbox" class="form-control" name="actualmente" id="field_actualmente"
+                    ng-model="vm.trabajo.actualmente"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.trabajo.descripcionCargo" for="field_descripcionCargo">Descripcion Cargo</label>
+            <input type="text" class="form-control" name="descripcionCargo" id="field_descripcionCargo"
+                    ng-model="vm.trabajo.descripcionCargo"
+                     />
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setMultimedia($file, vm.trabajo)">
+            <label class="control-label" data-translate="littletimmyApp.trabajo.multimedia" for="field_multimedia">Multimedia</label>
+            <div>
+                <div ng-if="vm.trabajo.multimedia" class="help-block clearfix">
+                    <a class="pull-left" ng-click="vm.openFile(vm.trabajo.multimediaContentType, vm.trabajo.multimedia)" data-translate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{vm.trabajo.multimediaContentType}}, {{vm.byteSize(vm.trabajo.multimedia)}}</span>
+                    <button ng-click="vm.trabajo.multimedia=null;vm.trabajo.multimediaContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setMultimedia($file, vm.trabajo)" data-translate="entity.action.addblob">
+                    Add blob
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="multimedia" id="field_multimedia"
+                    ng-model="vm.trabajo.multimedia"
+                     />
+            <input type="hidden" class="form-control" name="multimediaContentType" id="field_multimediaContentType"
+                    ng-model="vm.trabajo.multimediaContentType" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

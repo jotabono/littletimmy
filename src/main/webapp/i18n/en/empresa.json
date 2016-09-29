@@ -1,0 +1,27 @@
+{
+    "littletimmyApp": {
+        "empresa" : {
+            "home": {
+                "title": "Empresas",
+                "createLabel": "Create a new Empresa",
+                "createOrEditLabel": "Create or edit a Empresa",
+                "search": "Search for Empresa"
+            },
+            "created": "A new Empresa is created with identifier {{ param }}",
+            "updated": "A Empresa is updated with identifier {{ param }}",
+            "deleted": "A Empresa is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Empresa {{ id }}?"
+            },
+            "detail": {
+                "title": "Empresa"
+            },
+            "nombre": "Nombre",
+            "numEmpleados": "Num Empleados",
+            "fechaFundacion": "Fecha Fundacion",
+            "ubicacion": "Ubicacion",
+            "latitud": "Latitud",
+            "longitud": "Longitud"
+        }
+    }
+}

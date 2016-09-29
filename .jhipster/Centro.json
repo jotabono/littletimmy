@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numEmpleados",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "fechaFundacion",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ubicacion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "latitud",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "longitud",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160929175626",
+    "entityTableName": "centro",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

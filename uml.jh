@@ -1,0 +1,45 @@
+entity Estudios {
+	centro String,
+    fechaInicio ZonedDateTime,
+    fechaFinal ZonedDateTime,
+    actualmente Boolean,
+    curso String,
+    nota Float,
+    descripcion String,
+    archivos Blob,
+    link String
+}
+
+entity Centro {
+	nombre String,
+    numEmpleados Integer,
+    fechaFundacion ZonedDateTime,
+    ubicacion String,
+    latitud String,
+    longitud String
+}
+
+entity Trabajo {
+	cargo String,
+    fechaInicio ZonedDateTime,
+    fechaFin ZonedDateTime,
+    actualmente Boolean,
+    descripcionCargo String,
+    multimedia Blob
+}
+
+entity Empresa {
+	nombre String,
+    numEmpleados Integer,
+    fechaFundacion ZonedDateTime,
+    ubicacion String,
+    latitud String,
+    longitud String
+}
+
+entity Recomendacion {
+    texto String,
+    fechaEnvio ZonedDateTime,
+    fechaResolucion ZonedDateTime,
+    aceptada Boolean
+}

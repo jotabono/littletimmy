@@ -1,0 +1,27 @@
+{
+    "littletimmyApp": {
+        "trabajo" : {
+            "home": {
+                "title": "Trabajos",
+                "createLabel": "Create a new Trabajo",
+                "createOrEditLabel": "Create or edit a Trabajo",
+                "search": "Search for Trabajo"
+            },
+            "created": "A new Trabajo is created with identifier {{ param }}",
+            "updated": "A Trabajo is updated with identifier {{ param }}",
+            "deleted": "A Trabajo is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Trabajo {{ id }}?"
+            },
+            "detail": {
+                "title": "Trabajo"
+            },
+            "cargo": "Cargo",
+            "fechaInicio": "Fecha Inicio",
+            "fechaFin": "Fecha Fin",
+            "actualmente": "Actualmente",
+            "descripcionCargo": "Descripcion Cargo",
+            "multimedia": "Multimedia"
+        }
+    }
+}

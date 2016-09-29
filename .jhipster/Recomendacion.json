@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "texto",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaEnvio",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "fechaResolucion",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "aceptada",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20160929175629",
+    "entityTableName": "recomendacion",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

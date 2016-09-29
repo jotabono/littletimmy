@@ -1,0 +1,27 @@
+{
+    "littletimmyApp": {
+        "centro" : {
+            "home": {
+                "title": "Centros",
+                "createLabel": "Create a new Centro",
+                "createOrEditLabel": "Create or edit a Centro",
+                "search": "Search for Centro"
+            },
+            "created": "A new Centro is created with identifier {{ param }}",
+            "updated": "A Centro is updated with identifier {{ param }}",
+            "deleted": "A Centro is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Centro {{ id }}?"
+            },
+            "detail": {
+                "title": "Centro"
+            },
+            "nombre": "Nombre",
+            "numEmpleados": "Num Empleados",
+            "fechaFundacion": "Fecha Fundacion",
+            "ubicacion": "Ubicacion",
+            "latitud": "Latitud",
+            "longitud": "Longitud"
+        }
+    }
+}

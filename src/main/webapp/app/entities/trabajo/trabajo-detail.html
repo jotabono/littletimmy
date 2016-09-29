@@ -1,0 +1,46 @@
+
+<div>
+    <h2><span data-translate="littletimmyApp.trabajo.detail.title">Trabajo</span> {{vm.trabajo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="littletimmyApp.trabajo.cargo">Cargo</span></dt>
+        <dd>
+            <span>{{vm.trabajo.cargo}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.trabajo.fechaInicio">Fecha Inicio</span></dt>
+        <dd>
+            <span>{{vm.trabajo.fechaInicio | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.trabajo.fechaFin">Fecha Fin</span></dt>
+        <dd>
+            <span>{{vm.trabajo.fechaFin | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.trabajo.actualmente">Actualmente</span></dt>
+        <dd>
+            <span>{{vm.trabajo.actualmente}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.trabajo.descripcionCargo">Descripcion Cargo</span></dt>
+        <dd>
+            <span>{{vm.trabajo.descripcionCargo}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.trabajo.multimedia">Multimedia</span></dt>
+        <dd>
+            <div ng-if="vm.trabajo.multimedia">
+                <a ng-click="vm.openFile(vm.trabajo.multimediaContentType, vm.trabajo.multimedia)" data-translate="entity.action.open">open</a>
+                {{vm.trabajo.multimediaContentType}}, {{vm.byteSize(vm.trabajo.multimedia)}}
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="trabajo-detail.edit({id:vm.trabajo.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

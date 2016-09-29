@@ -1,0 +1,25 @@
+{
+    "littletimmyApp": {
+        "recomendacion" : {
+            "home": {
+                "title": "Recomendacions",
+                "createLabel": "Crear nuevo Recomendacion",
+                "createOrEditLabel": "Crear o editar Recomendacion",
+                "search": "Search for Recomendacion"
+            },
+            "created": "Un nuevo Recomendacion ha sido creado con el identificador {{ param }}",
+            "updated": "Un Recomendacion ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Recomendacion ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Recomendacion {{ id }}?"
+            },
+            "detail": {
+                "title": "Recomendacion"
+            },
+            "texto": "Texto",
+            "fechaEnvio": "Fecha Envio",
+            "fechaResolucion": "Fecha Resolucion",
+            "aceptada": "Aceptada"
+        }
+    }
+}

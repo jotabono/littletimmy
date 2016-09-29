@@ -1,0 +1,86 @@
+<div>
+    <h2 data-translate="littletimmyApp.trabajo.home.title">Trabajos</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="trabajo.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  data-translate="littletimmyApp.trabajo.home.createLabel">
+                        Create new Trabajo
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'littletimmyApp.trabajo.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="littletimmyApp.trabajo.cargo">Cargo</span></th>
+                    <th><span data-translate="littletimmyApp.trabajo.fechaInicio">Fecha Inicio</span></th>
+                    <th><span data-translate="littletimmyApp.trabajo.fechaFin">Fecha Fin</span></th>
+                    <th><span data-translate="littletimmyApp.trabajo.actualmente">Actualmente</span></th>
+                    <th><span data-translate="littletimmyApp.trabajo.descripcionCargo">Descripcion Cargo</span></th>
+                    <th><span data-translate="littletimmyApp.trabajo.multimedia">Multimedia</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="trabajo in vm.trabajos track by trabajo.id">
+                    <td><a ui-sref="trabajo-detail({id:trabajo.id})">{{trabajo.id}}</a></td>
+                    <td>{{trabajo.cargo}}</td>
+                    <td>{{trabajo.fechaInicio | date:'medium'}}</td>
+                    <td>{{trabajo.fechaFin | date:'medium'}}</td>
+                    <td>{{trabajo.actualmente}}</td>
+                    <td>{{trabajo.descripcionCargo}}</td>
+                    <td>
+                        <a ng-if="trabajo.multimedia" ng-click="vm.openFile(trabajo.multimediaContentType, trabajo.multimedia)" data-translate="entity.action.open">open</a>
+                        <span ng-if="trabajo.multimedia">{{trabajo.multimediaContentType}}, {{vm.byteSize(trabajo.multimedia)}}</span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="trabajo-detail({id:trabajo.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="trabajo.edit({id:trabajo.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="trabajo.delete({id:trabajo.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

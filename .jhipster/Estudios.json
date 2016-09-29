@@ -1,0 +1,48 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "centro",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaInicio",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "fechaFinal",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "actualmente",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "curso",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nota",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "archivos",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "link",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160929175625",
+    "entityTableName": "estudios",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

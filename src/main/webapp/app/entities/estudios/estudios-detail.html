@@ -1,0 +1,58 @@
+
+<div>
+    <h2><span data-translate="littletimmyApp.estudios.detail.title">Estudios</span> {{vm.estudios.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="littletimmyApp.estudios.centro">Centro</span></dt>
+        <dd>
+            <span>{{vm.estudios.centro}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.estudios.fechaInicio">Fecha Inicio</span></dt>
+        <dd>
+            <span>{{vm.estudios.fechaInicio | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.estudios.fechaFinal">Fecha Final</span></dt>
+        <dd>
+            <span>{{vm.estudios.fechaFinal | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.estudios.actualmente">Actualmente</span></dt>
+        <dd>
+            <span>{{vm.estudios.actualmente}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.estudios.curso">Curso</span></dt>
+        <dd>
+            <span>{{vm.estudios.curso}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.estudios.nota">Nota</span></dt>
+        <dd>
+            <span>{{vm.estudios.nota}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.estudios.descripcion">Descripcion</span></dt>
+        <dd>
+            <span>{{vm.estudios.descripcion}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.estudios.archivos">Archivos</span></dt>
+        <dd>
+            <div ng-if="vm.estudios.archivos">
+                <a ng-click="vm.openFile(vm.estudios.archivosContentType, vm.estudios.archivos)" data-translate="entity.action.open">open</a>
+                {{vm.estudios.archivosContentType}}, {{vm.byteSize(vm.estudios.archivos)}}
+            </div>
+        </dd>
+        <dt><span data-translate="littletimmyApp.estudios.link">Link</span></dt>
+        <dd>
+            <span>{{vm.estudios.link}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="estudios-detail.edit({id:vm.estudios.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

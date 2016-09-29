@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span data-translate="littletimmyApp.centro.detail.title">Centro</span> {{vm.centro.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="littletimmyApp.centro.nombre">Nombre</span></dt>
+        <dd>
+            <span>{{vm.centro.nombre}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.centro.numEmpleados">Num Empleados</span></dt>
+        <dd>
+            <span>{{vm.centro.numEmpleados}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.centro.fechaFundacion">Fecha Fundacion</span></dt>
+        <dd>
+            <span>{{vm.centro.fechaFundacion | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.centro.ubicacion">Ubicacion</span></dt>
+        <dd>
+            <span>{{vm.centro.ubicacion}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.centro.latitud">Latitud</span></dt>
+        <dd>
+            <span>{{vm.centro.latitud}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.centro.longitud">Longitud</span></dt>
+        <dd>
+            <span>{{vm.centro.longitud}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="centro-detail.edit({id:vm.centro.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
