@@ -58,6 +58,39 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 100, unique = true)
     private String email;
 
+    @Column(name = "imagen")
+    private String imagen;
+
+    @Column(name = "fecha_nacimiento")
+    private ZonedDateTime fecha_nacimiento;
+
+    @Column(name = "dni")
+    private String dni;
+
+    @Column(name = "telefono")
+    private String telefono;
+
+    @Column(name = "domicilio")
+    private String domicilio;
+
+    @Column(name = "web_personal")
+    private String web_personal;
+
+    @Column(name = "facebook")
+    private String facebook;
+
+    @Column(name = "twitter")
+    private String twitter;
+
+    @Column(name = "skype")
+    private String skype;
+
+    @Column(name = "correo_alternativo")
+    private String correo_alternativo;
+
+    @Column(name = "carta_presentacion")
+    private String carta_presentacion;
+
     @NotNull
     @Column(nullable = false)
     private boolean activated = false;
@@ -184,6 +217,94 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public ZonedDateTime getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public void setFecha_nacimiento(ZonedDateTime fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public String getWeb_personal() {
+        return web_personal;
+    }
+
+    public void setWeb_personal(String web_personal) {
+        this.web_personal = web_personal;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
+
+    public String getCorreo_alternativo() {
+        return correo_alternativo;
+    }
+
+    public void setCorreo_alternativo(String correo_alternativo) {
+        this.correo_alternativo = correo_alternativo;
+    }
+
+    public String getCarta_presentacion() {
+        return carta_presentacion;
+    }
+
+    public void setCarta_presentacion(String carta_presentacion) {
+        this.carta_presentacion = carta_presentacion;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -210,13 +331,26 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-            "login='" + login + '\'' +
+            "id=" + id +
+            ", login='" + login + '\'' +
+            ", password='" + password + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", activated='" + activated + '\'' +
+            ", imagen='" + imagen + '\'' +
+            ", fecha_nacimiento=" + fecha_nacimiento +
+            ", dni='" + dni + '\'' +
+            ", telefono='" + telefono + '\'' +
+            ", domicilio='" + domicilio + '\'' +
+            ", web_personal='" + web_personal + '\'' +
+            ", facebook='" + facebook + '\'' +
+            ", twitter='" + twitter + '\'' +
+            ", skype='" + skype + '\'' +
+            ", correo_alternativo='" + correo_alternativo + '\'' +
+            ", carta_presentacion='" + carta_presentacion + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
-            "}";
+            ", activated=" + activated +
+            '}';
     }
 }

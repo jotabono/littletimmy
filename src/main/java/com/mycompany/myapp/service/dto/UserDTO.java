@@ -8,6 +8,7 @@ import com.mycompany.myapp.domain.User;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.*;
+import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 /**
@@ -30,6 +31,30 @@ public class UserDTO {
     @Size(min = 5, max = 100)
     private String email;
 
+    private String imagen;
+
+    private ZonedDateTime fecha_nacimiento;
+
+    private String dni;
+
+    private String telefono;
+
+    private String domicilio;
+
+    private String web_personal;
+
+    private String facebook;
+
+    private String twitter;
+
+    private String skype;
+
+    @Email
+    @Size(min = 5, max = 100)
+    private String correo_alternativo;
+
+    private String carta_presentacion;
+
     private boolean activated = false;
 
     @Size(min = 2, max = 5)
@@ -44,11 +69,14 @@ public class UserDTO {
         this(user.getLogin(), user.getFirstName(), user.getLastName(),
             user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getAuthorities().stream().map(Authority::getName)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet()), user.getImagen(), user.getFecha_nacimiento(), user.getDni(), user.getTelefono(), user.getDomicilio(),
+            user.getWeb_personal(), user.getFacebook(), user.getTwitter(), user.getSkype(), user.getCorreo_alternativo(), user.getCarta_presentacion());
     }
 
     public UserDTO(String login, String firstName, String lastName,
-        String email, boolean activated, String langKey, Set<String> authorities) {
+                   String email, boolean activated, String langKey, Set<String> authorities, String imagen, ZonedDateTime fecha_nacimiento,
+                   String dni, String telefono, String domicilio, String web_personal, String facebook, String twitter, String skype,
+                   String correo_alternativo, String carta_presentacion) {
 
         this.login = login;
         this.firstName = firstName;
@@ -57,6 +85,17 @@ public class UserDTO {
         this.activated = activated;
         this.langKey = langKey;
         this.authorities = authorities;
+        this.imagen = imagen;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.domicilio = domicilio;
+        this.web_personal = web_personal;
+        this.facebook = facebook;
+        this.twitter = twitter;
+        this.skype = skype;
+        this.correo_alternativo = correo_alternativo;
+        this.carta_presentacion = carta_presentacion;
     }
 
     public String getLogin() {
@@ -87,7 +126,51 @@ public class UserDTO {
         return authorities;
     }
 
-    @Override
+    public String getImagen() {
+        return imagen;
+    }
+
+    public ZonedDateTime getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public String getWeb_personal() {
+        return web_personal;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public String getSkype() {
+        return skype;
+    }
+
+    public String getCorreo_alternativo() {
+        return correo_alternativo;
+    }
+
+    public String getCarta_presentacion() {
+        return carta_presentacion;
+    }
+
+    /*@Override
     public String toString() {
         return "UserDTO{" +
             "login='" + login + '\'' +
@@ -98,5 +181,29 @@ public class UserDTO {
             ", langKey='" + langKey + '\'' +
             ", authorities=" + authorities +
             "}";
+    }*/
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+            "login='" + login + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            ", imagen='" + imagen + '\'' +
+            ", fecha_nacimiento=" + fecha_nacimiento +
+            ", dni='" + dni + '\'' +
+            ", telefono='" + telefono + '\'' +
+            ", domicilio='" + domicilio + '\'' +
+            ", web_personal='" + web_personal + '\'' +
+            ", facebook='" + facebook + '\'' +
+            ", twitter='" + twitter + '\'' +
+            ", skype='" + skype + '\'' +
+            ", correo_alternativo='" + correo_alternativo + '\'' +
+            ", carta_presentacion='" + carta_presentacion + '\'' +
+            ", activated=" + activated +
+            ", langKey='" + langKey + '\'' +
+            ", authorities=" + authorities +
+            '}';
     }
 }

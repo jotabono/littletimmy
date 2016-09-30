@@ -85,21 +85,21 @@ public class AccountResourceIntTest {
     @Test
     public void testNonAuthenticatedUser() throws Exception {
         restUserMockMvc.perform(get("/api/authenticate")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string(""));
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(""));
     }
 
     @Test
     public void testAuthenticatedUser() throws Exception {
         restUserMockMvc.perform(get("/api/authenticate")
-                .with(request -> {
-                    request.setRemoteUser("test");
-                    return request;
-                })
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string("test"));
+            .with(request -> {
+                request.setRemoteUser("test");
+                return request;
+            })
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string("test"));
     }
 
     @Test
@@ -118,14 +118,14 @@ public class AccountResourceIntTest {
         when(mockUserService.getUserWithAuthorities()).thenReturn(user);
 
         restUserMockMvc.perform(get("/api/account")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.login").value("test"))
-                .andExpect(jsonPath("$.firstName").value("john"))
-                .andExpect(jsonPath("$.lastName").value("doe"))
-                .andExpect(jsonPath("$.email").value("john.doe@jhipter.com"))
-                .andExpect(jsonPath("$.authorities").value(AuthoritiesConstants.ADMIN));
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.login").value("test"))
+            .andExpect(jsonPath("$.firstName").value("john"))
+            .andExpect(jsonPath("$.lastName").value("doe"))
+            .andExpect(jsonPath("$.email").value("john.doe@jhipter.com"))
+            .andExpect(jsonPath("$.authorities").value(AuthoritiesConstants.ADMIN));
     }
 
     @Test
@@ -133,8 +133,8 @@ public class AccountResourceIntTest {
         when(mockUserService.getUserWithAuthorities()).thenReturn(null);
 
         restUserMockMvc.perform(get("/api/account")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isInternalServerError());
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isInternalServerError());
     }
 
     @Test
@@ -153,7 +153,18 @@ public class AccountResourceIntTest {
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
-            null                    // lastModifiedDate
+            null,                    // lastModifiedDate,
+            null,                    // imagen
+            null,                    // fecha nacimiento
+            null,                    // dni
+            null,                    // telefono
+            null,                    // domicilio
+            null,                    // web personal
+            null,                    // facebook
+            null,                    // twitter
+            null,                    // skype
+            null,                    // correo alternativo
+            null                   // carta presentacion
         );
 
         restMvc.perform(
@@ -182,7 +193,18 @@ public class AccountResourceIntTest {
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
-            null                    // lastModifiedDate
+            null,                    // lastModifiedDate,
+            null,                    // imagen
+            null,                    // fecha nacimiento
+            null,                    // dni
+            null,                    // telefono
+            null,                    // domicilio
+            null,                    // web personal
+            null,                    // facebook
+            null,                    // twitter
+            null,                    // skype
+            null,                    // correo alternativo
+            null                   // carta presentacion
         );
 
         restUserMockMvc.perform(
@@ -211,7 +233,18 @@ public class AccountResourceIntTest {
             null,               // createdBy
             null,               // createdDate
             null,               // lastModifiedBy
-            null                // lastModifiedDate
+            null,                    // lastModifiedDate,
+            null,                    // imagen
+            null,                    // fecha nacimiento
+            null,                    // dni
+            null,                    // telefono
+            null,                    // domicilio
+            null,                    // web personal
+            null,                    // facebook
+            null,                    // twitter
+            null,                    // skype
+            null,                    // correo alternativo
+            null                   // carta presentacion
         );
 
         restUserMockMvc.perform(
@@ -240,7 +273,18 @@ public class AccountResourceIntTest {
             null,               // createdBy
             null,               // createdDate
             null,               // lastModifiedBy
-            null                // lastModifiedDate
+            null,                    // lastModifiedDate,
+            null,                    // imagen
+            null,                    // fecha nacimiento
+            null,                    // dni
+            null,                    // telefono
+            null,                    // domicilio
+            null,                    // web personal
+            null,                    // facebook
+            null,                    // twitter
+            null,                    // skype
+            null,                    // correo alternativo
+            null                   // carta presentacion
         );
 
         restUserMockMvc.perform(
@@ -270,12 +314,25 @@ public class AccountResourceIntTest {
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
-            null                    // lastModifiedDate
+            null,                    // lastModifiedDate,
+            null,                    // imagen
+            null,                    // fecha nacimiento
+            null,                    // dni
+            null,                    // telefono
+            null,                    // domicilio
+            null,                    // web personal
+            null,                    // facebook
+            null,                    // twitter
+            null,                    // skype
+            null,                    // correo alternativo
+            null                   // carta presentacion
         );
 
         // Duplicate login, different e-mail
         ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), validUser.getLogin(), validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),
-            "alicejr@example.com", true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate());
+            "alicejr@example.com", true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate(),
+            validUser.getImagen(), validUser.getFecha_nacimiento(),validUser.getDni(),validUser.getTelefono(), validUser.getDomicilio(),validUser.getWeb_personal(),validUser.getFacebook(),
+            validUser.getTwitter(), validUser.getSkype(), validUser.getCorreo_alternativo(), validUser.getCarta_presentacion());
 
         // Good user
         restMvc.perform(
@@ -312,12 +369,25 @@ public class AccountResourceIntTest {
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
-            null                    // lastModifiedDate
+            null,                    // lastModifiedDate,
+            null,                    // imagen
+            null,                    // fecha nacimiento
+            null,                    // dni
+            null,                    // telefono
+            null,                    // domicilio
+            null,                    // web personal
+            null,                    // facebook
+            null,                    // twitter
+            null,                    // skype
+            null,                    // correo alternativo
+            null                   // carta presentacion
         );
 
         // Duplicate e-mail, different login
         ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), "johnjr", validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),
-            validUser.getEmail(), true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate());
+            validUser.getEmail(), true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate(),
+            validUser.getImagen(), validUser.getFecha_nacimiento(),validUser.getDni(),validUser.getTelefono(), validUser.getDomicilio(),validUser.getWeb_personal(),validUser.getFacebook(),
+            validUser.getTwitter(), validUser.getSkype(), validUser.getCorreo_alternativo(), validUser.getCarta_presentacion());
 
         // Good user
         restMvc.perform(
@@ -353,7 +423,18 @@ public class AccountResourceIntTest {
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
-            null                    // lastModifiedDate
+            null,                    // lastModifiedDate,
+            null,                    // imagen
+            null,                    // fecha nacimiento
+            null,                    // dni
+            null,                    // telefono
+            null,                    // domicilio
+            null,                    // web personal
+            null,                    // facebook
+            null,                    // twitter
+            null,                    // skype
+            null,                    // correo alternativo
+            null                   // carta presentacion
         );
 
         restMvc.perform(
@@ -378,7 +459,18 @@ public class AccountResourceIntTest {
             "funky@example.com",    // e-mail
             true,                   // activated
             "es",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            null,                    // imagen
+            null,                    // fecha nacimiento
+            null,                    // dni
+            null,                    // telefono
+            null,                    // domicilio
+            null,                    // web personal
+            null,                    // facebook
+            null,                    // twitter
+            null,                    // skype
+            null,                    // correo alternativo
+            null                   // carta presentacion
         );
 
         restUserMockMvc.perform(

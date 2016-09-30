@@ -14,6 +14,8 @@
         vm.save = save;
         vm.settingsAccount = null;
         vm.success = null;
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar = openCalendar;
 
         /**
          * Store the "settings account" in a separate variable, and not in the shared "account" variable.
@@ -25,9 +27,23 @@
                 firstName: account.firstName,
                 langKey: account.langKey,
                 lastName: account.lastName,
-                login: account.login
+                login: account.login,
+                imagen: account.imagen,
+                fecha_nacimiento: account.fecha_nacimiento,
+                web_personal: account.web_personal,
+                facebook: account.facebook,
+                twitter: account.twitter,
+                skype: account.skype,
+                carta_presentacion: account.carta_presentacion,
+                correo_alternativo: account.correo_alternativo,
+                dni: account.dni,
+                domicilio: account.domicilio
             };
         };
+
+        function openCalendar (date) {
+            vm.datePickerOpenStatus[date] = true;
+        }
 
         Principal.identity().then(function(account) {
             vm.settingsAccount = copyAccount(account);
