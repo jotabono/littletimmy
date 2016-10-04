@@ -38,10 +38,10 @@
                     <th><span data-translate="global.field.id">ID</span></th>
                     <th><span data-translate="littletimmyApp.empresa.nombre">Nombre</span></th>
                     <th><span data-translate="littletimmyApp.empresa.numEmpleados">Num Empleados</span></th>
-                    <th><span data-translate="littletimmyApp.empresa.fechaFundacion">Fecha Fundacion</span></th>
                     <th><span data-translate="littletimmyApp.empresa.ubicacion">Ubicacion</span></th>
                     <th><span data-translate="littletimmyApp.empresa.latitud">Latitud</span></th>
                     <th><span data-translate="littletimmyApp.empresa.longitud">Longitud</span></th>
+                    <th><span data-translate="littletimmyApp.empresa.fechaFundacion">Fecha Fundacion</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -50,10 +50,10 @@
                     <td><a ui-sref="empresa-detail({id:empresa.id})">{{empresa.id}}</a></td>
                     <td>{{empresa.nombre}}</td>
                     <td>{{empresa.numEmpleados}}</td>
-                    <td>{{empresa.fechaFundacion | date:'medium'}}</td>
                     <td>{{empresa.ubicacion}}</td>
                     <td>{{empresa.latitud}}</td>
                     <td>{{empresa.longitud}}</td>
+                        <td>{{empresa.fechaFundacion | date:'yyyy'}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

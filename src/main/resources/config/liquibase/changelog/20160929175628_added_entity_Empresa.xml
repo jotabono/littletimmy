@@ -29,10 +29,6 @@
                 <constraints nullable="true" />
             </column>
             
-            <column name="fecha_fundacion" type="timestamp">
-                <constraints nullable="true" />
-            </column>
-            
             <column name="ubicacion" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -45,9 +41,12 @@
                 <constraints nullable="true" />
             </column>
             
+            <column name="fecha_fundacion" type="date">
+                <constraints nullable="true" />
+            </column>
+            
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="empresa" columnName="fecha_fundacion" columnDataType="datetime"/>
         
     </changeSet>
 </databaseChangeLog>

@@ -106,10 +106,10 @@
                             return {
                                 nombre: null,
                                 numEmpleados: null,
-                                fechaFundacion: null,
                                 ubicacion: null,
                                 latitud: null,
                                 longitud: null,
+                                fechaFundacion: null,
                                 id: null
                             };
                         }

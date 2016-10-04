@@ -11,10 +11,6 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "fechaFundacion",
-            "fieldType": "ZonedDateTime"
-        },
-        {
             "fieldName": "ubicacion",
             "fieldType": "String"
         },
@@ -25,6 +21,10 @@
         {
             "fieldName": "longitud",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaFundacion",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20160929175628",

@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -30,9 +30,6 @@ public class Empresa implements Serializable {
     @Column(name = "num_empleados")
     private Integer numEmpleados;
 
-    @Column(name = "fecha_fundacion")
-    private ZonedDateTime fechaFundacion;
-
     @Column(name = "ubicacion")
     private String ubicacion;
 
@@ -41,6 +38,9 @@ public class Empresa implements Serializable {
 
     @Column(name = "longitud")
     private String longitud;
+
+    @Column(name = "fecha_fundacion")
+    private LocalDate fechaFundacion;
 
     public Long getId() {
         return id;
@@ -74,19 +74,6 @@ public class Empresa implements Serializable {
 
     public void setNumEmpleados(Integer numEmpleados) {
         this.numEmpleados = numEmpleados;
-    }
-
-    public ZonedDateTime getFechaFundacion() {
-        return fechaFundacion;
-    }
-
-    public Empresa fechaFundacion(ZonedDateTime fechaFundacion) {
-        this.fechaFundacion = fechaFundacion;
-        return this;
-    }
-
-    public void setFechaFundacion(ZonedDateTime fechaFundacion) {
-        this.fechaFundacion = fechaFundacion;
     }
 
     public String getUbicacion() {
@@ -128,6 +115,19 @@ public class Empresa implements Serializable {
         this.longitud = longitud;
     }
 
+    public LocalDate getFechaFundacion() {
+        return fechaFundacion;
+    }
+
+    public Empresa fechaFundacion(LocalDate fechaFundacion) {
+        this.fechaFundacion = fechaFundacion;
+        return this;
+    }
+
+    public void setFechaFundacion(LocalDate fechaFundacion) {
+        this.fechaFundacion = fechaFundacion;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -154,10 +154,10 @@ public class Empresa implements Serializable {
             "id=" + id +
             ", nombre='" + nombre + "'" +
             ", numEmpleados='" + numEmpleados + "'" +
-            ", fechaFundacion='" + fechaFundacion + "'" +
             ", ubicacion='" + ubicacion + "'" +
             ", latitud='" + latitud + "'" +
             ", longitud='" + longitud + "'" +
+            ", fechaFundacion='" + fechaFundacion + "'" +
             '}';
     }
 }

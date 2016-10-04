@@ -12,10 +12,6 @@
         <dd>
             <span>{{vm.empresa.numEmpleados}}</span>
         </dd>
-        <dt><span data-translate="littletimmyApp.empresa.fechaFundacion">Fecha Fundacion</span></dt>
-        <dd>
-            <span>{{vm.empresa.fechaFundacion | date:'medium'}}</span>
-        </dd>
         <dt><span data-translate="littletimmyApp.empresa.ubicacion">Ubicacion</span></dt>
         <dd>
             <span>{{vm.empresa.ubicacion}}</span>
@@ -27,6 +23,10 @@
         <dt><span data-translate="littletimmyApp.empresa.longitud">Longitud</span></dt>
         <dd>
             <span>{{vm.empresa.longitud}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.empresa.fechaFundacion">Fecha Fundacion</span></dt>
+        <dd>
+            <span>{{vm.empresa.fechaFundacion | date:'mediumDate'}}</span>
         </dd>
     </dl>
 

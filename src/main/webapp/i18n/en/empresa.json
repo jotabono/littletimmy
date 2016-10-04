@@ -18,10 +18,10 @@
             },
             "nombre": "Nombre",
             "numEmpleados": "Num Empleados",
-            "fechaFundacion": "Fecha Fundacion",
             "ubicacion": "Ubicacion",
             "latitud": "Latitud",
-            "longitud": "Longitud"
+            "longitud": "Longitud",
+            "fechaFundacion": "Fecha Fundacion"
         }
     }
 }

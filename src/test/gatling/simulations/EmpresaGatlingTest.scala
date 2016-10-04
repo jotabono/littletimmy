@@ -80,7 +80,7 @@ class EmpresaGatlingTest extends Simulation {
             .exec(http("Create new empresa")
             .post("/api/empresas")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "nombre":"SAMPLE_TEXT", "numEmpleados":"0", "fechaFundacion":"2020-01-01T00:00:00.000Z", "ubicacion":"SAMPLE_TEXT", "latitud":"SAMPLE_TEXT", "longitud":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "nombre":"SAMPLE_TEXT", "numEmpleados":"0", "ubicacion":"SAMPLE_TEXT", "latitud":"SAMPLE_TEXT", "longitud":"SAMPLE_TEXT", "fechaFundacion":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_empresa_url"))).exitHereIfFailed
             .pause(10)
