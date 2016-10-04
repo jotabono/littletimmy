@@ -57,5 +57,17 @@
                                timeToLiveSeconds="3600">
                         </cache>
                         
+    <cache name="com.mycompany.myapp.domain.Trabajo.empresas"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.mycompany.myapp.domain.Trabajo.recomendacions"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.mycompany.myapp.domain.Empresa.trabajos"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>

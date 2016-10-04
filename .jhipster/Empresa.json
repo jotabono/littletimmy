@@ -28,8 +28,8 @@
         }
     ],
     "changelogDate": "20160929175628",
-    "entityTableName": "empresa",
     "dto": "no",
-    "pagination": "no",
-    "service": "no"
+    "service": "no",
+    "entityTableName": "empresa",
+    "pagination": "no"
 }

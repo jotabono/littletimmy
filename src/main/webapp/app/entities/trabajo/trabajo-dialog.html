@@ -74,6 +74,12 @@
                     ng-model="vm.trabajo.multimediaContentType" />
         </div>
 
+        <div class="form-group">
+            <label data-translate="littletimmyApp.trabajo.empresa" for="field_empresa">Empresa</label>
+            <select class="form-control" id="field_empresa" name="empresa" ng-model="vm.trabajo.empresa" ng-options="empresa as empresa.nombre for empresa in vm.empresas track by empresa.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

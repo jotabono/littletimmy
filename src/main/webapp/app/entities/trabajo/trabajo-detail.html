@@ -31,6 +31,10 @@
                 {{vm.trabajo.multimediaContentType}}, {{vm.byteSize(vm.trabajo.multimedia)}}
             </div>
         </dd>
+        <dt><span data-translate="littletimmyApp.trabajo.empresa">Empresa</span></dt>
+        <dd>
+            <a ui-sref="empresa-detail({id:vm.trabajo.empresa.id})">{{vm.trabajo.empresa.nombre}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

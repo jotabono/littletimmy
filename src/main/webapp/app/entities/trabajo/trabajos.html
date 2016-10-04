@@ -42,6 +42,7 @@
                     <th><span data-translate="littletimmyApp.trabajo.actualmente">Actualmente</span></th>
                     <th><span data-translate="littletimmyApp.trabajo.descripcionCargo">Descripcion Cargo</span></th>
                     <th><span data-translate="littletimmyApp.trabajo.multimedia">Multimedia</span></th>
+                    <th><span data-translate="littletimmyApp.trabajo.empresa">Empresa</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -56,6 +57,9 @@
                     <td>
                         <a ng-if="trabajo.multimedia" ng-click="vm.openFile(trabajo.multimediaContentType, trabajo.multimedia)" data-translate="entity.action.open">open</a>
                         <span ng-if="trabajo.multimedia">{{trabajo.multimediaContentType}}, {{vm.byteSize(trabajo.multimedia)}}</span>
+                    </td>
+                    <td>
+                        <a ui-sref="empresa-detail({id:trabajo.empresa.id})">{{trabajo.empresa.nombre}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

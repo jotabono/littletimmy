@@ -21,7 +21,8 @@
             "fechaFin": "Fecha Fin",
             "actualmente": "Actualmente",
             "descripcionCargo": "Descripcion Cargo",
-            "multimedia": "Multimedia"
+            "multimedia": "Multimedia",
+            "empresa": "Empresa"
         }
     }
 }

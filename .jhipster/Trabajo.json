@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "empresa",
+            "otherEntityName": "empresa",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "nombre"
+        }
+    ],
     "fields": [
         {
             "fieldName": "cargo",
@@ -29,8 +36,8 @@
         }
     ],
     "changelogDate": "20160929175627",
-    "entityTableName": "trabajo",
     "dto": "no",
-    "pagination": "no",
-    "service": "no"
+    "service": "no",
+    "entityTableName": "trabajo",
+    "pagination": "no"
 }

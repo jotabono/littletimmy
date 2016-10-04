@@ -46,6 +46,9 @@ public class Trabajo implements Serializable {
     @Column(name = "multimedia_content_type")
     private String multimediaContentType;
 
+    @ManyToOne
+    private Empresa empresa;
+
     public Long getId() {
         return id;
     }
@@ -143,6 +146,19 @@ public class Trabajo implements Serializable {
 
     public void setMultimediaContentType(String multimediaContentType) {
         this.multimediaContentType = multimediaContentType;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public Trabajo empresa(Empresa empresa) {
+        this.empresa = empresa;
+        return this;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     @Override
