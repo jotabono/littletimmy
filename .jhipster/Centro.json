@@ -12,7 +12,7 @@
         },
         {
             "fieldName": "fechaFundacion",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "ubicacion",

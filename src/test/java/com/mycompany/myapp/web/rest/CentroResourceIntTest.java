@@ -24,9 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
@@ -43,17 +41,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = LittletimmyApp.class)
 public class CentroResourceIntTest {
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZone(ZoneId.of("Z"));
-
     private static final String DEFAULT_NOMBRE = "AAAAA";
     private static final String UPDATED_NOMBRE = "BBBBB";
 
     private static final Integer DEFAULT_NUM_EMPLEADOS = 1;
     private static final Integer UPDATED_NUM_EMPLEADOS = 2;
 
-    private static final ZonedDateTime DEFAULT_FECHA_FUNDACION = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
-    private static final ZonedDateTime UPDATED_FECHA_FUNDACION = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_FECHA_FUNDACION_STR = dateTimeFormatter.format(DEFAULT_FECHA_FUNDACION);
+    private static final LocalDate DEFAULT_FECHA_FUNDACION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_FECHA_FUNDACION = LocalDate.now(ZoneId.systemDefault());
     private static final String DEFAULT_UBICACION = "AAAAA";
     private static final String UPDATED_UBICACION = "BBBBB";
     private static final String DEFAULT_LATITUD = "AAAAA";
@@ -155,7 +150,7 @@ public class CentroResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(centro.getId().intValue())))
                 .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
                 .andExpect(jsonPath("$.[*].numEmpleados").value(hasItem(DEFAULT_NUM_EMPLEADOS)))
-                .andExpect(jsonPath("$.[*].fechaFundacion").value(hasItem(DEFAULT_FECHA_FUNDACION_STR)))
+                .andExpect(jsonPath("$.[*].fechaFundacion").value(hasItem(DEFAULT_FECHA_FUNDACION.toString())))
                 .andExpect(jsonPath("$.[*].ubicacion").value(hasItem(DEFAULT_UBICACION.toString())))
                 .andExpect(jsonPath("$.[*].latitud").value(hasItem(DEFAULT_LATITUD.toString())))
                 .andExpect(jsonPath("$.[*].longitud").value(hasItem(DEFAULT_LONGITUD.toString())));
@@ -174,7 +169,7 @@ public class CentroResourceIntTest {
             .andExpect(jsonPath("$.id").value(centro.getId().intValue()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.numEmpleados").value(DEFAULT_NUM_EMPLEADOS))
-            .andExpect(jsonPath("$.fechaFundacion").value(DEFAULT_FECHA_FUNDACION_STR))
+            .andExpect(jsonPath("$.fechaFundacion").value(DEFAULT_FECHA_FUNDACION.toString()))
             .andExpect(jsonPath("$.ubicacion").value(DEFAULT_UBICACION.toString()))
             .andExpect(jsonPath("$.latitud").value(DEFAULT_LATITUD.toString()))
             .andExpect(jsonPath("$.longitud").value(DEFAULT_LONGITUD.toString()));
@@ -263,7 +258,7 @@ public class CentroResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(centro.getId().intValue())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].numEmpleados").value(hasItem(DEFAULT_NUM_EMPLEADOS)))
-            .andExpect(jsonPath("$.[*].fechaFundacion").value(hasItem(DEFAULT_FECHA_FUNDACION_STR)))
+            .andExpect(jsonPath("$.[*].fechaFundacion").value(hasItem(DEFAULT_FECHA_FUNDACION.toString())))
             .andExpect(jsonPath("$.[*].ubicacion").value(hasItem(DEFAULT_UBICACION.toString())))
             .andExpect(jsonPath("$.[*].latitud").value(hasItem(DEFAULT_LATITUD.toString())))
             .andExpect(jsonPath("$.[*].longitud").value(hasItem(DEFAULT_LONGITUD.toString())));

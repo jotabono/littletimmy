@@ -25,11 +25,11 @@
                 <constraints nullable="true" />
             </column>
             
-            <column name="fecha_inicio" type="timestamp">
+            <column name="fecha_inicio" type="date">
                 <constraints nullable="true" />
             </column>
             
-            <column name="fecha_fin" type="timestamp">
+            <column name="fecha_fin" type="date">
                 <constraints nullable="true" />
             </column>
             
@@ -52,10 +52,12 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="trabajador_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="trabajo" columnName="fecha_inicio" columnDataType="datetime"/>
-        <dropDefaultValue tableName="trabajo" columnName="fecha_fin" columnDataType="datetime"/>
         
     </changeSet>
 </databaseChangeLog>

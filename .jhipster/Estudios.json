@@ -8,11 +8,11 @@
         },
         {
             "fieldName": "fechaInicio",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "fechaFinal",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "actualmente",

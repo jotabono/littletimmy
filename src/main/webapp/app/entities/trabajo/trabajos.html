@@ -43,6 +43,7 @@
                     <th><span data-translate="littletimmyApp.trabajo.descripcionCargo">Descripcion Cargo</span></th>
                     <th><span data-translate="littletimmyApp.trabajo.multimedia">Multimedia</span></th>
                     <th><span data-translate="littletimmyApp.trabajo.empresa">Empresa</span></th>
+                    <th><span data-translate="littletimmyApp.trabajo.trabajador">Trabajador</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -50,8 +51,8 @@
                 <tr ng-repeat="trabajo in vm.trabajos track by trabajo.id">
                     <td><a ui-sref="trabajo-detail({id:trabajo.id})">{{trabajo.id}}</a></td>
                     <td>{{trabajo.cargo}}</td>
-                    <td>{{trabajo.fechaInicio | date:'medium'}}</td>
-                    <td>{{trabajo.fechaFin | date:'medium'}}</td>
+                        <td>{{trabajo.fechaInicio | date:'mediumDate'}}</td>
+                        <td>{{trabajo.fechaFin | date:'mediumDate'}}</td>
                     <td>{{trabajo.actualmente}}</td>
                     <td>{{trabajo.descripcionCargo}}</td>
                     <td>
@@ -60,6 +61,9 @@
                     </td>
                     <td>
                         <a ui-sref="empresa-detail({id:trabajo.empresa.id})">{{trabajo.empresa.nombre}}</a>
+                    </td>
+                    <td>
+                        {{trabajo.trabajador.firstName}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

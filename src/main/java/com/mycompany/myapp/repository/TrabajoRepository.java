@@ -12,4 +12,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface TrabajoRepository extends JpaRepository<Trabajo,Long> {
 
+    @Query("select trabajo from Trabajo trabajo where trabajo.trabajador.login = ?#{principal.username}")
+    List<Trabajo> findByTrabajadorIsCurrentUser();
+
 }

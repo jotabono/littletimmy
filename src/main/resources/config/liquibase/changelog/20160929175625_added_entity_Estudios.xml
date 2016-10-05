@@ -25,11 +25,11 @@
                 <constraints nullable="true" />
             </column>
             
-            <column name="fecha_inicio" type="timestamp">
+            <column name="fecha_inicio" type="date">
                 <constraints nullable="true" />
             </column>
             
-            <column name="fecha_final" type="timestamp">
+            <column name="fecha_final" type="date">
                 <constraints nullable="true" />
             </column>
             
@@ -62,8 +62,6 @@
             
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="estudios" columnName="fecha_inicio" columnDataType="datetime"/>
-        <dropDefaultValue tableName="estudios" columnName="fecha_final" columnDataType="datetime"/>
         
     </changeSet>
 </databaseChangeLog>

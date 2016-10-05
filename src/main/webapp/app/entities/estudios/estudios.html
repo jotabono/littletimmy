@@ -52,8 +52,8 @@
                 <tr ng-repeat="estudios in vm.estudios track by estudios.id">
                     <td><a ui-sref="estudios-detail({id:estudios.id})">{{estudios.id}}</a></td>
                     <td>{{estudios.centro}}</td>
-                    <td>{{estudios.fechaInicio | date:'medium'}}</td>
-                    <td>{{estudios.fechaFinal | date:'medium'}}</td>
+                        <td>{{estudios.fechaInicio | date:'mediumDate'}}</td>
+                        <td>{{estudios.fechaFinal | date:'mediumDate'}}</td>
                     <td>{{estudios.actualmente}}</td>
                     <td>{{estudios.curso}}</td>
                     <td>{{estudios.nota}}</td>

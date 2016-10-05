@@ -25,9 +25,7 @@ import org.springframework.util.Base64Utils;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
@@ -44,18 +42,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = LittletimmyApp.class)
 public class TrabajoResourceIntTest {
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZone(ZoneId.of("Z"));
-
     private static final String DEFAULT_CARGO = "AAAAA";
     private static final String UPDATED_CARGO = "BBBBB";
 
-    private static final ZonedDateTime DEFAULT_FECHA_INICIO = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
-    private static final ZonedDateTime UPDATED_FECHA_INICIO = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_FECHA_INICIO_STR = dateTimeFormatter.format(DEFAULT_FECHA_INICIO);
+    private static final LocalDate DEFAULT_FECHA_INICIO = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_FECHA_INICIO = LocalDate.now(ZoneId.systemDefault());
 
-    private static final ZonedDateTime DEFAULT_FECHA_FIN = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
-    private static final ZonedDateTime UPDATED_FECHA_FIN = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_FECHA_FIN_STR = dateTimeFormatter.format(DEFAULT_FECHA_FIN);
+    private static final LocalDate DEFAULT_FECHA_FIN = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_FECHA_FIN = LocalDate.now(ZoneId.systemDefault());
 
     private static final Boolean DEFAULT_ACTUALMENTE = false;
     private static final Boolean UPDATED_ACTUALMENTE = true;
@@ -162,8 +156,8 @@ public class TrabajoResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(trabajo.getId().intValue())))
                 .andExpect(jsonPath("$.[*].cargo").value(hasItem(DEFAULT_CARGO.toString())))
-                .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO_STR)))
-                .andExpect(jsonPath("$.[*].fechaFin").value(hasItem(DEFAULT_FECHA_FIN_STR)))
+                .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO.toString())))
+                .andExpect(jsonPath("$.[*].fechaFin").value(hasItem(DEFAULT_FECHA_FIN.toString())))
                 .andExpect(jsonPath("$.[*].actualmente").value(hasItem(DEFAULT_ACTUALMENTE.booleanValue())))
                 .andExpect(jsonPath("$.[*].descripcionCargo").value(hasItem(DEFAULT_DESCRIPCION_CARGO.toString())))
                 .andExpect(jsonPath("$.[*].multimediaContentType").value(hasItem(DEFAULT_MULTIMEDIA_CONTENT_TYPE)))
@@ -182,8 +176,8 @@ public class TrabajoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(trabajo.getId().intValue()))
             .andExpect(jsonPath("$.cargo").value(DEFAULT_CARGO.toString()))
-            .andExpect(jsonPath("$.fechaInicio").value(DEFAULT_FECHA_INICIO_STR))
-            .andExpect(jsonPath("$.fechaFin").value(DEFAULT_FECHA_FIN_STR))
+            .andExpect(jsonPath("$.fechaInicio").value(DEFAULT_FECHA_INICIO.toString()))
+            .andExpect(jsonPath("$.fechaFin").value(DEFAULT_FECHA_FIN.toString()))
             .andExpect(jsonPath("$.actualmente").value(DEFAULT_ACTUALMENTE.booleanValue()))
             .andExpect(jsonPath("$.descripcionCargo").value(DEFAULT_DESCRIPCION_CARGO.toString()))
             .andExpect(jsonPath("$.multimediaContentType").value(DEFAULT_MULTIMEDIA_CONTENT_TYPE))
@@ -274,8 +268,8 @@ public class TrabajoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(trabajo.getId().intValue())))
             .andExpect(jsonPath("$.[*].cargo").value(hasItem(DEFAULT_CARGO.toString())))
-            .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO_STR)))
-            .andExpect(jsonPath("$.[*].fechaFin").value(hasItem(DEFAULT_FECHA_FIN_STR)))
+            .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO.toString())))
+            .andExpect(jsonPath("$.[*].fechaFin").value(hasItem(DEFAULT_FECHA_FIN.toString())))
             .andExpect(jsonPath("$.[*].actualmente").value(hasItem(DEFAULT_ACTUALMENTE.booleanValue())))
             .andExpect(jsonPath("$.[*].descripcionCargo").value(hasItem(DEFAULT_DESCRIPCION_CARGO.toString())))
             .andExpect(jsonPath("$.[*].multimediaContentType").value(hasItem(DEFAULT_MULTIMEDIA_CONTENT_TYPE)))

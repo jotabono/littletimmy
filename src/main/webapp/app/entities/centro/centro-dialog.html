@@ -28,8 +28,8 @@
         <div class="form-group">
             <label class="control-label" data-translate="littletimmyApp.centro.fechaFundacion" for="field_fechaFundacion">Fecha Fundacion</label>
                 <div class="input-group">
-                    <input id="field_fechaFundacion" type="text" class="form-control" name="fechaFundacion" datetime-picker="{{dateformat}}" ng-model="vm.centro.fechaFundacion" is-open="vm.datePickerOpenStatus.fechaFundacion"
-                      />
+                    <input id="field_fechaFundacion" type="text" class="form-control" name="fechaFundacion" uib-datepicker-popup="{{dateformat}}" ng-model="vm.centro.fechaFundacion" is-open="vm.datePickerOpenStatus.fechaFundacion"
+                    />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaFundacion')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>

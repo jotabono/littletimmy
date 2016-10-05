@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="empresa"/>
 
+        <addForeignKeyConstraint baseColumnNames="trabajador_id"
+                                 baseTableName="trabajo"
+                                 constraintName="fk_trabajo_trabajador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>

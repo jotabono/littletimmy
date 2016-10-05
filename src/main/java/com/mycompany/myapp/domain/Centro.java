@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -31,7 +31,7 @@ public class Centro implements Serializable {
     private Integer numEmpleados;
 
     @Column(name = "fecha_fundacion")
-    private ZonedDateTime fechaFundacion;
+    private LocalDate fechaFundacion;
 
     @Column(name = "ubicacion")
     private String ubicacion;
@@ -76,16 +76,16 @@ public class Centro implements Serializable {
         this.numEmpleados = numEmpleados;
     }
 
-    public ZonedDateTime getFechaFundacion() {
+    public LocalDate getFechaFundacion() {
         return fechaFundacion;
     }
 
-    public Centro fechaFundacion(ZonedDateTime fechaFundacion) {
+    public Centro fechaFundacion(LocalDate fechaFundacion) {
         this.fechaFundacion = fechaFundacion;
         return this;
     }
 
-    public void setFechaFundacion(ZonedDateTime fechaFundacion) {
+    public void setFechaFundacion(LocalDate fechaFundacion) {
         this.fechaFundacion = fechaFundacion;
     }
 

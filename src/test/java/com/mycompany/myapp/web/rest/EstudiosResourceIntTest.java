@@ -25,9 +25,7 @@ import org.springframework.util.Base64Utils;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
@@ -44,18 +42,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = LittletimmyApp.class)
 public class EstudiosResourceIntTest {
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZone(ZoneId.of("Z"));
-
     private static final String DEFAULT_CENTRO = "AAAAA";
     private static final String UPDATED_CENTRO = "BBBBB";
 
-    private static final ZonedDateTime DEFAULT_FECHA_INICIO = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
-    private static final ZonedDateTime UPDATED_FECHA_INICIO = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_FECHA_INICIO_STR = dateTimeFormatter.format(DEFAULT_FECHA_INICIO);
+    private static final LocalDate DEFAULT_FECHA_INICIO = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_FECHA_INICIO = LocalDate.now(ZoneId.systemDefault());
 
-    private static final ZonedDateTime DEFAULT_FECHA_FINAL = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
-    private static final ZonedDateTime UPDATED_FECHA_FINAL = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_FECHA_FINAL_STR = dateTimeFormatter.format(DEFAULT_FECHA_FINAL);
+    private static final LocalDate DEFAULT_FECHA_FINAL = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_FECHA_FINAL = LocalDate.now(ZoneId.systemDefault());
 
     private static final Boolean DEFAULT_ACTUALMENTE = false;
     private static final Boolean UPDATED_ACTUALMENTE = true;
@@ -175,8 +169,8 @@ public class EstudiosResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(estudios.getId().intValue())))
                 .andExpect(jsonPath("$.[*].centro").value(hasItem(DEFAULT_CENTRO.toString())))
-                .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO_STR)))
-                .andExpect(jsonPath("$.[*].fechaFinal").value(hasItem(DEFAULT_FECHA_FINAL_STR)))
+                .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO.toString())))
+                .andExpect(jsonPath("$.[*].fechaFinal").value(hasItem(DEFAULT_FECHA_FINAL.toString())))
                 .andExpect(jsonPath("$.[*].actualmente").value(hasItem(DEFAULT_ACTUALMENTE.booleanValue())))
                 .andExpect(jsonPath("$.[*].curso").value(hasItem(DEFAULT_CURSO.toString())))
                 .andExpect(jsonPath("$.[*].nota").value(hasItem(DEFAULT_NOTA.doubleValue())))
@@ -198,8 +192,8 @@ public class EstudiosResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(estudios.getId().intValue()))
             .andExpect(jsonPath("$.centro").value(DEFAULT_CENTRO.toString()))
-            .andExpect(jsonPath("$.fechaInicio").value(DEFAULT_FECHA_INICIO_STR))
-            .andExpect(jsonPath("$.fechaFinal").value(DEFAULT_FECHA_FINAL_STR))
+            .andExpect(jsonPath("$.fechaInicio").value(DEFAULT_FECHA_INICIO.toString()))
+            .andExpect(jsonPath("$.fechaFinal").value(DEFAULT_FECHA_FINAL.toString()))
             .andExpect(jsonPath("$.actualmente").value(DEFAULT_ACTUALMENTE.booleanValue()))
             .andExpect(jsonPath("$.curso").value(DEFAULT_CURSO.toString()))
             .andExpect(jsonPath("$.nota").value(DEFAULT_NOTA.doubleValue()))
@@ -299,8 +293,8 @@ public class EstudiosResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(estudios.getId().intValue())))
             .andExpect(jsonPath("$.[*].centro").value(hasItem(DEFAULT_CENTRO.toString())))
-            .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO_STR)))
-            .andExpect(jsonPath("$.[*].fechaFinal").value(hasItem(DEFAULT_FECHA_FINAL_STR)))
+            .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO.toString())))
+            .andExpect(jsonPath("$.[*].fechaFinal").value(hasItem(DEFAULT_FECHA_FINAL.toString())))
             .andExpect(jsonPath("$.[*].actualmente").value(hasItem(DEFAULT_ACTUALMENTE.booleanValue())))
             .andExpect(jsonPath("$.[*].curso").value(hasItem(DEFAULT_CURSO.toString())))
             .andExpect(jsonPath("$.[*].nota").value(hasItem(DEFAULT_NOTA.doubleValue())))

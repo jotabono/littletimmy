@@ -22,8 +22,8 @@
         <div class="form-group">
             <label class="control-label" data-translate="littletimmyApp.estudios.fechaInicio" for="field_fechaInicio">Fecha Inicio</label>
                 <div class="input-group">
-                    <input id="field_fechaInicio" type="text" class="form-control" name="fechaInicio" datetime-picker="{{dateformat}}" ng-model="vm.estudios.fechaInicio" is-open="vm.datePickerOpenStatus.fechaInicio"
-                      />
+                    <input id="field_fechaInicio" type="text" class="form-control" name="fechaInicio" uib-datepicker-popup="{{dateformat}}" ng-model="vm.estudios.fechaInicio" is-open="vm.datePickerOpenStatus.fechaInicio"
+                    />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaInicio')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
@@ -32,8 +32,8 @@
         <div class="form-group">
             <label class="control-label" data-translate="littletimmyApp.estudios.fechaFinal" for="field_fechaFinal">Fecha Final</label>
                 <div class="input-group">
-                    <input id="field_fechaFinal" type="text" class="form-control" name="fechaFinal" datetime-picker="{{dateformat}}" ng-model="vm.estudios.fechaFinal" is-open="vm.datePickerOpenStatus.fechaFinal"
-                      />
+                    <input id="field_fechaFinal" type="text" class="form-control" name="fechaFinal" uib-datepicker-popup="{{dateformat}}" ng-model="vm.estudios.fechaFinal" is-open="vm.datePickerOpenStatus.fechaFinal"
+                    />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaFinal')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>

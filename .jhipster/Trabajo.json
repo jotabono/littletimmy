@@ -6,6 +6,13 @@
             "otherEntityName": "empresa",
             "relationshipType": "many-to-one",
             "otherEntityField": "nombre"
+        },
+        {
+            "relationshipName": "trabajador",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName",
+            "ownerSide": true
         }
     ],
     "fields": [
@@ -15,11 +22,11 @@
         },
         {
             "fieldName": "fechaInicio",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "fechaFin",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "actualmente",

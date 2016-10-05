@@ -10,11 +10,11 @@
         </dd>
         <dt><span data-translate="littletimmyApp.trabajo.fechaInicio">Fecha Inicio</span></dt>
         <dd>
-            <span>{{vm.trabajo.fechaInicio | date:'medium'}}</span>
+            <span>{{vm.trabajo.fechaInicio | date:'mediumDate'}}</span>
         </dd>
         <dt><span data-translate="littletimmyApp.trabajo.fechaFin">Fecha Fin</span></dt>
         <dd>
-            <span>{{vm.trabajo.fechaFin | date:'medium'}}</span>
+            <span>{{vm.trabajo.fechaFin | date:'mediumDate'}}</span>
         </dd>
         <dt><span data-translate="littletimmyApp.trabajo.actualmente">Actualmente</span></dt>
         <dd>
@@ -34,6 +34,10 @@
         <dt><span data-translate="littletimmyApp.trabajo.empresa">Empresa</span></dt>
         <dd>
             <a ui-sref="empresa-detail({id:vm.trabajo.empresa.id})">{{vm.trabajo.empresa.nombre}}</a>
+        </dd>
+        <dt><span data-translate="littletimmyApp.trabajo.trabajador">Trabajador</span></dt>
+        <dd>
+            {{vm.trabajo.trabajador.firstName}}
         </dd>
     </dl>
 

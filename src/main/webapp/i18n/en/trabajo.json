@@ -22,7 +22,8 @@
             "actualmente": "Actualmente",
             "descripcionCargo": "Descripcion Cargo",
             "multimedia": "Multimedia",
-            "empresa": "Empresa"
+            "empresa": "Empresa",
+            "trabajador": "Trabajador"
         }
     }
 }

@@ -22,8 +22,8 @@
         <div class="form-group">
             <label class="control-label" data-translate="littletimmyApp.trabajo.fechaInicio" for="field_fechaInicio">Fecha Inicio</label>
                 <div class="input-group">
-                    <input id="field_fechaInicio" type="text" class="form-control" name="fechaInicio" datetime-picker="{{dateformat}}" ng-model="vm.trabajo.fechaInicio" is-open="vm.datePickerOpenStatus.fechaInicio"
-                      />
+                    <input id="field_fechaInicio" type="text" class="form-control" name="fechaInicio" uib-datepicker-popup="{{dateformat}}" ng-model="vm.trabajo.fechaInicio" is-open="vm.datePickerOpenStatus.fechaInicio"
+                    />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaInicio')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
@@ -32,8 +32,8 @@
         <div class="form-group">
             <label class="control-label" data-translate="littletimmyApp.trabajo.fechaFin" for="field_fechaFin">Fecha Fin</label>
                 <div class="input-group">
-                    <input id="field_fechaFin" type="text" class="form-control" name="fechaFin" datetime-picker="{{dateformat}}" ng-model="vm.trabajo.fechaFin" is-open="vm.datePickerOpenStatus.fechaFin"
-                      />
+                    <input id="field_fechaFin" type="text" class="form-control" name="fechaFin" uib-datepicker-popup="{{dateformat}}" ng-model="vm.trabajo.fechaFin" is-open="vm.datePickerOpenStatus.fechaFin"
+                    />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaFin')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
@@ -77,6 +77,12 @@
         <div class="form-group">
             <label data-translate="littletimmyApp.trabajo.empresa" for="field_empresa">Empresa</label>
             <select class="form-control" id="field_empresa" name="empresa" ng-model="vm.trabajo.empresa" ng-options="empresa as empresa.nombre for empresa in vm.empresas track by empresa.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="littletimmyApp.trabajo.trabajador" for="field_trabajador">Trabajador</label>
+            <select class="form-control" id="field_trabajador" name="trabajador" ng-model="vm.trabajo.trabajador" ng-options="user as user.firstName for user in vm.users track by user.id">
                 <option value=""></option>
             </select>
         </div>

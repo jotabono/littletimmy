@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -28,10 +28,10 @@ public class Trabajo implements Serializable {
     private String cargo;
 
     @Column(name = "fecha_inicio")
-    private ZonedDateTime fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(name = "fecha_fin")
-    private ZonedDateTime fechaFin;
+    private LocalDate fechaFin;
 
     @Column(name = "actualmente")
     private Boolean actualmente;
@@ -48,6 +48,9 @@ public class Trabajo implements Serializable {
 
     @ManyToOne
     private Empresa empresa;
+
+    @ManyToOne
+    private User trabajador;
 
     public Long getId() {
         return id;
@@ -70,29 +73,29 @@ public class Trabajo implements Serializable {
         this.cargo = cargo;
     }
 
-    public ZonedDateTime getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public Trabajo fechaInicio(ZonedDateTime fechaInicio) {
+    public Trabajo fechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
         return this;
     }
 
-    public void setFechaInicio(ZonedDateTime fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public ZonedDateTime getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public Trabajo fechaFin(ZonedDateTime fechaFin) {
+    public Trabajo fechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
         return this;
     }
 
-    public void setFechaFin(ZonedDateTime fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -159,6 +162,19 @@ public class Trabajo implements Serializable {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public User getTrabajador() {
+        return trabajador;
+    }
+
+    public Trabajo trabajador(User user) {
+        this.trabajador = user;
+        return this;
+    }
+
+    public void setTrabajador(User user) {
+        this.trabajador = user;
     }
 
     @Override

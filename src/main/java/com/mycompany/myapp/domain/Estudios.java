@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -28,10 +28,10 @@ public class Estudios implements Serializable {
     private String centro;
 
     @Column(name = "fecha_inicio")
-    private ZonedDateTime fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(name = "fecha_final")
-    private ZonedDateTime fechaFinal;
+    private LocalDate fechaFinal;
 
     @Column(name = "actualmente")
     private Boolean actualmente;
@@ -76,29 +76,29 @@ public class Estudios implements Serializable {
         this.centro = centro;
     }
 
-    public ZonedDateTime getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public Estudios fechaInicio(ZonedDateTime fechaInicio) {
+    public Estudios fechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
         return this;
     }
 
-    public void setFechaInicio(ZonedDateTime fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public ZonedDateTime getFechaFinal() {
+    public LocalDate getFechaFinal() {
         return fechaFinal;
     }
 
-    public Estudios fechaFinal(ZonedDateTime fechaFinal) {
+    public Estudios fechaFinal(LocalDate fechaFinal) {
         this.fechaFinal = fechaFinal;
         return this;
     }
 
-    public void setFechaFinal(ZonedDateTime fechaFinal) {
+    public void setFechaFinal(LocalDate fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
 
