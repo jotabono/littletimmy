@@ -12,4 +12,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface EstudiosRepository extends JpaRepository<Estudios,Long> {
 
+    @Query("select estudios from Estudios estudios where estudios.user.login = ?#{principal.username}")
+    List<Estudios> findByUserIsCurrentUser();
+
 }

@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('EstudiosDetailController', EstudiosDetailController);
 
-    EstudiosDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Estudios', 'Centro'];
+    EstudiosDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Estudios', 'Centro', 'User'];
 
-    function EstudiosDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Estudios, Centro) {
+    function EstudiosDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Estudios, Centro, User) {
         var vm = this;
 
         vm.estudios = entity;

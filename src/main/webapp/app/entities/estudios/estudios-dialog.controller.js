@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('EstudiosDialogController', EstudiosDialogController);
 
-    EstudiosDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Estudios', 'Centro'];
+    EstudiosDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Estudios', 'Centro', 'User'];
 
-    function EstudiosDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Estudios, Centro) {
+    function EstudiosDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Estudios, Centro, User) {
         var vm = this;
 
         vm.estudios = entity;
@@ -18,6 +18,7 @@
         vm.openFile = DataUtils.openFile;
         vm.save = save;
         vm.centros = Centro.query();
+        vm.users = User.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -91,6 +91,18 @@
             <select class="form-control" id="field_centro_estudios" name="centro_estudios" ng-model="vm.estudios.centro_estudios" ng-options="centro as centro.nombre for centro in vm.centros track by centro.id">
                 <option value=""></option>
             </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="littletimmyApp.estudios.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.estudios.user" ng-options="user as user.firstName for user in vm.users track by user.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.user.$invalid">
+            <p class="help-block"
+                ng-show="editForm.user.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
         </div>
     </div>
     <div class="modal-footer">

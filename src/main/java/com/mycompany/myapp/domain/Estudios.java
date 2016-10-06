@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -54,6 +55,10 @@ public class Estudios implements Serializable {
 
     @ManyToOne
     private Centro centro_estudios;
+
+    @ManyToOne
+    @NotNull
+    private User user;
 
     public Long getId() {
         return id;
@@ -191,6 +196,19 @@ public class Estudios implements Serializable {
 
     public void setCentro_estudios(Centro centro) {
         this.centro_estudios = centro;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Estudios user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

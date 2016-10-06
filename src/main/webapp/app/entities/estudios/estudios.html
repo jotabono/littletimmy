@@ -45,6 +45,7 @@
                     <th><span data-translate="littletimmyApp.estudios.archivos">Archivos</span></th>
                     <th><span data-translate="littletimmyApp.estudios.link">Link</span></th>
                     <th><span data-translate="littletimmyApp.estudios.centro_estudios">Centro Estudios</span></th>
+                    <th><span data-translate="littletimmyApp.estudios.user">User</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -64,6 +65,9 @@
                     <td>{{estudios.link}}</td>
                     <td>
                         <a ui-sref="centro-detail({id:estudios.centro_estudios.id})">{{estudios.centro_estudios.nombre}}</a>
+                    </td>
+                    <td>
+                        {{estudios.user.firstName}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

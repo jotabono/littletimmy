@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="centro"/>
 
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="estudios"
+                                 constraintName="fk_estudios_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>

@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.LittletimmyApp;
 
 import com.mycompany.myapp.domain.Estudios;
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.EstudiosRepository;
 import com.mycompany.myapp.repository.search.EstudiosSearchRepository;
 
@@ -113,6 +114,11 @@ public class EstudiosResourceIntTest {
                 .archivos(DEFAULT_ARCHIVOS)
                 .archivosContentType(DEFAULT_ARCHIVOS_CONTENT_TYPE)
                 .link(DEFAULT_LINK);
+        // Add required entity
+        User user = UserResourceIntTest.createEntity(em);
+        em.persist(user);
+        em.flush();
+        estudios.setUser(user);
         return estudios;
     }
 

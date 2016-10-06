@@ -24,7 +24,8 @@
             "descripcion": "Descripcion",
             "archivos": "Archivos",
             "link": "Link",
-            "centro_estudios": "Centro Estudios"
+            "centro_estudios": "Centro Estudios",
+            "user": "User"
         }
     }
 }

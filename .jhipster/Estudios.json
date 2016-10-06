@@ -6,6 +6,16 @@
             "otherEntityName": "centro",
             "relationshipType": "many-to-one",
             "otherEntityField": "nombre"
+        },
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "firstName",
+            "ownerSide": true
         }
     ],
     "fields": [
@@ -44,8 +54,8 @@
         }
     ],
     "changelogDate": "20160929175625",
-    "entityTableName": "estudios",
     "dto": "no",
-    "pagination": "no",
-    "service": "no"
+    "service": "no",
+    "entityTableName": "estudios",
+    "pagination": "no"
 }
