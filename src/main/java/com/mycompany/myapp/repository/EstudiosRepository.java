@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Spring Data JPA repository for the Estudios entity.
  */
+@SuppressWarnings("unused")
 public interface EstudiosRepository extends JpaRepository<Estudios,Long> {
 
 }

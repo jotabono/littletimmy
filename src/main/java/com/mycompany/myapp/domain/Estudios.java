@@ -46,14 +46,14 @@ public class Estudios implements Serializable {
     @Column(name = "archivos")
     private byte[] archivos;
 
-    @Column(name = "archivos_content_type")    
+    @Column(name = "archivos_content_type")
     private String archivosContentType;
 
     @Column(name = "link")
     private String link;
 
     @ManyToOne
-    private Centro centro;
+    private Centro centro_estudios;
 
     public Long getId() {
         return id;
@@ -67,12 +67,22 @@ public class Estudios implements Serializable {
         return fechaInicio;
     }
 
+    public Estudios fechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+        return this;
+    }
+
     public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
     public LocalDate getFechaFinal() {
         return fechaFinal;
+    }
+
+    public Estudios fechaFinal(LocalDate fechaFinal) {
+        this.fechaFinal = fechaFinal;
+        return this;
     }
 
     public void setFechaFinal(LocalDate fechaFinal) {
@@ -83,12 +93,22 @@ public class Estudios implements Serializable {
         return actualmente;
     }
 
+    public Estudios actualmente(Boolean actualmente) {
+        this.actualmente = actualmente;
+        return this;
+    }
+
     public void setActualmente(Boolean actualmente) {
         this.actualmente = actualmente;
     }
 
     public String getCurso() {
         return curso;
+    }
+
+    public Estudios curso(String curso) {
+        this.curso = curso;
+        return this;
     }
 
     public void setCurso(String curso) {
@@ -99,12 +119,22 @@ public class Estudios implements Serializable {
         return nota;
     }
 
+    public Estudios nota(Float nota) {
+        this.nota = nota;
+        return this;
+    }
+
     public void setNota(Float nota) {
         this.nota = nota;
     }
 
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public Estudios descripcion(String descripcion) {
+        this.descripcion = descripcion;
+        return this;
     }
 
     public void setDescripcion(String descripcion) {
@@ -115,12 +145,22 @@ public class Estudios implements Serializable {
         return archivos;
     }
 
+    public Estudios archivos(byte[] archivos) {
+        this.archivos = archivos;
+        return this;
+    }
+
     public void setArchivos(byte[] archivos) {
         this.archivos = archivos;
     }
 
     public String getArchivosContentType() {
         return archivosContentType;
+    }
+
+    public Estudios archivosContentType(String archivosContentType) {
+        this.archivosContentType = archivosContentType;
+        return this;
     }
 
     public void setArchivosContentType(String archivosContentType) {
@@ -131,16 +171,26 @@ public class Estudios implements Serializable {
         return link;
     }
 
+    public Estudios link(String link) {
+        this.link = link;
+        return this;
+    }
+
     public void setLink(String link) {
         this.link = link;
     }
 
-    public Centro getCentro() {
-        return centro;
+    public Centro getCentro_estudios() {
+        return centro_estudios;
     }
 
-    public void setCentro(Centro centro) {
-        this.centro = centro;
+    public Estudios centro_estudios(Centro centro) {
+        this.centro_estudios = centro;
+        return this;
+    }
+
+    public void setCentro_estudios(Centro centro) {
+        this.centro_estudios = centro;
     }
 
     @Override

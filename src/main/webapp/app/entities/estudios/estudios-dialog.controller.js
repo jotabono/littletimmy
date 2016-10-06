@@ -5,42 +5,47 @@
         .module('littletimmyApp')
         .controller('EstudiosDialogController', EstudiosDialogController);
 
-    EstudiosDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Estudios', 'Centro'];
+    EstudiosDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Estudios', 'Centro'];
 
-    function EstudiosDialogController ($scope, $stateParams, $uibModalInstance, DataUtils, entity, Estudios, Centro) {
+    function EstudiosDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Estudios, Centro) {
         var vm = this;
+
         vm.estudios = entity;
+        vm.clear = clear;
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar = openCalendar;
+        vm.byteSize = DataUtils.byteSize;
+        vm.openFile = DataUtils.openFile;
+        vm.save = save;
         vm.centros = Centro.query();
-        vm.load = function(id) {
-            Estudios.get({id : id}, function(result) {
-                vm.estudios = result;
-            });
-        };
 
-        var onSaveSuccess = function (result) {
-            $scope.$emit('littletimmyApp:estudiosUpdate', result);
-            $uibModalInstance.close(result);
-            vm.isSaving = false;
-        };
+        $timeout(function (){
+            angular.element('.form-group:eq(1)>input').focus();
+        });
 
-        var onSaveError = function () {
-            vm.isSaving = false;
-        };
+        function clear () {
+            $uibModalInstance.dismiss('cancel');
+        }
 
-        vm.save = function () {
+        function save () {
             vm.isSaving = true;
             if (vm.estudios.id !== null) {
                 Estudios.update(vm.estudios, onSaveSuccess, onSaveError);
             } else {
                 Estudios.save(vm.estudios, onSaveSuccess, onSaveError);
             }
-        };
+        }
 
-        vm.clear = function() {
-            $uibModalInstance.dismiss('cancel');
-        };
+        function onSaveSuccess (result) {
+            $scope.$emit('littletimmyApp:estudiosUpdate', result);
+            $uibModalInstance.close(result);
+            vm.isSaving = false;
+        }
 
-        vm.datePickerOpenStatus = {};
+        function onSaveError () {
+            vm.isSaving = false;
+        }
+
         vm.datePickerOpenStatus.fechaInicio = false;
         vm.datePickerOpenStatus.fechaFinal = false;
 
@@ -55,11 +60,8 @@
             }
         };
 
-        vm.openFile = DataUtils.openFile;
-        vm.byteSize = DataUtils.byteSize;
-
-        vm.openCalendar = function(date) {
+        function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
-        };
+        }
     }
 })();

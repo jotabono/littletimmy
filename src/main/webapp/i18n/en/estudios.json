@@ -16,15 +16,15 @@
             "detail": {
                 "title": "Estudios"
             },
-            "fechaInicio": "FechaInicio",
-            "fechaFinal": "FechaFinal",
+            "fechaInicio": "Fecha Inicio",
+            "fechaFinal": "Fecha Final",
             "actualmente": "Actualmente",
             "curso": "Curso",
             "nota": "Nota",
             "descripcion": "Descripcion",
             "archivos": "Archivos",
             "link": "Link",
-            "centro": "Centro"
+            "centro_estudios": "Centro Estudios"
         }
     }
 }

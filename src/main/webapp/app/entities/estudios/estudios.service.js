@@ -14,26 +14,30 @@
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
-                    data = angular.fromJson(data);
-                    data.fechaInicio = DateUtils.convertLocalDateFromServer(data.fechaInicio);
-                    data.fechaFinal = DateUtils.convertLocalDateFromServer(data.fechaFinal);
+                    if (data) {
+                        data = angular.fromJson(data);
+                        data.fechaInicio = DateUtils.convertLocalDateFromServer(data.fechaInicio);
+                        data.fechaFinal = DateUtils.convertLocalDateFromServer(data.fechaFinal);
+                    }
                     return data;
                 }
             },
             'update': {
                 method: 'PUT',
                 transformRequest: function (data) {
-                    data.fechaInicio = DateUtils.convertLocalDateToServer(data.fechaInicio);
-                    data.fechaFinal = DateUtils.convertLocalDateToServer(data.fechaFinal);
-                    return angular.toJson(data);
+                    var copy = angular.copy(data);
+                    copy.fechaInicio = DateUtils.convertLocalDateToServer(copy.fechaInicio);
+                    copy.fechaFinal = DateUtils.convertLocalDateToServer(copy.fechaFinal);
+                    return angular.toJson(copy);
                 }
             },
             'save': {
                 method: 'POST',
                 transformRequest: function (data) {
-                    data.fechaInicio = DateUtils.convertLocalDateToServer(data.fechaInicio);
-                    data.fechaFinal = DateUtils.convertLocalDateToServer(data.fechaFinal);
-                    return angular.toJson(data);
+                    var copy = angular.copy(data);
+                    copy.fechaInicio = DateUtils.convertLocalDateToServer(copy.fechaInicio);
+                    copy.fechaFinal = DateUtils.convertLocalDateToServer(copy.fechaFinal);
+                    return angular.toJson(copy);
                 }
             }
         });

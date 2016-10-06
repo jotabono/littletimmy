@@ -2,7 +2,7 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "centro",
+            "relationshipName": "centro_estudios",
             "otherEntityName": "centro",
             "relationshipType": "many-to-one",
             "otherEntityField": "nombre"

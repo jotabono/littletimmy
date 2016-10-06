@@ -35,7 +35,7 @@ class EstudiosGatlingTest extends Simulation {
         "Accept" -> """application/json"""
     )
 
-    val authorization_header = "Basic " + Base64.getEncoder.encodeToString("littletimmyapp:mySecretOAuthSecret".getBytes(StandardCharsets.UTF_8))
+    val authorization_header = "Basic " + Base64.getEncoder.encodeToString("littletimmyapp:my-secret-token-to-change-in-production".getBytes(StandardCharsets.UTF_8))
 
     val headers_http_authentication = Map(
         "Content-Type" -> """application/x-www-form-urlencoded""",
@@ -61,7 +61,7 @@ class EstudiosGatlingTest extends Simulation {
         .formParam("password", "admin")
         .formParam("grant_type", "password")
         .formParam("scope", "read write")
-        .formParam("client_secret", "mySecretOAuthSecret")
+        .formParam("client_secret", "my-secret-token-to-change-in-production")
         .formParam("client_id", "littletimmyapp")
         .formParam("submit", "Login")
         .check(jsonPath("$.access_token").saveAs("access_token"))).exitHereIfFailed
