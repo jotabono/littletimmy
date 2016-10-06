@@ -1,12 +1,12 @@
 <div>
-    <h2 data-translate="littletimmyApp.estudios.home.title">Estudios</h2>
+    <h2 translate="littletimmyApp.estudios.home.title">Estudios</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="estudios.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs"  data-translate="littletimmyApp.estudios.home.createLabel">
+                    <span class="hidden-xs"  translate="littletimmyApp.estudios.home.createLabel">
                         Create new Estudios
                     </span>
                 </button>
@@ -35,53 +35,53 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr>
-                    <th><span data-translate="global.field.id">ID</span></th>
-                    <th><span data-translate="littletimmyApp.estudios.centro">Centro</span></th>
-                    <th><span data-translate="littletimmyApp.estudios.fechaInicio">Fecha Inicio</span></th>
-                    <th><span data-translate="littletimmyApp.estudios.fechaFinal">Fecha Final</span></th>
-                    <th><span data-translate="littletimmyApp.estudios.actualmente">Actualmente</span></th>
-                    <th><span data-translate="littletimmyApp.estudios.curso">Curso</span></th>
-                    <th><span data-translate="littletimmyApp.estudios.nota">Nota</span></th>
-                    <th><span data-translate="littletimmyApp.estudios.descripcion">Descripcion</span></th>
-                    <th><span data-translate="littletimmyApp.estudios.archivos">Archivos</span></th>
-                    <th><span data-translate="littletimmyApp.estudios.link">Link</span></th>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="littletimmyApp.estudios.fechaInicio">FechaInicio</span></th>
+                    <th><span translate="littletimmyApp.estudios.fechaFinal">FechaFinal</span></th>
+                    <th><span translate="littletimmyApp.estudios.actualmente">Actualmente</span></th>
+                    <th><span translate="littletimmyApp.estudios.curso">Curso</span></th>
+                    <th><span translate="littletimmyApp.estudios.nota">Nota</span></th>
+                    <th><span translate="littletimmyApp.estudios.descripcion">Descripcion</span></th>
+                    <th><span translate="littletimmyApp.estudios.archivos">Archivos</span></th>
+                    <th><span translate="littletimmyApp.estudios.link">Link</span></th>
+                    <th><span translate="littletimmyApp.estudios.centro">centro</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="estudios in vm.estudios track by estudios.id">
                     <td><a ui-sref="estudios-detail({id:estudios.id})">{{estudios.id}}</a></td>
-                    <td>{{estudios.centro}}</td>
                         <td>{{estudios.fechaInicio | date:'mediumDate'}}</td>
                         <td>{{estudios.fechaFinal | date:'mediumDate'}}</td>
                     <td>{{estudios.actualmente}}</td>
                     <td>{{estudios.curso}}</td>
                     <td>{{estudios.nota}}</td>
                     <td>{{estudios.descripcion}}</td>
-                    <td>
-                        <a ng-if="estudios.archivos" ng-click="vm.openFile(estudios.archivosContentType, estudios.archivos)" data-translate="entity.action.open">open</a>
-                        <span ng-if="estudios.archivos">{{estudios.archivosContentType}}, {{vm.byteSize(estudios.archivos)}}</span>
-                    </td>
+                    <td><a ng-click="vm.openFile(estudios.archivosContentType, estudios.archivos)" ng-if="estudios.archivos" target="_blank">open</a>
+                        {{estudios.archivosContentType}}, {{byteSize(estudios.archivos)}}</td>
                     <td>{{estudios.link}}</td>
+                    <td>
+                        <a ui-sref="centro-detail({id:estudios.centro.id})">{{estudios.centro.nombre}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="estudios-detail({id:estudios.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="estudios.edit({id:estudios.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="estudios.delete({id:estudios.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
                             </button>
                         </div>
                     </td>

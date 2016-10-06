@@ -1,11 +1,14 @@
 {
     "fluentMethods": true,
-    "relationships": [],
-    "fields": [
+    "relationships": [
         {
-            "fieldName": "centro",
-            "fieldType": "String"
-        },
+            "relationshipName": "centro",
+            "otherEntityName": "centro",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "nombre"
+        }
+    ],
+    "fields": [
         {
             "fieldName": "fechaInicio",
             "fieldType": "LocalDate"

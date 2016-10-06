@@ -2,7 +2,6 @@ package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Estudios;
-
 import com.mycompany.myapp.repository.EstudiosRepository;
 import com.mycompany.myapp.repository.search.EstudiosSearchRepository;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
@@ -35,10 +34,10 @@ public class EstudiosResource {
         
     @Inject
     private EstudiosRepository estudiosRepository;
-
+    
     @Inject
     private EstudiosSearchRepository estudiosSearchRepository;
-
+    
     /**
      * POST  /estudios : Create a new estudios.
      *
@@ -143,7 +142,7 @@ public class EstudiosResource {
      * SEARCH  /_search/estudios?query=:query : search for the estudios corresponding
      * to the query.
      *
-     * @param query the query of the estudios search 
+     * @param query the query of the estudios search
      * @return the result of the search
      */
     @RequestMapping(value = "/_search/estudios",
@@ -156,6 +155,5 @@ public class EstudiosResource {
             .stream(estudiosSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
-
 
 }

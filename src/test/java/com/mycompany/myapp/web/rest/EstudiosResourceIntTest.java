@@ -1,7 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.LittletimmyApp;
-
 import com.mycompany.myapp.domain.Estudios;
 import com.mycompany.myapp.repository.EstudiosRepository;
 import com.mycompany.myapp.repository.search.EstudiosSearchRepository;
@@ -11,11 +10,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.IntegrationTest;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -24,7 +25,6 @@ import org.springframework.util.Base64Utils;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -33,17 +33,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
 /**
  * Test class for the EstudiosResource REST controller.
  *
  * @see EstudiosResource
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = LittletimmyApp.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = LittletimmyApp.class)
+@WebAppConfiguration
+@IntegrationTest
 public class EstudiosResourceIntTest {
 
-    private static final String DEFAULT_CENTRO = "AAAAA";
-    private static final String UPDATED_CENTRO = "BBBBB";
 
     private static final LocalDate DEFAULT_FECHA_INICIO = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_FECHA_INICIO = LocalDate.now(ZoneId.systemDefault());
@@ -80,9 +81,6 @@ public class EstudiosResourceIntTest {
     @Inject
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
-    @Inject
-    private EntityManager em;
-
     private MockMvc restEstudiosMockMvc;
 
     private Estudios estudios;
@@ -98,31 +96,19 @@ public class EstudiosResourceIntTest {
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    /**
-     * Create an entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Estudios createEntity(EntityManager em) {
-        Estudios estudios = new Estudios()
-                .centro(DEFAULT_CENTRO)
-                .fechaInicio(DEFAULT_FECHA_INICIO)
-                .fechaFinal(DEFAULT_FECHA_FINAL)
-                .actualmente(DEFAULT_ACTUALMENTE)
-                .curso(DEFAULT_CURSO)
-                .nota(DEFAULT_NOTA)
-                .descripcion(DEFAULT_DESCRIPCION)
-                .archivos(DEFAULT_ARCHIVOS)
-                .archivosContentType(DEFAULT_ARCHIVOS_CONTENT_TYPE)
-                .link(DEFAULT_LINK);
-        return estudios;
-    }
-
     @Before
     public void initTest() {
         estudiosSearchRepository.deleteAll();
-        estudios = createEntity(em);
+        estudios = new Estudios();
+        estudios.setFechaInicio(DEFAULT_FECHA_INICIO);
+        estudios.setFechaFinal(DEFAULT_FECHA_FINAL);
+        estudios.setActualmente(DEFAULT_ACTUALMENTE);
+        estudios.setCurso(DEFAULT_CURSO);
+        estudios.setNota(DEFAULT_NOTA);
+        estudios.setDescripcion(DEFAULT_DESCRIPCION);
+        estudios.setArchivos(DEFAULT_ARCHIVOS);
+        estudios.setArchivosContentType(DEFAULT_ARCHIVOS_CONTENT_TYPE);
+        estudios.setLink(DEFAULT_LINK);
     }
 
     @Test
@@ -141,7 +127,6 @@ public class EstudiosResourceIntTest {
         List<Estudios> estudios = estudiosRepository.findAll();
         assertThat(estudios).hasSize(databaseSizeBeforeCreate + 1);
         Estudios testEstudios = estudios.get(estudios.size() - 1);
-        assertThat(testEstudios.getCentro()).isEqualTo(DEFAULT_CENTRO);
         assertThat(testEstudios.getFechaInicio()).isEqualTo(DEFAULT_FECHA_INICIO);
         assertThat(testEstudios.getFechaFinal()).isEqualTo(DEFAULT_FECHA_FINAL);
         assertThat(testEstudios.isActualmente()).isEqualTo(DEFAULT_ACTUALMENTE);
@@ -166,9 +151,8 @@ public class EstudiosResourceIntTest {
         // Get all the estudios
         restEstudiosMockMvc.perform(get("/api/estudios?sort=id,desc"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(estudios.getId().intValue())))
-                .andExpect(jsonPath("$.[*].centro").value(hasItem(DEFAULT_CENTRO.toString())))
                 .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO.toString())))
                 .andExpect(jsonPath("$.[*].fechaFinal").value(hasItem(DEFAULT_FECHA_FINAL.toString())))
                 .andExpect(jsonPath("$.[*].actualmente").value(hasItem(DEFAULT_ACTUALMENTE.booleanValue())))
@@ -189,9 +173,8 @@ public class EstudiosResourceIntTest {
         // Get the estudios
         restEstudiosMockMvc.perform(get("/api/estudios/{id}", estudios.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(estudios.getId().intValue()))
-            .andExpect(jsonPath("$.centro").value(DEFAULT_CENTRO.toString()))
             .andExpect(jsonPath("$.fechaInicio").value(DEFAULT_FECHA_INICIO.toString()))
             .andExpect(jsonPath("$.fechaFinal").value(DEFAULT_FECHA_FINAL.toString()))
             .andExpect(jsonPath("$.actualmente").value(DEFAULT_ACTUALMENTE.booleanValue()))
@@ -220,18 +203,17 @@ public class EstudiosResourceIntTest {
         int databaseSizeBeforeUpdate = estudiosRepository.findAll().size();
 
         // Update the estudios
-        Estudios updatedEstudios = estudiosRepository.findOne(estudios.getId());
-        updatedEstudios
-                .centro(UPDATED_CENTRO)
-                .fechaInicio(UPDATED_FECHA_INICIO)
-                .fechaFinal(UPDATED_FECHA_FINAL)
-                .actualmente(UPDATED_ACTUALMENTE)
-                .curso(UPDATED_CURSO)
-                .nota(UPDATED_NOTA)
-                .descripcion(UPDATED_DESCRIPCION)
-                .archivos(UPDATED_ARCHIVOS)
-                .archivosContentType(UPDATED_ARCHIVOS_CONTENT_TYPE)
-                .link(UPDATED_LINK);
+        Estudios updatedEstudios = new Estudios();
+        updatedEstudios.setId(estudios.getId());
+        updatedEstudios.setFechaInicio(UPDATED_FECHA_INICIO);
+        updatedEstudios.setFechaFinal(UPDATED_FECHA_FINAL);
+        updatedEstudios.setActualmente(UPDATED_ACTUALMENTE);
+        updatedEstudios.setCurso(UPDATED_CURSO);
+        updatedEstudios.setNota(UPDATED_NOTA);
+        updatedEstudios.setDescripcion(UPDATED_DESCRIPCION);
+        updatedEstudios.setArchivos(UPDATED_ARCHIVOS);
+        updatedEstudios.setArchivosContentType(UPDATED_ARCHIVOS_CONTENT_TYPE);
+        updatedEstudios.setLink(UPDATED_LINK);
 
         restEstudiosMockMvc.perform(put("/api/estudios")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -242,7 +224,6 @@ public class EstudiosResourceIntTest {
         List<Estudios> estudios = estudiosRepository.findAll();
         assertThat(estudios).hasSize(databaseSizeBeforeUpdate);
         Estudios testEstudios = estudios.get(estudios.size() - 1);
-        assertThat(testEstudios.getCentro()).isEqualTo(UPDATED_CENTRO);
         assertThat(testEstudios.getFechaInicio()).isEqualTo(UPDATED_FECHA_INICIO);
         assertThat(testEstudios.getFechaFinal()).isEqualTo(UPDATED_FECHA_FINAL);
         assertThat(testEstudios.isActualmente()).isEqualTo(UPDATED_ACTUALMENTE);
@@ -290,9 +271,8 @@ public class EstudiosResourceIntTest {
         // Search the estudios
         restEstudiosMockMvc.perform(get("/api/_search/estudios?query=id:" + estudios.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.[*].id").value(hasItem(estudios.getId().intValue())))
-            .andExpect(jsonPath("$.[*].centro").value(hasItem(DEFAULT_CENTRO.toString())))
             .andExpect(jsonPath("$.[*].fechaInicio").value(hasItem(DEFAULT_FECHA_INICIO.toString())))
             .andExpect(jsonPath("$.[*].fechaFinal").value(hasItem(DEFAULT_FECHA_FINAL.toString())))
             .andExpect(jsonPath("$.[*].actualmente").value(hasItem(DEFAULT_ACTUALMENTE.booleanValue())))

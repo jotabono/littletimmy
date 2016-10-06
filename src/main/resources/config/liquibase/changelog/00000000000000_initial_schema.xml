@@ -34,7 +34,7 @@
                 <constraints unique="true" nullable="true"/>
             </column>
             <column name="imagen" type="varchar(255)"/>
-            <column name="fecha_nacimiento"  type="timestamp">
+            <column name="fecha_nacimiento"  type="timestamp" defaultValueDate="${now}">
                 <constraints nullable="false"/>
             </column>
             <column name="dni" type="varchar(9)"/>

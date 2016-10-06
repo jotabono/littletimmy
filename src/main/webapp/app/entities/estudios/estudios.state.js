@@ -51,42 +51,9 @@
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Estudios', function($stateParams, Estudios) {
-                    return Estudios.get({id : $stateParams.id}).$promise;
-                }],
-                previousState: ["$state", function ($state) {
-                    var currentStateData = {
-                        name: $state.current.name || 'estudios',
-                        params: $state.params,
-                        url: $state.href($state.current.name, $state.params)
-                    };
-                    return currentStateData;
+                    return Estudios.get({id : $stateParams.id});
                 }]
             }
-        })
-        .state('estudios-detail.edit', {
-            parent: 'estudios-detail',
-            url: '/detail/edit',
-            data: {
-                authorities: ['ROLE_USER']
-            },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
-                    templateUrl: 'app/entities/estudios/estudios-dialog.html',
-                    controller: 'EstudiosDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['Estudios', function(Estudios) {
-                            return Estudios.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
         })
         .state('estudios.new', {
             parent: 'estudios',
@@ -104,7 +71,6 @@
                     resolve: {
                         entity: function () {
                             return {
-                                centro: null,
                                 fechaInicio: null,
                                 fechaFinal: null,
                                 actualmente: null,
@@ -119,7 +85,7 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('estudios', null, { reload: 'estudios' });
+                    $state.go('estudios', null, { reload: true });
                 }, function() {
                     $state.go('estudios');
                 });
@@ -140,11 +106,11 @@
                     size: 'lg',
                     resolve: {
                         entity: ['Estudios', function(Estudios) {
-                            return Estudios.get({id : $stateParams.id}).$promise;
+                            return Estudios.get({id : $stateParams.id});
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('estudios', null, { reload: 'estudios' });
+                    $state.go('estudios', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });
@@ -164,11 +130,11 @@
                     size: 'md',
                     resolve: {
                         entity: ['Estudios', function(Estudios) {
-                            return Estudios.get({id : $stateParams.id}).$promise;
+                            return Estudios.get({id : $stateParams.id});
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('estudios', null, { reload: 'estudios' });
+                    $state.go('estudios', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });

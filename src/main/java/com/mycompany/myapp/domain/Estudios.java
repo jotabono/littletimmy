@@ -24,9 +24,6 @@ public class Estudios implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "centro")
-    private String centro;
-
     @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
 
@@ -49,11 +46,14 @@ public class Estudios implements Serializable {
     @Column(name = "archivos")
     private byte[] archivos;
 
-    @Column(name = "archivos_content_type")
+    @Column(name = "archivos_content_type")    
     private String archivosContentType;
 
     @Column(name = "link")
     private String link;
+
+    @ManyToOne
+    private Centro centro;
 
     public Long getId() {
         return id;
@@ -63,26 +63,8 @@ public class Estudios implements Serializable {
         this.id = id;
     }
 
-    public String getCentro() {
-        return centro;
-    }
-
-    public Estudios centro(String centro) {
-        this.centro = centro;
-        return this;
-    }
-
-    public void setCentro(String centro) {
-        this.centro = centro;
-    }
-
     public LocalDate getFechaInicio() {
         return fechaInicio;
-    }
-
-    public Estudios fechaInicio(LocalDate fechaInicio) {
-        this.fechaInicio = fechaInicio;
-        return this;
     }
 
     public void setFechaInicio(LocalDate fechaInicio) {
@@ -93,22 +75,12 @@ public class Estudios implements Serializable {
         return fechaFinal;
     }
 
-    public Estudios fechaFinal(LocalDate fechaFinal) {
-        this.fechaFinal = fechaFinal;
-        return this;
-    }
-
     public void setFechaFinal(LocalDate fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
 
     public Boolean isActualmente() {
         return actualmente;
-    }
-
-    public Estudios actualmente(Boolean actualmente) {
-        this.actualmente = actualmente;
-        return this;
     }
 
     public void setActualmente(Boolean actualmente) {
@@ -119,22 +91,12 @@ public class Estudios implements Serializable {
         return curso;
     }
 
-    public Estudios curso(String curso) {
-        this.curso = curso;
-        return this;
-    }
-
     public void setCurso(String curso) {
         this.curso = curso;
     }
 
     public Float getNota() {
         return nota;
-    }
-
-    public Estudios nota(Float nota) {
-        this.nota = nota;
-        return this;
     }
 
     public void setNota(Float nota) {
@@ -145,22 +107,12 @@ public class Estudios implements Serializable {
         return descripcion;
     }
 
-    public Estudios descripcion(String descripcion) {
-        this.descripcion = descripcion;
-        return this;
-    }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
     public byte[] getArchivos() {
         return archivos;
-    }
-
-    public Estudios archivos(byte[] archivos) {
-        this.archivos = archivos;
-        return this;
     }
 
     public void setArchivos(byte[] archivos) {
@@ -171,11 +123,6 @@ public class Estudios implements Serializable {
         return archivosContentType;
     }
 
-    public Estudios archivosContentType(String archivosContentType) {
-        this.archivosContentType = archivosContentType;
-        return this;
-    }
-
     public void setArchivosContentType(String archivosContentType) {
         this.archivosContentType = archivosContentType;
     }
@@ -184,13 +131,16 @@ public class Estudios implements Serializable {
         return link;
     }
 
-    public Estudios link(String link) {
-        this.link = link;
-        return this;
-    }
-
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public Centro getCentro() {
+        return centro;
+    }
+
+    public void setCentro(Centro centro) {
+        this.centro = centro;
     }
 
     @Override
@@ -217,7 +167,6 @@ public class Estudios implements Serializable {
     public String toString() {
         return "Estudios{" +
             "id=" + id +
-            ", centro='" + centro + "'" +
             ", fechaInicio='" + fechaInicio + "'" +
             ", fechaFinal='" + fechaFinal + "'" +
             ", actualmente='" + actualmente + "'" +

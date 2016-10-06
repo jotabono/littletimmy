@@ -16,15 +16,11 @@
     <!--
         Added the entity Estudios.
     -->
-    <changeSet id="20160929175625-1" author="jhipster">
+    <changeSet id="20160929175625" author="jhipster">
         <createTable tableName="estudios">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="centro" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            
             <column name="fecha_inicio" type="date">
                 <constraints nullable="true" />
             </column>
@@ -60,8 +56,15 @@
                 <constraints nullable="true" />
             </column>
             
+            <column name="centro_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
+        <addForeignKeyConstraint baseColumnNames="centro_id"
+                                 baseTableName="estudios"
+                                 constraintName="fk_estudios_centro_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="centro"/>
+
     </changeSet>
 </databaseChangeLog>

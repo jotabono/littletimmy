@@ -9,20 +9,15 @@
 
     function EstudiosDeleteController($uibModalInstance, entity, Estudios) {
         var vm = this;
-
         vm.estudios = entity;
-        vm.clear = clear;
-        vm.confirmDelete = confirmDelete;
-        
-        function clear () {
+        vm.clear = function() {
             $uibModalInstance.dismiss('cancel');
-        }
-
-        function confirmDelete (id) {
+        };
+        vm.confirmDelete = function (id) {
             Estudios.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);
                 });
-        }
+        };
     }
 })();
