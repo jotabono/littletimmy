@@ -19,7 +19,9 @@
             "texto": "Texto",
             "fechaEnvio": "Fecha Envio",
             "fechaResolucion": "Fecha Resolucion",
-            "aceptada": "Aceptada"
+            "aceptada": "Aceptada",
+            "recomendador": "Recomendador",
+            "recomendado": "Recomendado"
         }
     }
 }

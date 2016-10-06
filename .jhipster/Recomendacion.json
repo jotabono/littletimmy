@@ -1,6 +1,27 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "recomendador",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "recomendado",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true
+        }
+    ],
     "fields": [
         {
             "fieldName": "texto",
@@ -20,8 +41,8 @@
         }
     ],
     "changelogDate": "20160929175629",
-    "entityTableName": "recomendacion",
     "dto": "no",
-    "pagination": "no",
-    "service": "no"
+    "service": "no",
+    "entityTableName": "recomendacion",
+    "pagination": "no"
 }

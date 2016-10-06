@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('RecomendacionDialogController', RecomendacionDialogController);
 
-    RecomendacionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Recomendacion'];
+    RecomendacionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Recomendacion', 'User'];
 
-    function RecomendacionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Recomendacion) {
+    function RecomendacionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Recomendacion, User) {
         var vm = this;
 
         vm.recomendacion = entity;
@@ -15,6 +15,7 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
+        vm.users = User.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

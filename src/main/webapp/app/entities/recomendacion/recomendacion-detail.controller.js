@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('RecomendacionDetailController', RecomendacionDetailController);
 
-    RecomendacionDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Recomendacion'];
+    RecomendacionDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Recomendacion', 'User'];
 
-    function RecomendacionDetailController($scope, $rootScope, $stateParams, previousState, entity, Recomendacion) {
+    function RecomendacionDetailController($scope, $rootScope, $stateParams, previousState, entity, Recomendacion, User) {
         var vm = this;
 
         vm.recomendacion = entity;

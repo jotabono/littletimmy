@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -35,6 +36,14 @@ public class Recomendacion implements Serializable {
 
     @Column(name = "aceptada")
     private Boolean aceptada;
+
+    @ManyToOne
+    @NotNull
+    private User recomendador;
+
+    @ManyToOne
+    @NotNull
+    private User recomendado;
 
     public Long getId() {
         return id;
@@ -94,6 +103,32 @@ public class Recomendacion implements Serializable {
 
     public void setAceptada(Boolean aceptada) {
         this.aceptada = aceptada;
+    }
+
+    public User getRecomendador() {
+        return recomendador;
+    }
+
+    public Recomendacion recomendador(User user) {
+        this.recomendador = user;
+        return this;
+    }
+
+    public void setRecomendador(User user) {
+        this.recomendador = user;
+    }
+
+    public User getRecomendado() {
+        return recomendado;
+    }
+
+    public Recomendacion recomendado(User user) {
+        this.recomendado = user;
+        return this;
+    }
+
+    public void setRecomendado(User user) {
+        this.recomendado = user;
     }
 
     @Override

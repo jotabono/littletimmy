@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -50,7 +51,7 @@ public class RecomendacionResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Recomendacion> createRecomendacion(@RequestBody Recomendacion recomendacion) throws URISyntaxException {
+    public ResponseEntity<Recomendacion> createRecomendacion(@Valid @RequestBody Recomendacion recomendacion) throws URISyntaxException {
         log.debug("REST request to save Recomendacion : {}", recomendacion);
         if (recomendacion.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("recomendacion", "idexists", "A new recomendacion cannot already have an ID")).body(null);
@@ -75,7 +76,7 @@ public class RecomendacionResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Recomendacion> updateRecomendacion(@RequestBody Recomendacion recomendacion) throws URISyntaxException {
+    public ResponseEntity<Recomendacion> updateRecomendacion(@Valid @RequestBody Recomendacion recomendacion) throws URISyntaxException {
         log.debug("REST request to update Recomendacion : {}", recomendacion);
         if (recomendacion.getId() == null) {
             return createRecomendacion(recomendacion);

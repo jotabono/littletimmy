@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.LittletimmyApp;
 
 import com.mycompany.myapp.domain.Recomendacion;
+import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.RecomendacionRepository;
 import com.mycompany.myapp.repository.search.RecomendacionSearchRepository;
 
@@ -101,6 +103,16 @@ public class RecomendacionResourceIntTest {
                 .fechaEnvio(DEFAULT_FECHA_ENVIO)
                 .fechaResolucion(DEFAULT_FECHA_RESOLUCION)
                 .aceptada(DEFAULT_ACEPTADA);
+        // Add required entity
+        User recomendador = UserResourceIntTest.createEntity(em);
+        em.persist(recomendador);
+        em.flush();
+        recomendacion.setRecomendador(recomendador);
+        // Add required entity
+        User recomendado = UserResourceIntTest.createEntity(em);
+        em.persist(recomendado);
+        em.flush();
+        recomendacion.setRecomendado(recomendado);
         return recomendacion;
     }
 

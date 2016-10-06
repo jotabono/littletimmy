@@ -40,6 +40,8 @@
                     <th><span data-translate="littletimmyApp.recomendacion.fechaEnvio">Fecha Envio</span></th>
                     <th><span data-translate="littletimmyApp.recomendacion.fechaResolucion">Fecha Resolucion</span></th>
                     <th><span data-translate="littletimmyApp.recomendacion.aceptada">Aceptada</span></th>
+                    <th><span data-translate="littletimmyApp.recomendacion.recomendador">Recomendador</span></th>
+                    <th><span data-translate="littletimmyApp.recomendacion.recomendado">Recomendado</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -50,6 +52,12 @@
                     <td>{{recomendacion.fechaEnvio | date:'medium'}}</td>
                     <td>{{recomendacion.fechaResolucion | date:'medium'}}</td>
                     <td>{{recomendacion.aceptada}}</td>
+                    <td>
+                        {{recomendacion.recomendador.login}}
+                    </td>
+                    <td>
+                        {{recomendacion.recomendado.login}}
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

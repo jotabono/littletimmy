@@ -12,4 +12,10 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface RecomendacionRepository extends JpaRepository<Recomendacion,Long> {
 
+    @Query("select recomendacion from Recomendacion recomendacion where recomendacion.recomendador.login = ?#{principal.username}")
+    List<Recomendacion> findByRecomendadorIsCurrentUser();
+
+    @Query("select recomendacion from Recomendacion recomendacion where recomendacion.recomendado.login = ?#{principal.username}")
+    List<Recomendacion> findByRecomendadoIsCurrentUser();
+
 }
