@@ -5,23 +5,23 @@
         .module('littletimmyApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance) {
+    function LoginController ($rootScope, $state, $timeout, Auth) {
         var vm = this;
 
         vm.authenticationError = false;
-        vm.cancel = cancel;
+        // vm.cancel = cancel;
         vm.credentials = {};
         vm.login = login;
         vm.password = null;
-        vm.register = register;
+        // vm.register = register;
         vm.rememberMe = true;
-        vm.requestResetPassword = requestResetPassword;
+        // vm.requestResetPassword = requestResetPassword;
         vm.username = null;
 
         $timeout(function (){angular.element('#username').focus();});
-
+/*
         function cancel () {
             vm.credentials = {
                 username: null,
@@ -30,7 +30,7 @@
             };
             vm.authenticationError = false;
             $uibModalInstance.dismiss('cancel');
-        }
+        }*/
 
         function login (event) {
             event.preventDefault();
@@ -59,7 +59,7 @@
                 vm.authenticationError = true;
             });
         }
-
+/*
         function register () {
             $uibModalInstance.dismiss('cancel');
             $state.go('register');
@@ -68,6 +68,6 @@
         function requestResetPassword () {
             $uibModalInstance.dismiss('cancel');
             $state.go('requestReset');
-        }
+        }*/
     }
 })();

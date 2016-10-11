@@ -1,0 +1,25 @@
+.navbar{
+    background: linear-gradient(180deg, rgb(73, 255, 179) 20%, rgb(57, 148, 153) 100%);
+    background: -webkit-linear-gradient(180deg, rgb(73, 255, 179) 20%, rgb(57, 148, 153) 100%);
+    border-width:0;
+    -webkit-border-radius:0;
+    -moz-border-radius:0;
+    border-radius:0;
+    color:white;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+    background: rgba(0,0,0, 0.1);
+    color:white;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
+    background: rgba(0,0,0, 0.1);
+    color:white;
+}
+
+/*.footer{
+    background: rgba(39,40,35, 1);
+    height:500px;
+    width:100%;
+}*/
