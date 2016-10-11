@@ -1,0 +1,66 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myFriend_userLabel" data-translate="littletimmyApp.friend_user.home.createOrEditLabel">Create or edit a Friend User</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.friend_user.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.friend_user.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.friend_user.friendship" for="field_friendship">Friendship</label>
+            <input type="checkbox" class="form-control" name="friendship" id="field_friendship"
+                    ng-model="vm.friend_user.friendship"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.friend_user.friendship_date" for="field_friendship_date">Friendship Date</label>
+                <div class="input-group">
+                    <input id="field_friendship_date" type="text" class="form-control" name="friendship_date" datetime-picker="{{dateformat}}" ng-model="vm.friend_user.friendship_date" is-open="vm.datePickerOpenStatus.friendship_date"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('friendship_date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="littletimmyApp.friend_user.friend_from" for="field_friend_from">Friend From</label>
+            <select class="form-control" id="field_friend_from" name="friend_from" ng-model="vm.friend_user.friend_from" ng-options="user as user.login for user in vm.users track by user.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.friend_from.$invalid">
+            <p class="help-block"
+                ng-show="editForm.friend_from.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label data-translate="littletimmyApp.friend_user.friend_to" for="field_friend_to">Friend To</label>
+            <select class="form-control" id="field_friend_to" name="friend_to" ng-model="vm.friend_user.friend_to" ng-options="user as user.login for user in vm.users track by user.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.friend_to.$invalid">
+            <p class="help-block"
+                ng-show="editForm.friend_to.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

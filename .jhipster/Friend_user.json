@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "friend_from",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "friend_to",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "friendship",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "friendship_date",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20161006205703",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "friend_user",
+    "pagination": "pagination"
+}
