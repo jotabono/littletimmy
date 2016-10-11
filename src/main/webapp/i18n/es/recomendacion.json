@@ -21,7 +21,9 @@
             "fechaResolucion": "Fecha Resolucion",
             "aceptada": "Aceptada",
             "recomendador": "Recomendador",
-            "recomendado": "Recomendado"
+            "recomendado": "Recomendado",
+            "trabajo": "Trabajo",
+            "empresa": "Empresa"
         }
     }
 }

@@ -28,6 +28,14 @@
         <dd>
             {{vm.recomendacion.recomendado.login}}
         </dd>
+        <dt><span data-translate="littletimmyApp.recomendacion.trabajo">Trabajo</span></dt>
+        <dd>
+            <a ui-sref="trabajo-detail({id:vm.recomendacion.trabajo.id})">{{vm.recomendacion.trabajo.cargo}}</a>
+        </dd>
+        <dt><span data-translate="littletimmyApp.recomendacion.empresa">Empresa</span></dt>
+        <dd>
+            <a ui-sref="empresa-detail({id:vm.recomendacion.empresa.id})">{{vm.recomendacion.empresa.nombre}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

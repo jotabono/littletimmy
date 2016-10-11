@@ -20,6 +20,24 @@
             ],
             "otherEntityField": "login",
             "ownerSide": true
+        },
+        {
+            "relationshipName": "trabajo",
+            "otherEntityName": "trabajo",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "cargo"
+        },
+        {
+            "relationshipName": "empresa",
+            "otherEntityName": "empresa",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "nombre"
         }
     ],
     "fields": [

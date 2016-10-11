@@ -42,6 +42,8 @@
                     <th><span data-translate="littletimmyApp.recomendacion.aceptada">Aceptada</span></th>
                     <th><span data-translate="littletimmyApp.recomendacion.recomendador">Recomendador</span></th>
                     <th><span data-translate="littletimmyApp.recomendacion.recomendado">Recomendado</span></th>
+                    <th><span data-translate="littletimmyApp.recomendacion.trabajo">Trabajo</span></th>
+                    <th><span data-translate="littletimmyApp.recomendacion.empresa">Empresa</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -57,6 +59,12 @@
                     </td>
                     <td>
                         {{recomendacion.recomendado.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="trabajo-detail({id:recomendacion.trabajo.id})">{{recomendacion.trabajo.cargo}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="empresa-detail({id:recomendacion.empresa.id})">{{recomendacion.empresa.nombre}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

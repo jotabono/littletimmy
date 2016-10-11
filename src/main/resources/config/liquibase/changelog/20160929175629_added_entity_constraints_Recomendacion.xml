@@ -20,5 +20,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="trabajo_id"
+                                 baseTableName="recomendacion"
+                                 constraintName="fk_recomendacion_trabajo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="trabajo"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id"
+                                 baseTableName="recomendacion"
+                                 constraintName="fk_recomendacion_empresa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="empresa"/>
+
     </changeSet>
 </databaseChangeLog>

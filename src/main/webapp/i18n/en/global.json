@@ -12,6 +12,7 @@
                 "trabajo": "Trabajo",
                 "empresa": "Empresa",
                 "recomendacion": "Recomendacion",
+                "friendUser": "Friend User",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -45,6 +45,14 @@ public class Recomendacion implements Serializable {
     @NotNull
     private User recomendado;
 
+    @ManyToOne
+    @NotNull
+    private Trabajo trabajo;
+
+    @ManyToOne
+    @NotNull
+    private Empresa empresa;
+
     public Long getId() {
         return id;
     }
@@ -129,6 +137,32 @@ public class Recomendacion implements Serializable {
 
     public void setRecomendado(User user) {
         this.recomendado = user;
+    }
+
+    public Trabajo getTrabajo() {
+        return trabajo;
+    }
+
+    public Recomendacion trabajo(Trabajo trabajo) {
+        this.trabajo = trabajo;
+        return this;
+    }
+
+    public void setTrabajo(Trabajo trabajo) {
+        this.trabajo = trabajo;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public Recomendacion empresa(Empresa empresa) {
+        this.empresa = empresa;
+        return this;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     @Override

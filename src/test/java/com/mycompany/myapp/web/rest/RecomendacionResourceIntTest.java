@@ -5,6 +5,8 @@ import com.mycompany.myapp.LittletimmyApp;
 import com.mycompany.myapp.domain.Recomendacion;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.domain.Trabajo;
+import com.mycompany.myapp.domain.Empresa;
 import com.mycompany.myapp.repository.RecomendacionRepository;
 import com.mycompany.myapp.repository.search.RecomendacionSearchRepository;
 
@@ -113,6 +115,16 @@ public class RecomendacionResourceIntTest {
         em.persist(recomendado);
         em.flush();
         recomendacion.setRecomendado(recomendado);
+        // Add required entity
+        Trabajo trabajo = TrabajoResourceIntTest.createEntity(em);
+        em.persist(trabajo);
+        em.flush();
+        recomendacion.setTrabajo(trabajo);
+        // Add required entity
+        Empresa empresa = EmpresaResourceIntTest.createEntity(em);
+        em.persist(empresa);
+        em.flush();
+        recomendacion.setEmpresa(empresa);
         return recomendacion;
     }
 
