@@ -70,6 +70,30 @@
                 This field is required.
             </p>
         </div>
+        <div class="form-group">
+            <label data-translate="littletimmyApp.recomendacion.trabajo" for="field_trabajo">Trabajo</label>
+            <select class="form-control" id="field_trabajo" name="trabajo" ng-model="vm.recomendacion.trabajo" ng-options="trabajo as trabajo.cargo +' en '+ trabajo.empresa.nombre for trabajo in vm.trabajos track by trabajo.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.trabajo.$invalid">
+            <p class="help-block"
+                ng-show="editForm.trabajo.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+        <!--<div class="form-group">
+            <label data-translate="littletimmyApp.recomendacion.empresa" for="field_empresa">Empresa</label>
+            <select class="form-control" id="field_empresa" name="empresa" ng-model="vm.recomendacion.empresa" ng-options="empresa as empresa.nombre for empresa in vm.empresas track by empresa.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.empresa.$invalid">
+            <p class="help-block"
+                ng-show="editForm.empresa.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>-->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

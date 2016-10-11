@@ -39,6 +39,11 @@
                     copy.fechaFin = DateUtils.convertLocalDateToServer(copy.fechaFin);
                     return angular.toJson(copy);
                 }
+            },
+            'getTrabajosUsers':{
+                method: 'GET',
+                isArray: true,
+                url: 'api/trabajos/usuarios/:recomendador/:recomendado'
             }
         });
     }

@@ -3,8 +3,11 @@ package com.mycompany.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Recomendacion;
 
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.RecomendacionRepository;
+import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.RecomendacionSearchRepository;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +36,12 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class RecomendacionResource {
 
     private final Logger log = LoggerFactory.getLogger(RecomendacionResource.class);
-        
+
     @Inject
     private RecomendacionRepository recomendacionRepository;
+
+    @Inject
+    private UserRepository userRepository;
 
     @Inject
     private RecomendacionSearchRepository recomendacionSearchRepository;
@@ -56,6 +62,10 @@ public class RecomendacionResource {
         if (recomendacion.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("recomendacion", "idexists", "A new recomendacion cannot already have an ID")).body(null);
         }
+        /*User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        recomendacion.setRecomendador(user);*/
+        recomendacion.setAceptada(false);
+        recomendacion.setEmpresa(recomendacion.getTrabajo().getEmpresa());
         Recomendacion result = recomendacionRepository.save(recomendacion);
         recomendacionSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/recomendacions/" + result.getId()))
@@ -144,7 +154,7 @@ public class RecomendacionResource {
      * SEARCH  /_search/recomendacions?query=:query : search for the recomendacion corresponding
      * to the query.
      *
-     * @param query the query of the recomendacion search 
+     * @param query the query of the recomendacion search
      * @return the result of the search
      */
     @RequestMapping(value = "/_search/recomendacions",

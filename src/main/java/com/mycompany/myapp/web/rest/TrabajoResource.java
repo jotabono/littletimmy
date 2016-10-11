@@ -1,10 +1,15 @@
 package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mycompany.myapp.domain.Recomendacion;
 import com.mycompany.myapp.domain.Trabajo;
 
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.TrabajoRepository;
+import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.TrabajoSearchRepository;
+import com.mycompany.myapp.security.SecurityUtils;
+import com.mycompany.myapp.service.RecomendacionService;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +24,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -32,12 +38,18 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class TrabajoResource {
 
     private final Logger log = LoggerFactory.getLogger(TrabajoResource.class);
-        
+
     @Inject
     private TrabajoRepository trabajoRepository;
 
     @Inject
+    private UserRepository userRepository;
+
+    @Inject
     private TrabajoSearchRepository trabajoSearchRepository;
+
+    @Inject
+    private RecomendacionService recomendacionService;
 
     /**
      * POST  /trabajos : Create a new trabajo.
@@ -143,7 +155,7 @@ public class TrabajoResource {
      * SEARCH  /_search/trabajos?query=:query : search for the trabajo corresponding
      * to the query.
      *
-     * @param query the query of the trabajo search 
+     * @param query the query of the trabajo search
      * @return the result of the search
      */
     @RequestMapping(value = "/_search/trabajos",
@@ -155,6 +167,17 @@ public class TrabajoResource {
         return StreamSupport
             .stream(trabajoSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+    }
+
+    @RequestMapping(value = "/trabajos/usuarios/{recomendador}/{recomendado}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public Set<Trabajo> getAllTrabajosEntreUsers(@PathVariable String recomendador, @PathVariable String recomendado) {
+        log.debug("REST request to get all Trabajos");
+        //User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        Set<Trabajo> trabajos = recomendacionService.getTrabajosUsuarios(recomendador, recomendado);
+        return trabajos;
     }
 
 
