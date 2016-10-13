@@ -25,7 +25,7 @@
     <![endif]-->
     <page-ribbon></page-ribbon>
     <div ui-view="navbar" ng-cloak></div>
-    <div class="container-fluid">
+    <div class="container-fluid" id="contentapp">
         <div ui-view="content">
             <!-- Angular views -->
         </div>
@@ -70,6 +70,8 @@
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
+
+    <script src="content/js/menu.js"></script>
 
     <!-- build:js app/app.js  -->
     <!-- inject:js -->
