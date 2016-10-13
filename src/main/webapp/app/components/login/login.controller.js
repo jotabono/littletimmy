@@ -34,13 +34,15 @@
 
         function login (event) {
             event.preventDefault();
+            console.log("USERNAME: " + vm.username);
+            console.log("PASSWORD: " + vm.password);
             Auth.login({
                 username: vm.username,
                 password: vm.password,
                 rememberMe: vm.rememberMe
             }).then(function () {
                 vm.authenticationError = false;
-                $uibModalInstance.close();
+                //$uibModalInstance.close();
                 if ($state.current.name === 'register' || $state.current.name === 'activate' ||
                     $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
                     $state.go('home');
@@ -54,6 +56,9 @@
                     var previousState = Auth.getPreviousState();
                     Auth.resetPreviousState();
                     $state.go(previousState.name, previousState.params);
+                }
+                else{
+                    $state.go("home");
                 }
             }).catch(function () {
                 vm.authenticationError = true;
