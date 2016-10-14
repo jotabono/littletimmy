@@ -1,8 +1,8 @@
 $(document).ready(init);
 
 function init() {
-    var colorInitWebkit = "-webkit-linear-gradient(180deg, rgb(73, 255, 179) 20%, rgb(57, 148, 153) 100%)";
-    var colorInit = "linear-gradient(180deg, rgb(73, 255, 179) 20%, rgb(57, 148, 153) 100%)";
+    var colorInitWebkit = "-webkit-linear-gradient(top right, rgb(73, 255, 179) 20%, rgb(57, 148, 153) 100%)";
+    var colorInit = "linear-gradient(top right, rgb(73, 255, 179) 20%, rgb(57, 148, 153) 100%)";
 
     $(window).scroll(function () {
         var url = window.location.href.split('/#');
