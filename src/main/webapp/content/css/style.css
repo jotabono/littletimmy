@@ -14,6 +14,7 @@ body{
 }
 
 .navbar{
+    //overflow: hidden;
     background-color: #55acee;
     border-width:0;
     -webkit-border-radius:0;
@@ -25,7 +26,7 @@ body{
     left:0;
     right:0;
     z-index: 20;
-    transition:background 0.5s linear;
+    transition:background 0.2s linear;
 }
 
 .navbar-default .navbar-nav > li > a{
@@ -55,3 +56,47 @@ body{
     height:500px;
     width:100%;
 }*/
+
+.footer{
+    background: rgba(39, 40, 35, 1);
+    text-align: center;
+}
+
+.footer img{
+    width: 40%;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+.bell-notification-read:after{
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: 1px;
+    height: 12px;
+    width: 12px;
+    background: linear-gradient(top left, rgb(73, 255, 179) 0%, rgb(57, 148, 153) 100%);
+    background: -webkit-linear-gradient(top left, rgb(73, 255, 179) 0%, rgb(57, 148, 153) 100%);
+    border-radius: 100%;
+}
+
+.bell-notification-read{
+    position: relative;
+}
+
+li.notification  .glyphicon{
+    font-size: 19px;
+    color: whitesmoke;
+}
+
+li.notification {
+    height: 50px;
+}
+
+li.notification > a{
+    height: 100%;
+}
+
