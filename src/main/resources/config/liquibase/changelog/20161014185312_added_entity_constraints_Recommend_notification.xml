@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Recommend_notification.
+    -->
+    <changeSet id="20161014185312-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="remitente_id"
+                                 baseTableName="recommend_notification"
+                                 constraintName="fk_recommend_notification_remitente_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>

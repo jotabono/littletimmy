@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "remitente",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "contenido",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaRecibida",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "leida",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161014185312",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "recommend_notification",
+    "pagination": "pager"
+}

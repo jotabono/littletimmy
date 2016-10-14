@@ -13,6 +13,7 @@
                 "empresa": "Empresa",
                 "recomendacion": "Recomendacion",
                 "friendUser": "Friend User",
+                "recommendNotification": "Recommend Notification",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
