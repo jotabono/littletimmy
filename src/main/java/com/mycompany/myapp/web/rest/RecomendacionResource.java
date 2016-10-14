@@ -62,9 +62,9 @@ public class RecomendacionResource {
         if (recomendacion.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("recomendacion", "idexists", "A new recomendacion cannot already have an ID")).body(null);
         }
-        /*User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
-        recomendacion.setRecomendador(user);*/
-        recomendacion.setAceptada(false);
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        recomendacion.setRecomendador(user);
+        recomendacion.setAceptada(recomendacion.isAceptada());
         recomendacion.setEmpresa(recomendacion.getTrabajo().getEmpresa());
         Recomendacion result = recomendacionRepository.save(recomendacion);
         recomendacionSearchRepository.save(result);
@@ -91,6 +91,10 @@ public class RecomendacionResource {
         if (recomendacion.getId() == null) {
             return createRecomendacion(recomendacion);
         }
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        recomendacion.setRecomendador(user);
+        recomendacion.setAceptada(recomendacion.isAceptada());
+        recomendacion.setEmpresa(recomendacion.getTrabajo().getEmpresa());
         Recomendacion result = recomendacionRepository.save(recomendacion);
         recomendacionSearchRepository.save(result);
         return ResponseEntity.ok()

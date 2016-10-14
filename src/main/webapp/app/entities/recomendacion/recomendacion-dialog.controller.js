@@ -5,22 +5,28 @@
         .module('littletimmyApp')
         .controller('RecomendacionDialogController', RecomendacionDialogController);
 
-    RecomendacionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Recomendacion', 'User', 'Trabajo', 'Empresa'];
+    RecomendacionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Recomendacion', 'User', 'Trabajo', 'Empresa', 'Principal'];
 
-    function RecomendacionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Recomendacion, User, Trabajo, Empresa) {
+    function RecomendacionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Recomendacion, User, Trabajo, Empresa, Principal) {
         var vm = this;
+
+        var recomendador = null;
+
+        Principal.identity().then(function(account) {
+            vm.account = account;
+        });
 
         vm.recomendacion = entity;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.users = User.query();
+        //QUERY PARA OBTENER LOS AMIGOS DEL USUARIO CONECTADO
+        vm.users = User.getFriendsUser();
         //vm.trabajos = Trabajo.query();
         vm.empresas = Empresa.query();
         vm.trabajos = {};
         var selectedUsers = 0;
-        var recomendador = null;
         var recomendado = null;
 
         $timeout(function (){
@@ -33,6 +39,7 @@
 
         function save () {
             vm.recomendacion.empresa = vm.recomendacion.trabajo.empresa;
+            vm.recomendacion.recomendador = vm.account;
             vm.isSaving = true;
             if (vm.recomendacion.id !== null) {
                 Recomendacion.update(vm.recomendacion, onSaveSuccess, onSaveError);
@@ -41,8 +48,8 @@
             }
         }
 
-        $scope.$watchCollection('vm.recomendacion.recomendador', function(e) {
-            //vm.trabajos = Trabajo.getTrabajosUsers({recomendador: recomendador, recomendado: recomendado});
+        /*$scope.$watchCollection('vm.recomendacion.recomendador', function(e) {
+            vm.trabajos = Trabajo.getTrabajoRecomendado({recomendado: recomendado});
             console.log(e.login);
             if(e != undefined){
                 selectedUsers += 1;
@@ -55,12 +62,12 @@
             }
             if(selectedUsers == 2){
                 recomendador = e.login;
-                vm.trabajos = Trabajo.getTrabajosUsers({recomendador: recomendador, recomendado: recomendado});
+                //vm.trabajos = Trabajo.getTrabajosUsers({recomendador: recomendador, recomendado: recomendado});
             }
-        });
+        });*/
 
         $scope.$watchCollection('vm.recomendacion.recomendado', function(e) {
-            //vm.trabajos = Trabajo.getTrabajosUsers({recomendador: recomendador, recomendado: recomendado});
+
             console.log(e.login);
             if(e != undefined){
                 selectedUsers += 1;
@@ -73,8 +80,9 @@
             }
             if(selectedUsers == 2){
                 recomendado = e.login;
-                vm.trabajos = Trabajo.getTrabajosUsers({recomendador: recomendador, recomendado: recomendado});
+                //vm.trabajos = Trabajo.getTrabajosUsers({recomendador: recomendador, recomendado: recomendado});
             }
+            vm.trabajos = Trabajo.getTrabajoRecomendado({recomendado: recomendado});
         });
 
         function onSaveSuccess (result) {

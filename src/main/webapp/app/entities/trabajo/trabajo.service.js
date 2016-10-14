@@ -44,6 +44,11 @@
                 method: 'GET',
                 isArray: true,
                 url: 'api/trabajos/usuarios/:recomendador/:recomendado'
+            },
+            'getTrabajoRecomendado':{
+                method: 'GET',
+                isArray: true,
+                url: 'api/trabajos/user/:recomendado'
             }
         });
     }

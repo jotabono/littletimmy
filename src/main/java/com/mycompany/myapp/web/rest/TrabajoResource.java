@@ -180,5 +180,15 @@ public class TrabajoResource {
         return trabajos;
     }
 
+    @RequestMapping(value = "/trabajos/user/{recomendado}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public Set<Trabajo> getAllTrabajosUser(@PathVariable String recomendado) {
+        log.debug("REST request to get all Trabajos");
+        //User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        Set<Trabajo> trabajos = recomendacionService.getTrabajosComunesUsuarios(recomendado);
+        return trabajos;
+    }
 
 }

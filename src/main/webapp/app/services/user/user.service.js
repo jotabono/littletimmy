@@ -19,7 +19,13 @@
             },
             'save': { method:'POST' },
             'update': { method:'PUT' },
-            'delete':{ method:'DELETE'}
+            'delete':{ method:'DELETE'},
+            'getFriendsUser': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/user/logged/friends'
+            }
+
         });
 
         return service;

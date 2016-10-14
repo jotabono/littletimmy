@@ -2,10 +2,13 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.config.Constants;
 import com.codahale.metrics.annotation.Timed;
+import com.mycompany.myapp.domain.Friend_user;
 import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.repository.Friend_userRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.UserSearchRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.MailService;
 import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.web.rest.vm.ManagedUserVM;
@@ -64,6 +67,9 @@ public class UserResource {
 
     @Inject
     private UserRepository userRepository;
+
+    @Inject
+    private Friend_userRepository friend_userRepository;
 
     @Inject
     private MailService mailService;
@@ -153,7 +159,7 @@ public class UserResource {
 
     /**
      * GET  /users : get all users.
-     * 
+     *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and with body all users
      * @throws URISyntaxException if the pagination headers couldn't be generated
@@ -223,4 +229,19 @@ public class UserResource {
             .stream(userSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
+
+    @RequestMapping(value = "/user/logged/friends",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<User> getFriendsUser() {
+
+        return friend_userRepository.findByFriendOfUser()
+            .stream()
+            .filter(friend_user -> friend_user.isFriendship())
+            .map(friend_user -> friend_user.getFriend_to())
+            .collect(Collectors.toList());
+
+    }
+
 }

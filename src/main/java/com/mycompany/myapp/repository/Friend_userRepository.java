@@ -18,4 +18,7 @@ public interface Friend_userRepository extends JpaRepository<Friend_user,Long> {
     @Query("select friend_user from Friend_user friend_user where friend_user.friend_to.login = ?#{principal.username}")
     List<Friend_user> findByFriend_toIsCurrentUser();
 
+    @Query("select friend_user from Friend_user friend_user where friend_user.friend_to.login = ?#{principal.username} OR friend_user.friend_from.login = ?#{principal.username}")
+    List<Friend_user> findByFriendOfUser();
+
 }
