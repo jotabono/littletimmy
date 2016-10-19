@@ -33,11 +33,15 @@
                 <constraints nullable="true" />
             </column>
             
-            <column name="remitente_id" type="bigint">
+            <column name="receptor_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <column name="recomendacion_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="emisor_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

@@ -39,8 +39,9 @@
                     <th jh-sort-by="contenido"><span data-translate="littletimmyApp.recommend_notification.contenido">Contenido</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="fechaRecibida"><span data-translate="littletimmyApp.recommend_notification.fechaRecibida">Fecha Recibida</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="leida"><span data-translate="littletimmyApp.recommend_notification.leida">Leida</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="remitente.login"><span data-translate="littletimmyApp.recommend_notification.remitente">Remitente</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="receptor.login"><span data-translate="littletimmyApp.recommend_notification.receptor">Receptor</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="recomendacion.id"><span data-translate="littletimmyApp.recommend_notification.recomendacion">Recomendacion</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="emisor.login"><span data-translate="littletimmyApp.recommend_notification.emisor">Emisor</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -51,10 +52,13 @@
                     <td>{{recommend_notification.fechaRecibida | date:'medium'}}</td>
                     <td>{{recommend_notification.leida}}</td>
                     <td>
-                        {{recommend_notification.remitente.login}}
+                        {{recommend_notification.receptor.login}}
                     </td>
                     <td>
                         <a ui-sref="recomendacion-detail({id:recommend_notification.recomendacion.id})">{{recommend_notification.recomendacion.id}}</a>
+                    </td>
+                    <td>
+                        {{recommend_notification.emisor.login}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

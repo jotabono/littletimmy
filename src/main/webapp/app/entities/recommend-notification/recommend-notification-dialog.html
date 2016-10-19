@@ -37,14 +37,20 @@
         </div>
 
         <div class="form-group">
-            <label data-translate="littletimmyApp.recommend_notification.remitente" for="field_remitente">Remitente</label>
-            <select class="form-control" id="field_remitente" name="remitente" ng-model="vm.recommend_notification.remitente" ng-options="user as user.login for user in vm.users track by user.id">
+            <label data-translate="littletimmyApp.recommend_notification.receptor" for="field_receptor">Receptor</label>
+            <select class="form-control" id="field_receptor" name="receptor" ng-model="vm.recommend_notification.receptor" ng-options="user as user.login for user in vm.users track by user.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label data-translate="littletimmyApp.recommend_notification.recomendacion" for="field_recomendacion">Recomendacion</label>
             <select class="form-control" id="field_recomendacion" name="recomendacion" ng-model="vm.recommend_notification.recomendacion" ng-options="recomendacion as recomendacion.id for recomendacion in vm.recomendacions track by recomendacion.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="littletimmyApp.recommend_notification.emisor" for="field_emisor">Emisor</label>
+            <select class="form-control" id="field_emisor" name="emisor" ng-model="vm.recommend_notification.emisor" ng-options="user as user.login for user in vm.users track by user.id">
                 <option value=""></option>
             </select>
         </div>

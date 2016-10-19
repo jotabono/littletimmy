@@ -34,10 +34,13 @@ public class Recommend_notification implements Serializable {
     private Boolean leida;
 
     @ManyToOne
-    private User remitente;
+    private User receptor;
 
     @ManyToOne
     private Recomendacion recomendacion;
+
+    @ManyToOne
+    private User emisor;
 
     public Long getId() {
         return id;
@@ -86,17 +89,17 @@ public class Recommend_notification implements Serializable {
         this.leida = leida;
     }
 
-    public User getRemitente() {
-        return remitente;
+    public User getReceptor() {
+        return receptor;
     }
 
-    public Recommend_notification remitente(User user) {
-        this.remitente = user;
+    public Recommend_notification receptor(User user) {
+        this.receptor = user;
         return this;
     }
 
-    public void setRemitente(User user) {
-        this.remitente = user;
+    public void setReceptor(User user) {
+        this.receptor = user;
     }
 
     public Recomendacion getRecomendacion() {
@@ -110,6 +113,19 @@ public class Recommend_notification implements Serializable {
 
     public void setRecomendacion(Recomendacion recomendacion) {
         this.recomendacion = recomendacion;
+    }
+
+    public User getEmisor() {
+        return emisor;
+    }
+
+    public Recommend_notification emisor(User user) {
+        this.emisor = user;
+        return this;
+    }
+
+    public void setEmisor(User user) {
+        this.emisor = user;
     }
 
     @Override

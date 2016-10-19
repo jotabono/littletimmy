@@ -28,7 +28,7 @@
         vm.empresas = Empresa.query();
         vm.trabajos = {};
         var selectedUsers = 0;
-        var recomendado = null;
+        var usuarioRecomendado = null;
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -72,18 +72,14 @@
             console.log(e.login);
             if(e != undefined){
                 selectedUsers += 1;
-                recomendado = e.login;
+                usuarioRecomendado = e.login;
 
                 if(recomendado != e.login){
                     selectedUsers -= 1;
-                    recomendado = e.login;
+                    usuarioRecomendado = e.login;
                 }
             }
-            if(selectedUsers == 2){
-                recomendado = e.login;
-                //vm.trabajos = Trabajo.getTrabajosUsers({recomendador: recomendador, recomendado: recomendado});
-            }
-            vm.trabajos = Trabajo.getTrabajoRecomendado({recomendado: recomendado});
+            vm.trabajos = Trabajo.getTrabajoRecomendado({recomendado: usuarioRecomendado});
         });
 
         function onSaveSuccess (result) {

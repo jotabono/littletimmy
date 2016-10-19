@@ -12,7 +12,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface Recommend_notificationRepository extends JpaRepository<Recommend_notification,Long> {
 
-    @Query("select recommend_notification from Recommend_notification recommend_notification where recommend_notification.remitente.login = ?#{principal.username}")
+    @Query("select recommend_notification from Recommend_notification recommend_notification where recommend_notification.receptor.login = ?#{principal.username}")
     List<Recommend_notification> findByRemitenteIsCurrentUser();
 
 }

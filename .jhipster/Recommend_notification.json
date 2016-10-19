@@ -2,7 +2,7 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "remitente",
+            "relationshipName": "receptor",
             "otherEntityName": "user",
             "relationshipType": "many-to-one",
             "otherEntityField": "login",
@@ -13,6 +13,13 @@
             "otherEntityName": "recomendacion",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "emisor",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true
         }
     ],
     "fields": [

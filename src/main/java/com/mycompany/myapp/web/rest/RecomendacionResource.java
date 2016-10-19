@@ -3,8 +3,10 @@ package com.mycompany.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Recomendacion;
 
+import com.mycompany.myapp.domain.Recommend_notification;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.RecomendacionRepository;
+import com.mycompany.myapp.repository.Recommend_notificationRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.RecomendacionSearchRepository;
 import com.mycompany.myapp.security.SecurityUtils;
@@ -21,6 +23,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,6 +49,9 @@ public class RecomendacionResource {
     @Inject
     private RecomendacionSearchRepository recomendacionSearchRepository;
 
+    @Inject
+    private Recommend_notificationRepository recommend_notificationRepository;
+
     /**
      * POST  /recomendacions : Create a new recomendacion.
      *
@@ -68,6 +74,16 @@ public class RecomendacionResource {
         recomendacion.setEmpresa(recomendacion.getTrabajo().getEmpresa());
         Recomendacion result = recomendacionRepository.save(recomendacion);
         recomendacionSearchRepository.save(result);
+        Recommend_notification notification = new Recommend_notification();
+
+        notification.setContenido("Tienes una nueva recomendación.");
+        notification.setEmisor(recomendacion.getRecomendador());
+        notification.setReceptor(recomendacion.getRecomendado());
+        notification.setFechaRecibida(recomendacion.getFechaEnvio());
+        notification.setLeida(false);
+        notification.setRecomendacion(recomendacion);
+        recommend_notificationRepository.save(notification);
+
         return ResponseEntity.created(new URI("/api/recomendacions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("recomendacion", result.getId().toString()))
             .body(result);

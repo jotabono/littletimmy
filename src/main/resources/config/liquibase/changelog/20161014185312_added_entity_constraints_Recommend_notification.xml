@@ -8,9 +8,9 @@
     -->
     <changeSet id="20161014185312-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="remitente_id"
+        <addForeignKeyConstraint baseColumnNames="receptor_id"
                                  baseTableName="recommend_notification"
-                                 constraintName="fk_recommend_notification_remitente_id"
+                                 constraintName="fk_recommend_notification_receptor_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
@@ -19,6 +19,12 @@
                                  constraintName="fk_recommend_notification_recomendacion_id"
                                  referencedColumnNames="id"
                                  referencedTableName="recomendacion"/>
+
+        <addForeignKeyConstraint baseColumnNames="emisor_id"
+                                 baseTableName="recommend_notification"
+                                 constraintName="fk_recommend_notification_emisor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
 
     </changeSet>
 </databaseChangeLog>

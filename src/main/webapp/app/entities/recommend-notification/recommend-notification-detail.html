@@ -16,13 +16,17 @@
         <dd>
             <span>{{vm.recommend_notification.leida}}</span>
         </dd>
-        <dt><span data-translate="littletimmyApp.recommend_notification.remitente">Remitente</span></dt>
+        <dt><span data-translate="littletimmyApp.recommend_notification.receptor">Receptor</span></dt>
         <dd>
-            {{vm.recommend_notification.remitente.login}}
+            {{vm.recommend_notification.receptor.login}}
         </dd>
         <dt><span data-translate="littletimmyApp.recommend_notification.recomendacion">Recomendacion</span></dt>
         <dd>
             <a ui-sref="recomendacion-detail({id:vm.recommend_notification.recomendacion.id})">{{vm.recommend_notification.recomendacion.id}}</a>
+        </dd>
+        <dt><span data-translate="littletimmyApp.recommend_notification.emisor">Emisor</span></dt>
+        <dd>
+            {{vm.recommend_notification.emisor.login}}
         </dd>
     </dl>
 
