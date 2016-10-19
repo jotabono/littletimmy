@@ -74,7 +74,7 @@
                 selectedUsers += 1;
                 usuarioRecomendado = e.login;
 
-                if(recomendado != e.login){
+                if(usuarioRecomendado != e.login){
                     selectedUsers -= 1;
                     usuarioRecomendado = e.login;
                 }
