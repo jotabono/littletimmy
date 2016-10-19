@@ -7,6 +7,12 @@
             "relationshipType": "many-to-one",
             "otherEntityField": "login",
             "ownerSide": true
+        },
+        {
+            "relationshipName": "recomendacion",
+            "otherEntityName": "recomendacion",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

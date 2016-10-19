@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('Recommend_notification Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockRecommend_notification, MockUser;
+        var MockEntity, MockPreviousState, MockRecommend_notification, MockUser, MockRecomendacion;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -14,6 +14,7 @@ describe('Controller Tests', function() {
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockRecommend_notification = jasmine.createSpy('MockRecommend_notification');
             MockUser = jasmine.createSpy('MockUser');
+            MockRecomendacion = jasmine.createSpy('MockRecomendacion');
             
 
             var locals = {
@@ -22,7 +23,8 @@ describe('Controller Tests', function() {
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
                 'Recommend_notification': MockRecommend_notification,
-                'User': MockUser
+                'User': MockUser,
+                'Recomendacion': MockRecomendacion
             };
             createController = function() {
                 $injector.get('$controller')("Recommend_notificationDetailController", locals);

@@ -37,6 +37,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="recomendacion_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="recommend_notification" columnName="fecha_recibida" columnDataType="datetime"/>

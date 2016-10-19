@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="recomendacion_id"
+                                 baseTableName="recommend_notification"
+                                 constraintName="fk_recommend_notification_recomendacion_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="recomendacion"/>
+
     </changeSet>
 </databaseChangeLog>

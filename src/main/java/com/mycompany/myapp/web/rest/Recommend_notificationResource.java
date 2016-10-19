@@ -22,6 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -35,7 +36,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class Recommend_notificationResource {
 
     private final Logger log = LoggerFactory.getLogger(Recommend_notificationResource.class);
-        
+
     @Inject
     private Recommend_notificationRepository recommend_notificationRepository;
 
@@ -58,6 +59,7 @@ public class Recommend_notificationResource {
         if (recommend_notification.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("recommend_notification", "idexists", "A new recommend_notification cannot already have an ID")).body(null);
         }
+        recommend_notification.setLeida(false);
         Recommend_notification result = recommend_notificationRepository.save(recommend_notification);
         recommend_notificationSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/recommend-notifications/" + result.getId()))
@@ -150,7 +152,7 @@ public class Recommend_notificationResource {
      * SEARCH  /_search/recommend-notifications?query=:query : search for the recommend_notification corresponding
      * to the query.
      *
-     * @param query the query of the recommend_notification search 
+     * @param query the query of the recommend_notification search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
@@ -165,6 +167,20 @@ public class Recommend_notificationResource {
         Page<Recommend_notification> page = recommend_notificationSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/recommend-notifications");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/recommend-notifications/user-conected",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Recommend_notification>> getRecommendNotificationsNotReaded()
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Recommend_notifications");
+
+        List<Recommend_notification> notifications = recommend_notificationRepository.findByRemitenteIsCurrentUser();
+
+        return new ResponseEntity<List<Recommend_notification>>(notifications, HttpStatus.OK);
+
     }
 
 

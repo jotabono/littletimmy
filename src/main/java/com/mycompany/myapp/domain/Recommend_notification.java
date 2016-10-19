@@ -36,6 +36,9 @@ public class Recommend_notification implements Serializable {
     @ManyToOne
     private User remitente;
 
+    @ManyToOne
+    private Recomendacion recomendacion;
+
     public Long getId() {
         return id;
     }
@@ -94,6 +97,19 @@ public class Recommend_notification implements Serializable {
 
     public void setRemitente(User user) {
         this.remitente = user;
+    }
+
+    public Recomendacion getRecomendacion() {
+        return recomendacion;
+    }
+
+    public Recommend_notification recomendacion(Recomendacion recomendacion) {
+        this.recomendacion = recomendacion;
+        return this;
+    }
+
+    public void setRecomendacion(Recomendacion recomendacion) {
+        this.recomendacion = recomendacion;
     }
 
     @Override
