@@ -21,7 +21,12 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'getRNotificationsNotReaded':{
+                method: 'GET',
+                isArray: true,
+                url: 'api/recommend-notifications/user-conected'
+            }
         });
     }
 })();

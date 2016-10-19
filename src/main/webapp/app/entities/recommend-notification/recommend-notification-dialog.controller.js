@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('Recommend_notificationDialogController', Recommend_notificationDialogController);
 
-    Recommend_notificationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Recommend_notification', 'User'];
+    Recommend_notificationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Recommend_notification', 'User', 'Recomendacion'];
 
-    function Recommend_notificationDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Recommend_notification, User) {
+    function Recommend_notificationDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Recommend_notification, User, Recomendacion) {
         var vm = this;
 
         vm.recommend_notification = entity;
@@ -16,6 +16,7 @@
         vm.openCalendar = openCalendar;
         vm.save = save;
         vm.users = User.query();
+        vm.recomendacions = Recomendacion.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

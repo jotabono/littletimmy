@@ -14,7 +14,6 @@ body{
 }
 
 .navbar{
-    //overflow: hidden;
     background-color: #55acee;
     border-width:0;
     -webkit-border-radius:0;
@@ -71,19 +70,20 @@ body{
     -ms-interpolation-mode: nearest-neighbor;
 }
 
-.bell-notification-read:after{
-    content: '';
+.notification-read:after{
+    content: "";
     position: absolute;
-    top: 0px;
-    right: 1px;
+    top: -4px;
+    right: -2px;
     height: 12px;
+    color: white;
     width: 12px;
     background: linear-gradient(top left, rgb(73, 255, 179) 0%, rgb(57, 148, 153) 100%);
     background: -webkit-linear-gradient(top left, rgb(73, 255, 179) 0%, rgb(57, 148, 153) 100%);
     border-radius: 100%;
 }
 
-.bell-notification-read{
+.notification-read{
     position: relative;
 }
 
@@ -100,3 +100,45 @@ li.notification > a{
     height: 100%;
 }
 
+li.notification > .dropdown-menu{
+    //background: rgba(0,0,0,.8);
+    background: #111;
+    border-radius: 0px;
+    width: 360px;
+    left: -222px;
+    border: 0;
+    outline: 0;
+}
+
+li.notification > .dropdown-menu > li > a{
+    color: #d4d4d4;
+}
+
+li.notification > .dropdown-menu > li > a:hover, li.notification > .dropdown-menu > li > a:focus{
+    background-color: inherit;
+    color: white;
+    outline: 0;
+}
+
+.navbar-default .navbar-nav > li.notification.open > a{
+    background: #111;
+    border-color: transparent!important;
+    outline: 0;
+}
+
+.navbar-default .navbar-nav > li.notification.open > a:hover, .navbar-default .navbar-nav > li.notification.open > a:focus{
+    border-color: transparent!important;
+    outline: 0;
+}
+
+li.view-all{
+    border-top: 1px solid rgba(255,255,255,0.3);
+}
+
+li.notification:focus > .notification > .dropdown-menu{
+    outline: 0;
+}
+
+li.notification:focus{
+    outline: 0;
+}

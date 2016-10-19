@@ -20,6 +20,10 @@
         <dd>
             {{vm.recommend_notification.remitente.login}}
         </dd>
+        <dt><span data-translate="littletimmyApp.recommend_notification.recomendacion">Recomendacion</span></dt>
+        <dd>
+            <a ui-sref="recomendacion-detail({id:vm.recommend_notification.recomendacion.id})">{{vm.recommend_notification.recomendacion.id}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

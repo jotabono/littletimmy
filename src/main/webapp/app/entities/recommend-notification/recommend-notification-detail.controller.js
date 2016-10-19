@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('Recommend_notificationDetailController', Recommend_notificationDetailController);
 
-    Recommend_notificationDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Recommend_notification', 'User'];
+    Recommend_notificationDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Recommend_notification', 'User', 'Recomendacion'];
 
-    function Recommend_notificationDetailController($scope, $rootScope, $stateParams, previousState, entity, Recommend_notification, User) {
+    function Recommend_notificationDetailController($scope, $rootScope, $stateParams, previousState, entity, Recommend_notification, User, Recomendacion) {
         var vm = this;
 
         vm.recommend_notification = entity;

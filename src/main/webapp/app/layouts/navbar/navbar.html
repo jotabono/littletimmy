@@ -195,12 +195,21 @@
                         </li>
                     </ul>
                 </li>
-                <li ui-sref-active="active" class="notification">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="">
+                <li ui-sref-active="active" uib-dropdown class="notification dropdown pointer" >
+                    <a class="dropdown-toggle" uib-dropdown-toggle>
                         <span>
-                            <span class="glyphicon glyphicon-bell "></span>
+                            <span class="glyphicon glyphicon-bell"
+                                  ng-class="{true:'notification-empty',false:'notification-read'}[vm.notifications.length == 0]"></span>
                         </span>
                     </a>
+                    <ul class="dropdown-menu" uib-dropdown-menu ng-if="vm.notifications.length >= 1">
+                        <li ng-repeat="notification in vm.notifications">
+                            <a ng-click="vm.readNotifications()" ui-sref="recomendacion-detail({id: notification.recomendacion.id})">{{$index+1}} {{notification.contenido}}</a>
+                        </li>
+                        <li class="view-all">
+                            <a>VER TODAS</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

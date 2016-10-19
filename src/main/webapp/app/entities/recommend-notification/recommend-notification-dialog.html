@@ -42,6 +42,12 @@
                 <option value=""></option>
             </select>
         </div>
+        <div class="form-group">
+            <label data-translate="littletimmyApp.recommend_notification.recomendacion" for="field_recomendacion">Recomendacion</label>
+            <select class="form-control" id="field_recomendacion" name="recomendacion" ng-model="vm.recommend_notification.recomendacion" ng-options="recomendacion as recomendacion.id for recomendacion in vm.recomendacions track by recomendacion.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

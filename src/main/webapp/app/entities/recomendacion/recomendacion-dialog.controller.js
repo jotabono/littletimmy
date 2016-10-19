@@ -22,7 +22,8 @@
         vm.openCalendar = openCalendar;
         vm.save = save;
         //QUERY PARA OBTENER LOS AMIGOS DEL USUARIO CONECTADO
-        vm.users = User.getFriendsUser();
+        //vm.users = User.getFriendsUser();
+        vm.users = User.query();
         //vm.trabajos = Trabajo.query();
         vm.empresas = Empresa.query();
         vm.trabajos = {};
