@@ -14,6 +14,7 @@
                 "recomendacion": "Recomendacion",
                 "friendUser": "Friend User",
                 "recommendNotification": "Recommend Notification",
+                "ciudad": "Ciudad",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
