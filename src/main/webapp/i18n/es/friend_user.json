@@ -1,0 +1,25 @@
+{
+    "littletimmyApp": {
+        "friend_user" : {
+            "home": {
+                "title": "Friend Users",
+                "createLabel": "Crear nuevo Friend User",
+                "createOrEditLabel": "Crear o editar Friend User",
+                "search": "Search for Friend User"
+            },
+            "created": "Un nuevo Friend User ha sido creado con el identificador {{ param }}",
+            "updated": "Un Friend User ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Friend User ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Friend User {{ id }}?"
+            },
+            "detail": {
+                "title": "Friend User"
+            },
+            "friendship": "Friendship",
+            "friendship_date": "Friendship Date",
+            "friend_from": "Friend From",
+            "friend_to": "Friend To"
+        }
+    }
+}

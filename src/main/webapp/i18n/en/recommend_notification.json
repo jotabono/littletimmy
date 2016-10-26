@@ -1,0 +1,27 @@
+{
+    "littletimmyApp": {
+        "recommend_notification" : {
+            "home": {
+                "title": "Recommend Notifications",
+                "createLabel": "Create a new Recommend Notification",
+                "createOrEditLabel": "Create or edit a Recommend Notification",
+                "search": "Search for Recommend Notification"
+            },
+            "created": "A new Recommend Notification is created with identifier {{ param }}",
+            "updated": "A Recommend Notification is updated with identifier {{ param }}",
+            "deleted": "A Recommend Notification is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Recommend Notification {{ id }}?"
+            },
+            "detail": {
+                "title": "Recommend Notification"
+            },
+            "contenido": "Contenido",
+            "fechaRecibida": "Fecha Recibida",
+            "leida": "Leida",
+            "receptor": "Receptor",
+            "recomendacion": "Recomendacion",
+            "emisor": "Emisor"
+        }
+    }
+}
