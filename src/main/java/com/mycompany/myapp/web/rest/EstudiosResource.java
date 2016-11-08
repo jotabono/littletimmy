@@ -33,7 +33,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class EstudiosResource {
 
     private final Logger log = LoggerFactory.getLogger(EstudiosResource.class);
-        
+
     @Inject
     private EstudiosRepository estudiosRepository;
 
@@ -144,7 +144,7 @@ public class EstudiosResource {
      * SEARCH  /_search/estudios?query=:query : search for the estudios corresponding
      * to the query.
      *
-     * @param query the query of the estudios search 
+     * @param query the query of the estudios search
      * @return the result of the search
      */
     @RequestMapping(value = "/_search/estudios",
@@ -156,6 +156,22 @@ public class EstudiosResource {
         return StreamSupport
             .stream(estudiosSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+    }
+
+
+    /**
+     * GET  /estudios usuario.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of estudios in body
+     */
+    @RequestMapping(value = "/estudios/user/{login}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Estudios> getEstudiosUser(@PathVariable String login) {
+        log.debug("REST request to get User Estudios");
+        List<Estudios> estudios = estudiosRepository.findByUserEstudio(login);
+        return estudios;
     }
 
 

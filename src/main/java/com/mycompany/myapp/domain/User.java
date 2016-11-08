@@ -85,11 +85,26 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "skype")
     private String skype;
 
+    @Column(name = "github")
+    private String github;
+
+
     @Column(name = "correo_alternativo")
     private String correo_alternativo;
 
     @Column(name = "carta_presentacion")
     private String carta_presentacion;
+
+    @Column(name = "ciudad")
+    private String ciudad;
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
 
     @NotNull
     @Column(nullable = false)
@@ -289,6 +304,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.skype = skype;
     }
 
+    public String getGithub() {
+        return github;
+    }
+
+    public void setGithub(String github) {
+        this.github = github;
+    }
+
     public String getCorreo_alternativo() {
         return correo_alternativo;
     }
@@ -351,6 +374,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
             ", activated=" + activated +
+            ", ciudad=" + ciudad +
+            ", github=" + github +
             '}';
     }
 }

@@ -13,43 +13,48 @@
             <div class="col-md-8 col-md-offset-2 hojaperfil" style="text-align:center">
                 <div class="row titulohoja">
                 <div class="col-md-4">
-                   <div><i class="ion-location ioniconmedium "></i> <span class="centervertical"> De Barcelona</span></div>
+                   <div><i class="ion-location ioniconmedium "></i> <span class="centervertical"> De <a>{{vm.user.ciudad}}</a></span></div>
                 </div>
                 <div class="col-md-4">
                     <div>
-                        <i class="ion-ios-briefcase ioniconmedium"></i> <span class="centervertical"> Trabajando en <a>Stucom</a></span>
+                        <i class="ion-ios-briefcase ioniconmedium"></i> <span class="centervertical"> {{vm.trabajoactual.cargo}} en <a>{{vm.trabajoactual.empresa.nombre}}</a></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div>
-                        <i class="ion-university ioniconmedium"></i> <span class="centervertical">Titulado en DAW</span>
+                        <i class="ion-university ioniconmedium"></i> <span class="centervertical">{{ vm.estudioactual.actualmente && 'Estudiando' || 'Titulado en ' }} {{vm.estudioactual.curso}} en <a>{{vm.estudioactual.centro_estudios.nombre}}</a></span>
                     </div>
                 </div>
                 </div>
                 <div class="row datospersonales">
                     <div class="col-md-4">
                         <div>
-                            <span class="centervertical"><b>Correo electrónico:</b> {{vm.user.email}} </span>
+                            <i class="mdi mdi-mail-ru" style="color:#4D4D4D; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="mailto:{{vm.user.email}}">{{vm.user.email}}</a></b></span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div ng-if="vm.user.web_personal" class="col-md-4">
                         <div>
-                            <span class="centervertical"><b>Web personal:</b> {{vm.user.web_personal}} </span>
+                            <i class="mdi mdi-web" style="color:#166199; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://{{vm.user.web_personal}}">{{vm.user.web_personal}}</a></b></span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div ng-if="vm.user.skype" class="col-md-4">
                         <div>
-                            <span class="centervertical"><b>Mensajero:</b> jotabono (Skype)</span>
+                            <i class="mdi mdi-skype" style="color:#00ABE9; font-size:28px;"> </i><span style="vertical-align:super"><b>{{vm.user.skype}}</b></span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div ng-if="vm.user.twitter" class="col-md-4">
                         <div>
-                            <span class="centervertical"><b>Twitter:</b> jotabono</span>
+                            <i class="mdi mdi-twitter" style="color:#1C9BEA; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.twitter.com/{{vm.user.twitter}}">{{vm.user.twitter}}</a></b></span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div ng-if="vm.user.facebook" class="col-md-4">
                         <div>
-                            <span class="centervertical"><b>Facebook:</b> {{vm.user.facebook}}</span>
+                            <i class="mdi mdi-facebook-box" style="color:#3B5998; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.facebook.com/{{vm.user.facebook}}">{{vm.user.facebook}}</a></b></span>
+                        </div>
+                    </div>
+                    <div ng-if="vm.user.github" class="col-md-4">
+                        <div>
+                            <i class="mdi mdi-github-circle" style="color:#0D2636; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.facebook.com/{{vm.user.github}}">{{vm.user.github}}</a></b></span>
                         </div>
                     </div>
 
@@ -60,12 +65,36 @@
     <div class="row">
             <div class="col-md-8 columna">
                 <div class="row curriculum">
-                    <div>
+                    <div class="perfilblock">
                         <div class="titulosperfil"><i class="mdi mdi-book-open-variant ioniconbig"></i><span style="font-size:28px"> Estudios</span></div>
+                        <div ng-repeat="estudio in vm.estudios" class="bloqueperfil">
+                            <b>{{estudio.curso}} en {{estudio.centro_estudios.nombre}}</b>
+                            <div class="fechaestudio">
+                            <b>{{estudio.fechaInicio | date:medium}} -
+                            <span ng-if="estudio.actualmente">Actualmente</span>
+                            <span ng-if="!estudio.actualmente">{{estudio.fechaFinal | date: medium}}</span></b>
+                            </div>
+                            <p></p>
+                            <p>{{estudio.descripcion}}</p>
+                        </div>
+                    </div>
+                    <div class="perfilblock">
+                        <div class="titulosperfil"><i class="mdi mdi-briefcase ioniconbig"></i><span style="font-size:28px"> Experiencia laboral</span></div>
+                        <div ng-repeat="trabajo in vm.trabajos" class="bloqueperfil">
+                            <b>{{trabajo.cargo}} en {{trabajo.empresa.nombre}}</b>
+                            <div class="fechaestudio">
+                                <b>{{trabajo.fechaInicio | date:medium}} -
+                                    <span ng-if="trabajo.actualmente">Actualmente</span>
+                                    <span ng-if="!trabajo.actualmente">{{trabajo.fechaFin | date: medium}}</span></b>
+                            </div>
+                            <p></p>
+                            <p>{{trabajo.descripcionCargo}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-nw-small columna">
+
 
             </div>
             <div class="col-md-3 columna">
@@ -222,4 +251,39 @@ i.ioniconbig{
     .datospersonales > div{
         text-align: center;
     }
+
+    .fechaestudio{
+        float:right;
+    }
+
+    .bloqueperfil{
+        width: 560px;
+        padding:15px 35px;
+        margin-bottom:5px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(245,245,245,0.6);
+    }
+
+    .bloqueperfil:last-child{
+        margin-bottom:0px;
+    }
+
+    b{
+        font-weight: 700;
+    }
+
+    .perfilblock{
+        margin-bottom: 10px;
+    }
+
+    .perfilblock:last-child{
+        margin-bottom:0px;
+    }
+
+    .datospersonales a{
+        color: #4D4D4D;
+    }
+
+
 </style>

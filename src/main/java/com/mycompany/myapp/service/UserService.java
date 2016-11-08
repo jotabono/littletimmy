@@ -143,7 +143,7 @@ public class UserService {
     }
 
     public void updateUser(String firstName, String lastName, String email, String langKey, String imagen, ZonedDateTime fecha_nacimiento, String dni, String telefono, String domicilio,
-                           String web_personal, String facebook, String twitter, String skype, String correo_alternativo, String carta_presentacion) {
+                           String web_personal, String facebook, String twitter, String skype, String correo_alternativo, String carta_presentacion, String ciudad, String github) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
             u.setFirstName(firstName);
             u.setLastName(lastName);
@@ -160,6 +160,8 @@ public class UserService {
             u.setSkype(skype);
             u.setCorreo_alternativo(correo_alternativo);
             u.setCarta_presentacion(carta_presentacion);
+            u.setCiudad(ciudad);
+            u.setGithub(github);
             userRepository.save(u);
             userSearchRepository.save(u);
             log.debug("Changed Information for User: {}", u);

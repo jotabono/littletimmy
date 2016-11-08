@@ -149,7 +149,7 @@ public class AccountResource {
             .map(u -> {
                 userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
                     userDTO.getLangKey(), userDTO.getImagen(), userDTO.getFecha_nacimiento(), userDTO.getDni(), userDTO.getTelefono(), userDTO.getDomicilio(),
-                    userDTO.getWeb_personal(), userDTO.getFacebook(), userDTO.getTwitter(), userDTO.getSkype(), userDTO.getCorreo_alternativo(), userDTO.getCarta_presentacion());
+                    userDTO.getWeb_personal(), userDTO.getFacebook(), userDTO.getTwitter(), userDTO.getSkype(), userDTO.getCorreo_alternativo(), userDTO.getCarta_presentacion(), userDTO.getCiudad(), userDTO.getGithub());
                 return new ResponseEntity<String>(HttpStatus.OK);
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));

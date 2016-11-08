@@ -44,8 +44,10 @@
             <column name="facebook" type="varchar(255)"/>
             <column name="twitter" type="varchar(255)"/>
             <column name="skype" type="varchar(255)"/>
+            <column name="github" type="varchar(255)"/>
             <column name="correo_alternativo" type="varchar(255)"/>
             <column name="carta_presentacion" type="text"/>
+            <column name="ciudad" type="varchar(255)"/>
             <column name="activated" type="boolean" valueBoolean="false">
                 <constraints nullable="false" />
             </column>

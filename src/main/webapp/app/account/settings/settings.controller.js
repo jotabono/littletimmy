@@ -34,8 +34,10 @@
                 facebook: account.facebook,
                 twitter: account.twitter,
                 skype: account.skype,
+                github: account.github,
                 carta_presentacion: account.carta_presentacion,
                 correo_alternativo: account.correo_alternativo,
+                ciudad: account.ciudad,
                 dni: account.dni,
                 domicilio: account.domicilio
             };

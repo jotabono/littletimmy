@@ -191,4 +191,19 @@ public class TrabajoResource {
         return trabajos;
     }
 
+    /**
+     * GET  /trabajos usuario.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of estudios in body
+     */
+    @RequestMapping(value = "/trabajos/usuario/{login}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Trabajo> getTrabajosUser(@PathVariable String login) {
+        log.debug("REST request to get User Trabajos");
+        List<Trabajo> trabajos = trabajoRepository.findByUserTrabajo(login);
+        return trabajos;
+    }
+
 }

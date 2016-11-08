@@ -164,7 +164,9 @@ public class AccountResourceIntTest {
             null,                    // twitter
             null,                    // skype
             null,                    // correo alternativo
-            null                   // carta presentacion
+            null,                   // carta presentacion
+            null,                    // ciudad
+        null                    // github
         );
 
         restMvc.perform(
@@ -204,7 +206,9 @@ public class AccountResourceIntTest {
             null,                    // twitter
             null,                    // skype
             null,                    // correo alternativo
-            null                   // carta presentacion
+            null,                   // carta presentacion
+            null,                    // ciudad
+            null                    // github
         );
 
         restUserMockMvc.perform(
@@ -244,8 +248,10 @@ public class AccountResourceIntTest {
             null,                    // twitter
             null,                    // skype
             null,                    // correo alternativo
-            null                   // carta presentacion
-        );
+            null,                   // carta presentacion
+            null,                    // ciudad
+        null                    // github
+            );
 
         restUserMockMvc.perform(
             post("/api/register")
@@ -284,7 +290,9 @@ public class AccountResourceIntTest {
             null,                    // twitter
             null,                    // skype
             null,                    // correo alternativo
-            null                   // carta presentacion
+            null,                   // carta presentacion
+            null,                    // ciudad
+            null                    // github
         );
 
         restUserMockMvc.perform(
@@ -325,14 +333,16 @@ public class AccountResourceIntTest {
             null,                    // twitter
             null,                    // skype
             null,                    // correo alternativo
-            null                   // carta presentacion
+            null,                   // carta presentacion
+            null,                    // ciudad
+        null                    // github
         );
 
         // Duplicate login, different e-mail
         ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), validUser.getLogin(), validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),
             "alicejr@example.com", true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate(),
             validUser.getImagen(), validUser.getFecha_nacimiento(),validUser.getDni(),validUser.getTelefono(), validUser.getDomicilio(),validUser.getWeb_personal(),validUser.getFacebook(),
-            validUser.getTwitter(), validUser.getSkype(), validUser.getCorreo_alternativo(), validUser.getCarta_presentacion());
+            validUser.getTwitter(), validUser.getSkype(), validUser.getCorreo_alternativo(), validUser.getCarta_presentacion(), validUser.getCiudad(), validUser.getGithub());
 
         // Good user
         restMvc.perform(
@@ -380,14 +390,16 @@ public class AccountResourceIntTest {
             null,                    // twitter
             null,                    // skype
             null,                    // correo alternativo
-            null                   // carta presentacion
-        );
+            null,                   // carta presentacion
+            null,                   // ciudad
+            null                   // github
+            );
 
         // Duplicate e-mail, different login
         ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), "johnjr", validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),
             validUser.getEmail(), true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(), validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate(),
             validUser.getImagen(), validUser.getFecha_nacimiento(),validUser.getDni(),validUser.getTelefono(), validUser.getDomicilio(),validUser.getWeb_personal(),validUser.getFacebook(),
-            validUser.getTwitter(), validUser.getSkype(), validUser.getCorreo_alternativo(), validUser.getCarta_presentacion());
+            validUser.getTwitter(), validUser.getSkype(), validUser.getCorreo_alternativo(), validUser.getCarta_presentacion(), validUser.getCiudad(), validUser.getGithub());
 
         // Good user
         restMvc.perform(
@@ -434,7 +446,9 @@ public class AccountResourceIntTest {
             null,                    // twitter
             null,                    // skype
             null,                    // correo alternativo
-            null                   // carta presentacion
+            null,                   // carta presentacion
+            null,                    // ciudad
+            null                    // github
         );
 
         restMvc.perform(
@@ -470,7 +484,9 @@ public class AccountResourceIntTest {
             null,                    // twitter
             null,                    // skype
             null,                    // correo alternativo
-            null                   // carta presentacion
+            null,                   // carta presentacion
+            null,                    // ciudad
+        null                    // github
         );
 
         restUserMockMvc.perform(

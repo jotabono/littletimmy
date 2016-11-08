@@ -19,4 +19,7 @@ public interface TrabajoRepository extends JpaRepository<Trabajo,Long> {
     @Query("select trabajo from Trabajo trabajo where trabajo.trabajador.login = :usuario")
     List<Trabajo> findByTrabajosByTrabajador(@Param("usuario") String usuario);
 
+    @Query("select trabajos from Trabajo trabajos where trabajos.trabajador.login = :login")
+    List<Trabajo> findByUserTrabajo(@Param("login")String login);
+
 }

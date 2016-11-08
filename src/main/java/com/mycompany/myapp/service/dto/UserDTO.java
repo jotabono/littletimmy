@@ -49,6 +49,10 @@ public class UserDTO {
 
     private String skype;
 
+    private String ciudad;
+
+    private String github;
+
     @Email
     @Size(min = 5, max = 100)
     private String correo_alternativo;
@@ -70,13 +74,13 @@ public class UserDTO {
             user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()), user.getImagen(), user.getFecha_nacimiento(), user.getDni(), user.getTelefono(), user.getDomicilio(),
-            user.getWeb_personal(), user.getFacebook(), user.getTwitter(), user.getSkype(), user.getCorreo_alternativo(), user.getCarta_presentacion());
+            user.getWeb_personal(), user.getFacebook(), user.getTwitter(), user.getSkype(), user.getCorreo_alternativo(), user.getCarta_presentacion(), user.getCiudad(), user.getGithub());
     }
 
     public UserDTO(String login, String firstName, String lastName,
                    String email, boolean activated, String langKey, Set<String> authorities, String imagen, ZonedDateTime fecha_nacimiento,
                    String dni, String telefono, String domicilio, String web_personal, String facebook, String twitter, String skype,
-                   String correo_alternativo, String carta_presentacion) {
+                   String correo_alternativo, String carta_presentacion, String ciudad, String github) {
 
         this.login = login;
         this.firstName = firstName;
@@ -96,6 +100,8 @@ public class UserDTO {
         this.skype = skype;
         this.correo_alternativo = correo_alternativo;
         this.carta_presentacion = carta_presentacion;
+        this.ciudad = ciudad;
+        this.github = github;
     }
 
     public String getLogin() {
@@ -162,6 +168,14 @@ public class UserDTO {
         return skype;
     }
 
+    public String getGithub() {
+        return github;
+    }
+
+    public void setGithub(String github) {
+        this.github = github;
+    }
+
     public String getCorreo_alternativo() {
         return correo_alternativo;
     }
@@ -169,6 +183,8 @@ public class UserDTO {
     public String getCarta_presentacion() {
         return carta_presentacion;
     }
+
+    public String getCiudad() { return ciudad; }
 
     /*@Override
     public String toString() {
@@ -204,6 +220,8 @@ public class UserDTO {
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
             ", authorities=" + authorities +
+            ", ciudad=" + ciudad +
+            ", github=" + github +
             '}';
     }
 }
