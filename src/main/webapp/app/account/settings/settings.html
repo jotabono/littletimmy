@@ -144,13 +144,13 @@
                 <div class="form-group">
                     <label class="control-label" for="field_fechaNacimiento">Fecha Nacimiento</label>
                     <div class="input-group">
-                        <input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" datetime-picker="{{dateformat}}" ng-model="vm.playlist.fechaNacimiento" is-open="vm.datePickerOpenStatus.fechaNacimiento"
+                        <input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" datetime-picker="{{dateformat}}" ng-model="vm.settingsAccount.fecha_nacimiento" is-open="vm.datePickerOpenStatus.fechaNacimiento"
                                required  />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaNacimiento')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                     </div>
-                    <div ng-show="editForm.dateCreated.$invalid">
+                    <div ng-show="editForm.fechaNacimiento.$invalid">
                         <p class="help-block"
                            ng-show="form.fechaNacimiento.$error.required" translate="entity.validation.required">
                             This field is required.
@@ -161,12 +161,17 @@
                         </p>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <button ngf-select ng-model="picFile"
+                            class="btn btn-primary" accept="image/*">
+                        Update profile picture
+                    </button>
+                    <img width="100px" height="100px" ng-src="{{vm.settingsAccount.imagen}}" alt="" class="image_user">
+                </div>
                 <div class="form-group">
                     <label for="langKey" data-translate="settings.form.language">Language</label>
                     <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>
                 </div>
-
                 <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" data-translate="settings.form.button">Save</button>
             </form>
         </div>
