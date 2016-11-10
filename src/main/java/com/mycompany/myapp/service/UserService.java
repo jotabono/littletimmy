@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import javax.inject.Inject;
 import java.util.*;
@@ -142,7 +143,7 @@ public class UserService {
         return user;
     }
 
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imagen, ZonedDateTime fecha_nacimiento, String dni, String telefono, String domicilio,
+    public void updateUser(String firstName, String lastName, String email, String langKey, String imagen, LocalDate fecha_nacimiento, String dni, String telefono, String domicilio,
                            String web_personal, String facebook, String twitter, String skype, String correo_alternativo, String carta_presentacion, String ciudad, String github) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
             u.setFirstName(firstName);

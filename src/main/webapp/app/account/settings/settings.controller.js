@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Upload','$scope', '$timeout'];
+    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Upload','$scope', '$timeout', 'DateUtils'];
 
-    function SettingsController (Principal, Auth, JhiLanguageService, $translate, Upload, $scope, $timeout) {
+    function SettingsController (Principal, Auth, JhiLanguageService, $translate, Upload, $scope, $timeout, DateUtils) {
         var vm = this;
 
         vm.error = null;

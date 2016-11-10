@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .factory('Auth', Auth);
 
-    Auth.$inject = ['$rootScope', '$state', '$sessionStorage', '$q', '$translate', 'Principal', 'AuthServerProvider', 'Account', 'LoginService', 'Register', 'Activate', 'Password', 'PasswordResetInit', 'PasswordResetFinish', 'JhiTrackerService'];
+    Auth.$inject = ['$rootScope', '$state', '$sessionStorage', '$q', '$translate', 'Principal', 'AuthServerProvider', 'Account', 'LoginService', 'Register', 'Activate', 'Password', 'PasswordResetInit', 'PasswordResetFinish', 'JhiTrackerService', 'DateUtils'];
 
-    function Auth ($rootScope, $state, $sessionStorage, $q, $translate, Principal, AuthServerProvider, Account, LoginService, Register, Activate, Password, PasswordResetInit, PasswordResetFinish, JhiTrackerService) {
+    function Auth ($rootScope, $state, $sessionStorage, $q, $translate, Principal, AuthServerProvider, Account, LoginService, Register, Activate, Password, PasswordResetInit, PasswordResetFinish, JhiTrackerService, DateUtils) {
         var service = {
             activateAccount: activateAccount,
             authorize: authorize,
@@ -157,7 +157,8 @@
 
         function updateAccount (account, callback) {
             var cb = callback || angular.noop;
-
+            
+            account.fecha_nacimiento = DateUtils.convertLocalDateToServer(account.fecha_nacimiento);
             return Account.save(account,
                 function () {
                     return cb(account);

@@ -1,5 +1,6 @@
 package com.mycompany.myapp.web.rest.vm;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 import java.util.Set;
@@ -46,7 +47,7 @@ public class ManagedUserVM extends UserDTO {
 
     public ManagedUserVM(Long id, String login, String password, String firstName, String lastName,
                          String email, boolean activated, String langKey, Set<String> authorities,
-                         String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate, String imagen, ZonedDateTime fecha_nacimiento,
+                         String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate, String imagen, LocalDate fecha_nacimiento,
                          String dni, String telefono, String domicilio, String web_personal, String facebook, String twitter, String skype,
                          String correo_alternativo, String carta_presentacion, String ciudad, String github) {
         super(login, firstName, lastName, email, activated, langKey, authorities, imagen, fecha_nacimiento,

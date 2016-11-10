@@ -140,25 +140,14 @@
                     <textarea class="form-control" id="carta_presentacion" name="carta_presentacion"
                               ng-model="vm.settingsAccount.carta_presentacion"></textarea>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label" for="field_fechaNacimiento">Fecha Nacimiento</label>
                     <div class="input-group">
-                        <input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" datetime-picker="{{dateformat}}" ng-model="vm.settingsAccount.fecha_nacimiento" is-open="vm.datePickerOpenStatus.fechaNacimiento"
-                               required  />
+                        <input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" uib-datepicker-popup="{{dateformat}}" ng-model="vm.settingsAccount.fecha_nacimiento" is-open="vm.datePickerOpenStatus.fechaNacimiento"
+                        required/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaNacimiento')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
-                    </div>
-                    <div ng-show="editForm.fechaNacimiento.$invalid">
-                        <p class="help-block"
-                           ng-show="form.fechaNacimiento.$error.required" translate="entity.validation.required">
-                            This field is required.
-                        </p>
-                        <p class="help-block"
-                           ng-show="form.fechaNacimiento.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </p>
                     </div>
                 </div>
                 <div class="form-group">
@@ -176,8 +165,6 @@
             </form>
         </div>
     </div>
-
 </div>
-
 
 <pre><code>{{vm.settingsAccount | json}}</code></pre>

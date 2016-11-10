@@ -8,6 +8,7 @@ import com.mycompany.myapp.domain.User;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ public class UserDTO {
 
     private String imagen;
 
-    private ZonedDateTime fecha_nacimiento;
+    private LocalDate fecha_nacimiento;
 
     private String dni;
 
@@ -78,7 +79,7 @@ public class UserDTO {
     }
 
     public UserDTO(String login, String firstName, String lastName,
-                   String email, boolean activated, String langKey, Set<String> authorities, String imagen, ZonedDateTime fecha_nacimiento,
+                   String email, boolean activated, String langKey, Set<String> authorities, String imagen, LocalDate fecha_nacimiento,
                    String dni, String telefono, String domicilio, String web_personal, String facebook, String twitter, String skype,
                    String correo_alternativo, String carta_presentacion, String ciudad, String github) {
 
@@ -136,7 +137,7 @@ public class UserDTO {
         return imagen;
     }
 
-    public ZonedDateTime getFecha_nacimiento() {
+    public LocalDate getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 

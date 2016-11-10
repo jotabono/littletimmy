@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -62,7 +63,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String imagen;
 
     @Column(name = "fecha_nacimiento")
-    private ZonedDateTime fecha_nacimiento;
+    private LocalDate fecha_nacimiento;
 
     @Column(name = "dni")
     private String dni;
@@ -240,11 +241,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.imagen = imagen;
     }
 
-    public ZonedDateTime getFecha_nacimiento() {
+    public LocalDate getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(ZonedDateTime fecha_nacimiento) {
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
