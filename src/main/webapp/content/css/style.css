@@ -14,7 +14,7 @@ body{
 }
 
 .navbar{
-    background-color: #55acee;
+    background-color: #03497B;
     border-width:0;
     -webkit-border-radius:0;
     -moz-border-radius:0;
@@ -141,4 +141,8 @@ li.notification:focus > .notification > .dropdown-menu{
 
 li.notification:focus{
     outline: 0;
+}
+
+.webimage .img-responsive {
+    margin: 0 auto;
 }

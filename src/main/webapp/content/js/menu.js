@@ -12,9 +12,9 @@ function init() {
         }
         else {
             if ($(window).scrollTop() >= 100) {
-                $(".navbar").css('background', 'rgba(85, 172, 238, 0.8)');
+                $(".navbar").css('background', 'rgba(3, 73, 123, 0.8)');
             } else {
-                $(".navbar").css('background', 'rgba(85, 172, 238, 1)');
+                $(".navbar").css('background', 'rgba(3, 73, 123, 1)');
             }
         }
     });
