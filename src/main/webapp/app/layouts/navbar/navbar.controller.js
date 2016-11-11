@@ -10,7 +10,6 @@
     function NavbarController ($state, Auth, Principal, ProfileService, LoginService, Recommend_notification, $interval, $rootScope) {
         var vm = this;
 
-
         var timeRefresh = 60000 * 3;
 
         Principal.identity().then(function(account) {

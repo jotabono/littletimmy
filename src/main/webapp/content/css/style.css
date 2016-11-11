@@ -121,7 +121,7 @@ li.notification > .dropdown-menu > li > a:hover, li.notification > .dropdown-men
 }
 
 .navbar-default .navbar-nav > li.notification.open > a{
-    background: #111;
+    color: #333;
     border-color: transparent!important;
     outline: 0;
 }
@@ -145,4 +145,16 @@ li.notification:focus{
 
 .webimage .img-responsive {
     margin: 0 auto;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+    background-color:#03497B;
+}
+
+.barname{
+    color:white;
+}
+
+.barname:visited{
+    color:white;
 }

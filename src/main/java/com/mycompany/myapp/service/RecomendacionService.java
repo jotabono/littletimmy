@@ -27,13 +27,13 @@ public class RecomendacionService {
 
     public Set<Trabajo> getTrabajosUsuarios(String recomendador, String recomendado){
 
-        //OBTENIEN LOS TRABAJOS EN COMUN ENTRE EL USUARIO RECOMENDADOR Y EL USUARIO RECOMENDADO
+        //OBTIENEN LOS TRABAJOS EN COMUN ENTRE EL USUARIO RECOMENDADOR Y EL USUARIO RECOMENDADO
         return comparadorTrabajos(recomendador, recomendado);
     }
 
     public Set<Trabajo> getTrabajosComunesUsuarios(String recomendado){
 
-        //OBTENIEN LOS TRABAJOS EN COMUN ENTRE EL USUARIO AUTENTICADO Y EL USUARIO RECOMENDADO
+        //OBTIENEN LOS TRABAJOS EN COMUN ENTRE EL USUARIO AUTENTICADO Y EL USUARIO RECOMENDADO
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
 
         return comparadorTrabajos(user.getLogin(), recomendado);
