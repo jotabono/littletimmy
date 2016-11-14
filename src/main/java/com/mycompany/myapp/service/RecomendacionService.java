@@ -43,18 +43,28 @@ public class RecomendacionService {
 
         Set<Trabajo> trabajosComunes = new HashSet<>();
 
+        //USER 1 -> Usuario conectado
+        //USER 2 -> Usuario a recomendar
+
         List<Trabajo> trabajosUsuario1 = trabajoRepository.findByTrabajosByTrabajador(user1);
         List<Trabajo> trabajosUsuario2 = trabajoRepository.findByTrabajosByTrabajador(user2);
 
-        for(Trabajo trabajo: trabajosUsuario1){
-            for(Trabajo trabajo1: trabajosUsuario2){
-                if(trabajo.getEmpresa().getId().equals(trabajo1.getEmpresa().getId())){
-                    if((trabajo.getFechaInicio() != null && trabajo.getFechaFin() != null)
-                        && (trabajo1.getFechaFin() != null && trabajo1.getFechaInicio() != null)){
+        for(Trabajo trabajoRecomendador: trabajosUsuario1){
+            for(Trabajo trabajoRecomendado: trabajosUsuario2){
+                if(trabajoRecomendador.getEmpresa().getId().equals(trabajoRecomendado.getEmpresa().getId())){
+                    if((trabajoRecomendador.getFechaInicio() != null && (trabajoRecomendador.getFechaFin() != null || trabajoRecomendador.isActualmente()))
+                        && ((trabajoRecomendado.getFechaFin() != null || trabajoRecomendado.isActualmente()) && trabajoRecomendado.getFechaInicio() != null)){
 
-                        if(trabajo1.getFechaInicio().isBefore(trabajo.getFechaFin())
-                            && trabajo1.getFechaFin().isAfter(trabajo.getFechaInicio())){
-                            trabajosComunes.add(trabajo1);
+                        if(trabajoRecomendador.isActualmente() || trabajoRecomendador.isActualmente() == null){
+                            if((trabajoRecomendado.getFechaInicio().isAfter(trabajoRecomendador.getFechaInicio()) || trabajoRecomendado.getFechaInicio().isBefore(trabajoRecomendador.getFechaInicio()))
+                                || trabajoRecomendado.getFechaInicio() == trabajoRecomendado.getFechaInicio()){
+                                trabajosComunes.add(trabajoRecomendado);
+                            }
+                        }
+                        else{
+                            if(trabajoRecomendado.getFechaInicio().isBefore(trabajoRecomendador.getFechaFin()) && trabajoRecomendado.getFechaFin().isAfter(trabajoRecomendador.getFechaInicio())){
+                                trabajosComunes.add(trabajoRecomendado);
+                            }
                         }
 
                     }

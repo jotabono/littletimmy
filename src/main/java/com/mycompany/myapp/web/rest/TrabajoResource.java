@@ -67,6 +67,12 @@ public class TrabajoResource {
         if (trabajo.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("trabajo", "idexists", "A new trabajo cannot already have an ID")).body(null);
         }
+        if(trabajo.getFechaFin()== null){
+            trabajo.actualmente(true);
+        }
+        else{
+            trabajo.actualmente(false);
+        }
         Trabajo result = trabajoRepository.save(trabajo);
         trabajoSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/trabajos/" + result.getId()))
@@ -91,6 +97,12 @@ public class TrabajoResource {
         log.debug("REST request to update Trabajo : {}", trabajo);
         if (trabajo.getId() == null) {
             return createTrabajo(trabajo);
+        }
+        if(trabajo.getFechaFin()== null){
+            trabajo.actualmente(true);
+        }
+        else{
+            trabajo.actualmente(false);
         }
         Trabajo result = trabajoRepository.save(trabajo);
         trabajoSearchRepository.save(result);

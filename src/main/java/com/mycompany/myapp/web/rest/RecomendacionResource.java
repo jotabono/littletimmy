@@ -165,6 +165,9 @@ public class RecomendacionResource {
     @Timed
     public ResponseEntity<Void> deleteRecomendacion(@PathVariable Long id) {
         log.debug("REST request to delete Recomendacion : {}", id);
+        Recomendacion recomendacion = recomendacionRepository.findOne(id);
+        List<Recommend_notification> notifications = recommend_notificationRepository.findByRecomendacion(recomendacion);
+        recommend_notificationRepository.delete(notifications);
         recomendacionRepository.delete(id);
         recomendacionSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("recomendacion", id.toString())).build();
