@@ -13,7 +13,16 @@
             <div class="col-md-8 col-md-offset-2 hojaperfil" style="text-align:center">
                 <div class="row titulohoja">
                 <div class="col-md-4">
-                   <div><i class="ion-location ioniconmedium "></i> <span class="centervertical"> De <a>{{vm.user.ciudad}}</a></span></div>
+                   <div>
+                       <i class="ion-location ioniconmedium "></i>
+                       <span class="centervertical"> De
+                            <span editable-text="vm.user.ciudad" e-form="userCity" onaftersave="vm.saveContent(vm.user)">{{ vm.user.ciudad || '' }}</span>
+                            <button class="btn btn-default" ng-click="userCity.$show()" ng-if="account.login == vm.user.login" ng-hide="userCity.$visible">
+                                edit
+                            </button>
+                       </span>
+                   </div>
+                       <!--<a editable-text="vm.user.ciudad" onaftersave="vm.saveContent(vm.user)" >{{vm.user.ciudad}}</a></span></div>-->
                 </div>
                 <div class="col-md-4">
                     <div>

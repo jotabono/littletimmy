@@ -9,12 +9,19 @@
 
     function RecomendacionController ($scope, $state, Recomendacion, RecomendacionSearch) {
         var vm = this;
-        
+
         vm.recomendacions = [];
         vm.search = search;
         vm.loadAll = loadAll;
 
         loadAll();
+
+        vm.saveContent = saveContent;
+
+        function saveContent(recomendacion) {
+            console.log(recomendacion);
+            Recomendacion.update(recomendacion);
+        }
 
         function loadAll() {
             Recomendacion.query(function(result) {

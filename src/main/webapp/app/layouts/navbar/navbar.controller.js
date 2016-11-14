@@ -17,6 +17,8 @@
 
             vm.account = account;
 
+            $rootScope.$broadcast('emitUser',account);
+
             $interval(function() {
                 vm.notifications = Recommend_notification.getRNotificationsNotReaded();
             }, timeRefresh);
@@ -27,6 +29,7 @@
 
             Principal.identity().then(function(account) {
                 vm.account = account;
+                $rootScope.account = account;
             });
 
             $interval(function() {
@@ -73,6 +76,7 @@
             collapseNavbar();
             Auth.logout();
             $state.go('home');
+            $rootScope.account = [];
         }
 
         function toggleNavbar() {

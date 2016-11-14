@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('PerfilUsuarioController', PerfilUsuarioController);
 
-    PerfilUsuarioController.$inject = ['$scope', '$state', 'userInfo', '$http'];
+    PerfilUsuarioController.$inject = ['$scope', '$state', 'userInfo', '$http', 'Auth', 'Principal', '$rootScope'];
 
-    function PerfilUsuarioController ($scope, $state, userInfo, $http) {
+    function PerfilUsuarioController ($scope, $state, userInfo, $http, Auth, Principal, $rootScope) {
         var vm = this;
         vm.user = userInfo;
         vm.estudios = [];
@@ -17,6 +17,32 @@
         vm.trabajos = [];
         vm.trabajoactuales = [];
         vm.trabajoactual = [];
+        vm.saveContent = saveContent;
+
+        $rootScope.$on('authenticationSuccess',function(){
+            Principal.identity().then(function(account) {
+                $rootScope.account = account;
+            });
+        });
+
+        $rootScope.$on('emitUser',function(e,user){
+            console.log(user);
+            $rootScope.account = user;
+        });
+
+        function saveContent(user) {
+            console.log(user);
+            Auth.updateAccount(user).then(function() {
+                vm.error = null;
+                vm.success = 'OK';
+                Principal.identity(true).then(function(account) {
+                    vm.account = account;
+                });
+            }).catch(function() {
+                vm.success = null;
+                vm.error = 'ERROR';
+            });
+        }
 
         vm.user.$promise.then(function () {
             $http({
@@ -40,7 +66,6 @@
                 method: 'GET',
                 url: 'api/trabajos/usuario/'+vm.user.login
             }).then(function successcallback(response){
-                console.log(response)
                 vm.trabajos = response.data;
                 for(var i=0; i<vm.trabajos.length; i++){
                         if (vm.trabajos[i].actualmente) {

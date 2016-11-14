@@ -50,7 +50,7 @@
             <tbody>
                 <tr ng-repeat="recomendacion in vm.recomendacions track by recomendacion.id">
                     <td><a ui-sref="recomendacion-detail({id:recomendacion.id})">{{recomendacion.id}}</a></td>
-                    <td>{{recomendacion.texto}}</td>
+                        <td><span editable-text="recomendacion.texto" onaftersave="vm.saveContent(recomendacion)" e-ng-readonly="flag">{{recomendacion.texto}}</span></td>
                     <td>{{recomendacion.fechaEnvio | date:'medium'}}</td>
                     <td>{{recomendacion.fechaResolucion | date:'medium'}}</td>
                     <td>{{recomendacion.aceptada}}</td>
