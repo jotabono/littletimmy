@@ -75,5 +75,17 @@
                     vm.trabajoactual = vm.trabajoactuales[vm.trabajoactuales.length-1];
             })
         })
+
+
+        $(window).on("scroll",function(){
+            console.log($(this).scrollTop());
+            if($(this).scrollTop() <= 500){
+                $('.fixed-user').css("height","0px");
+            }
+            if($(this).scrollTop() >= 437){
+                $('.fixed-user').css("height","65px");
+            }
+        })
+
     }
 })();
