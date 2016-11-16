@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Friend_user;
 
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.Friend_userRepository;
 import com.mycompany.myapp.repository.search.Friend_userSearchRepository;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
@@ -21,8 +22,10 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -36,7 +39,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class Friend_userResource {
 
     private final Logger log = LoggerFactory.getLogger(Friend_userResource.class);
-        
+
     @Inject
     private Friend_userRepository friend_userRepository;
 
@@ -50,6 +53,7 @@ public class Friend_userResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new friend_user, or with status 400 (Bad Request) if the friend_user has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
+
     @RequestMapping(value = "/friend-users",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -59,6 +63,11 @@ public class Friend_userResource {
         if (friend_user.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("friend_user", "idexists", "A new friend_user cannot already have an ID")).body(null);
         }
+        Friend_user exist = friend_userRepository.findExistFriendship(friend_user.getFriend_from().getLogin(), friend_user.getFriend_to().getLogin());
+        if(exist != null){
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("friend_user", "friendshipexist", "You and "+friend_user.getFriend_to().getLogin()+" are already friends")).body(null);
+        }
+        friend_user.setFriendship(false);
         Friend_user result = friend_userRepository.save(friend_user);
         friend_userSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/friend-users/" + result.getId()))
@@ -151,7 +160,7 @@ public class Friend_userResource {
      * SEARCH  /_search/friend-users?query=:query : search for the friend_user corresponding
      * to the query.
      *
-     * @param query the query of the friend_user search 
+     * @param query the query of the friend_user search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
@@ -168,5 +177,30 @@ public class Friend_userResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/user/{login}/friends",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Set<User>> getFriendsUser(@PathVariable String login) {
+        log.debug("REST request to delete Friend_user : {}", login);
+
+        Set<Friend_user> friendsUser = friend_userRepository.findFriendsOfUser(login);
+
+        Set<User> friends = new HashSet<>();
+
+        for(Friend_user friend_user:friendsUser){
+            String from = friend_user.getFriend_from().getLogin();
+            String to = friend_user.getFriend_to().getLogin();
+            String sad = "das";
+            if(from.equals(login)){
+                friends.add(friend_user.getFriend_to());
+            }
+            else{
+                friends.add(friend_user.getFriend_from());
+            }
+        }
+
+        return new ResponseEntity<>(friends,HttpStatus.OK);
+    }
 
 }

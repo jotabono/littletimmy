@@ -23,11 +23,19 @@
             'getFriendsUser': {
                 method: 'GET',
                 isArray: true,
-                url: 'api/user/logged/friends'
+                url: 'api/user/:login/friends'
+            },
+            'getTrabajosUser': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/trabajos/usuario/:login'
+            },
+            'getEstudiosUser': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/estudios/user/:login'
             }
-
         });
-
         return service;
     }
 })();

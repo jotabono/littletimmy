@@ -1,9 +1,15 @@
 <div class="fixed-user">
     <div class="col-md-offset-2 fixed-user-container">
-        <div class="fixed-user-image">
-            <img class="imgcirculo" height="100%" width="100%" src="{{vm.user.imagen}}"/>
+        <div ng-click="scroll()" class="fixed-user-image">
+            <img class="imgcirculo" style="border-radius:100%; border:0px;" height="100%" width="100%" src="{{vm.user.imagen}}"/>
         </div>
-        <div class="fixed-user-name">{{vm.user.firstName}} {{vm.user.lastName}}</div>
+        <div ng-click="scroll()" style="margin-left:10px;" class="fixed-user-name">{{vm.user.firstName}} {{vm.user.lastName}}</div>
+
+        <div style="float:right">
+        <button class="btn redondo fixedbarbuttons"><i class="mdi mdi-24px mdi-account-plus"></i></button>
+        <button class="btn redondo fixedbarbuttons"><i class="mdi mdi-24px mdi-notification-clear-all"></i></button>
+        <button class="btn redondo fixedbarbuttons"><i class="mdi mdi-24px mdi-wechat"></i></button>
+        </div>
     </div>
 </div>
 <div class="row topcabecera">
@@ -21,20 +27,20 @@
             <div class="col-md-8 col-md-offset-2 hojaperfil" style="text-align:center">
                 <div class="row titulohoja">
                 <div class="col-md-4">
-                   <div>
-                       <i class="ion-location ioniconmedium "></i>
-                       <span class="centervertical"> De
-                            <span editable-text="vm.user.ciudad" e-form="userCity" onaftersave="vm.saveContent(vm.user)">{{ vm.user.ciudad || '' }}</span>
-                            <button class="btn btn-default" ng-click="userCity.$show()" ng-if="account.login == vm.user.login" ng-hide="userCity.$visible">
-                                edit
+                    <div>
+                        <i class="ion-location ioniconmedium "></i>
+                        <span class="centervertical"> De
+                            <span buttons="no" editable-text="vm.user.ciudad" e-form="userCity" onaftersave="vm.saveContent(vm.user)">{{ vm.user.ciudad || '' }}</span>
+                            <button class="editbuttons" ng-click="userCity.$show()" ng-if="account.login == vm.user.login" ng-hide="userCity.$visible">
+                                <i class="ion-edit" style=""></i>
                             </button>
                        </span>
-                   </div>
+                    </div>
                        <!--<a editable-text="vm.user.ciudad" onaftersave="vm.saveContent(vm.user)" >{{vm.user.ciudad}}</a></span></div>-->
                 </div>
                 <div class="col-md-4">
                     <div>
-                        <i class="ion-ios-briefcase ioniconmedium"></i> <span class="centervertical"> {{vm.trabajoactual.cargo}} en <a>{{vm.trabajoactual.empresa.nombre}}</a></span>
+                        <i class="ion-ios-briefcase ioniconmedium"></i> <span class="centervertical"> {{ vm.trabajoactual.cargo || "Desempleado" }} <span ng-if="vm.trabajoactual"> en </span><a>{{vm.trabajoactual.empresa.nombre}}</a></span>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -46,32 +52,50 @@
                 <div class="row datospersonales">
                     <div class="col-md-4">
                         <div>
-                            <i class="mdi mdi-mail-ru" style="color:#4D4D4D; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="mailto:{{vm.user.email}}">{{vm.user.email}}</a></b></span>
+                            <i class="mdi mdi-mail-ru" style="color:#4D4D4D; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="mailto:{{vm.user.email}}" buttons="no" editable-text="vm.user.email" e-form="userMail" onaftersave="vm.saveContent(vm.user)">{{vm.user.email}}</a></b></span>
+                            <button class="editbuttons2" ng-click="userMail.$show()" ng-if="account.login == vm.user.login" ng-hide="userMail.$visible">
+                                <i class="ion-edit" style=""></i>
+                            </button>
                         </div>
                     </div>
                     <div ng-if="vm.user.web_personal" class="col-md-4">
                         <div>
-                            <i class="mdi mdi-web" style="color:#166199; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://{{vm.user.web_personal}}">{{vm.user.web_personal}}</a></b></span>
+                            <i class="mdi mdi-web" style="color:#166199; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://{{vm.user.web_personal}}" buttons="no" editable-text="vm.user.web_personal" e-form="userWeb" onaftersave="vm.saveContent(vm.user)">{{vm.user.web_personal}}</a></b></span>
+                            <button class="editbuttons2" ng-click="userWeb.$show()" ng-if="account.login == vm.user.login" ng-hide="userWeb.$visible">
+                                <i class="ion-edit" style=""></i>
+                            </button>
                         </div>
                     </div>
                     <div ng-if="vm.user.skype" class="col-md-4">
                         <div>
-                            <i class="mdi mdi-skype" style="color:#00ABE9; font-size:28px;"> </i><span style="vertical-align:super"><b>{{vm.user.skype}}</b></span>
+                            <i class="mdi mdi-skype" style="color:#00ABE9; font-size:28px;"> </i><span style="vertical-align:super" buttons="no" editable-text="vm.user.skype" e-form="userSkype" onaftersave="vm.saveContent(vm.user)"><b>{{vm.user.skype}}</b></span>
+                            <button class="editbuttons2" ng-click="userSkype.$show()" ng-if="account.login == vm.user.login" ng-hide="userSkype.$visible">
+                                <i class="ion-edit" style=""></i>
+                            </button>
                         </div>
                     </div>
                     <div ng-if="vm.user.twitter" class="col-md-4">
                         <div>
-                            <i class="mdi mdi-twitter" style="color:#1C9BEA; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.twitter.com/{{vm.user.twitter}}">{{vm.user.twitter}}</a></b></span>
+                            <i class="mdi mdi-twitter" style="color:#1C9BEA; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.twitter.com/{{vm.user.twitter}}" buttons="no" editable-text="vm.user.twitter" e-form="userTwitter" onaftersave="vm.saveContent(vm.user)">{{vm.user.twitter}}</a></b></span>
+                            <button class="editbuttons2" ng-click="userTwitter.$show()" ng-if="account.login == vm.user.login" ng-hide="userTwitter.$visible">
+                                <i class="ion-edit" style=""></i>
+                            </button>
                         </div>
                     </div>
                     <div ng-if="vm.user.facebook" class="col-md-4">
                         <div>
-                            <i class="mdi mdi-facebook-box" style="color:#3B5998; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.facebook.com/{{vm.user.facebook}}">{{vm.user.facebook}}</a></b></span>
+                            <i class="mdi mdi-facebook-box" style="color:#3B5998; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.facebook.com/{{vm.user.facebook}}" buttons="no" editable-text="vm.user.facebook" e-form="userFacebook" onaftersave="vm.saveContent(vm.user)">{{vm.user.facebook}}</a></b></span>
+                            <button class="editbuttons2" ng-click="userFacebook.$show()" ng-if="account.login == vm.user.login" ng-hide="userFacebook.$visible">
+                                <i class="ion-edit" style=""></i>
+                            </button>
                         </div>
                     </div>
                     <div ng-if="vm.user.github" class="col-md-4">
                         <div>
-                            <i class="mdi mdi-github-circle" style="color:#0D2636; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.facebook.com/{{vm.user.github}}">{{vm.user.github}}</a></b></span>
+                            <i class="mdi mdi-github-circle" style="color:#0D2636; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.facebook.com/{{vm.user.github}}" buttons="no" editable-text="vm.user.github" e-form="userGithub" onaftersave="vm.saveContent(vm.user)">{{vm.user.github}}</a></b></span>
+                            <button class="editbuttons2" ng-click="userGithub.$show()" ng-if="account.login == vm.user.login" ng-hide="userGithub.$visible">
+                                <i class="ion-edit" style=""></i>
+                            </button>
                         </div>
                     </div>
 
@@ -110,19 +134,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-nw-small columna">
-
-
+        <div class="col-nw-small columna">
+            <div>
+                <div class="titulohoja">
+                    Amigos de {{vm.user.firstName}}
+                </div>
+                <div ng-repeat="friend in vm.friends">
+                    <img class="friendspictures" src="{{friend.imagen}}">
+                    <span>{{friend.firstName}} {{friend.lastName}}</span>
+                </div>
             </div>
+        </div>
             <div class="col-md-3 columna">
-
             </div>
         </div>
 </div>
-
-
-
-
 
 <style>
 
@@ -335,8 +361,8 @@ i.ioniconbig{
     }
 
     .fixed-user-image .imgcirculo{
-        height: 50px;
-        width: 50px;
+        height: 45px;
+        width: 45px;
     }
 
     .fixed-user-name{
@@ -346,4 +372,62 @@ i.ioniconbig{
         align-items: center;
         font-size: 18px;
     }
+
+    .editbuttons, .editbuttons2{
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.5s linear;
+        background: transparent;
+        border:0px;
+    }
+
+    .editbuttons:hover{
+        border:0px;
+        color:#524D4D;
+        background-color: white;
+    }
+
+    .editbuttons2:hover{
+        border:0px;
+        color:white;
+        background-color: #524D4D;
+    }
+
+    .titulohoja:hover .editbuttons {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .datospersonales:hover .editbuttons2 {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .fixedbarbuttons{
+        background-color: transparent;
+        color: rgb(3, 73, 123);
+        border:0px;
+    }
+
+    .fixedbarbuttons:hover{
+        border:0px;
+        background-color: transparent;
+        color: #55ACEE;
+    }
+
+    * {
+        outline:none;
+    }
+    html{
+        scroll-behavior: smooth;
+    }
+
+    .friendspictures{
+        margin:10px;
+        width:60px;
+        height:60px;
+        border-radius:100%;
+
+    }
+
 </style>
