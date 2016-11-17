@@ -12,6 +12,11 @@
 
         var timeRefresh = 60000 * 3;
 
+        $rootScope.$on("user-updated", function(e,res){
+            vm.account = res;
+            $('#image-user-navbar').attr("src",vm.account.imagen);
+        });
+
         Principal.identity().then(function(account) {
             vm.notifications = Recommend_notification.getRNotificationsNotReaded();
 

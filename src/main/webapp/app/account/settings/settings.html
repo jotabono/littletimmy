@@ -9,8 +9,36 @@
 
             <jhi-alert-error></jhi-alert-error>
 
-            <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
+            <style>
+                .select-image{
+                    position: relative;
+                    width: 200px;
+                    height: 200px;
+                }
+                .select-image:hover button{
+                    opacity: 1;
+                }
+                .select-image button{
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    opacity: 0;
+                    transition: opacity 0.4s ease;
+                    line-height: 15px;
+                }
+            </style>
 
+            <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation>
+                <div class="form-group">
+                    <div class="select-image">
+                        <button ngf-select ng-model="picFile"
+                                class="btn" accept="image/*">
+                            Update
+                        </button>
+                        <img width="200px" height="200px" ng-src="{{vm.settingsAccount.imagen}}" alt="" class="image_user">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label" for="firstName" data-translate="settings.form.firstname">First Name</label>
                     <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
@@ -151,13 +179,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button ngf-select ng-model="picFile"
-                            class="btn btn-primary" accept="image/*">
-                        Update profile picture
-                    </button>
-                    <img width="100px" height="100px" ng-src="{{vm.settingsAccount.imagen}}" alt="" class="image_user">
-                </div>
-                <div class="form-group">
                     <label for="langKey" data-translate="settings.form.language">Language</label>
                     <select id="langKey" name="langKey" class="form-control" ng-model="vm.settingsAccount.langKey" ng-controller="JhiLanguageController as languageVm" ng-options="code as (code | findLanguageFromKey) for code in languageVm.languages"></select>
                 </div>
@@ -166,5 +187,3 @@
         </div>
     </div>
 </div>
-
-<pre><code>{{vm.settingsAccount | json}}</code></pre>

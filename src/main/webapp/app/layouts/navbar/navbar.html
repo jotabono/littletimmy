@@ -203,7 +203,7 @@
 
                     <li ui-sref-active="active" ng-switch-when="true">
                         <a style="padding:5px 10px;" href="/#/perfil/{{vm.account.login}}" ng-click="vm.collapseNavbar()">
-                            <img width="40px" height="40px" style="border: 1px solid #ccc" src="{{vm.account.imagen}}"/>
+                            <img id="image-user-navbar" width="40px" height="40px" style="border: 1px solid #ccc" src="{{vm.account.imagen}}"/>
                             <span style="padding-left:5px; vertical-align: middle" class="barname">{{vm.account.firstName}}</span>
                         </a>
                     </li>

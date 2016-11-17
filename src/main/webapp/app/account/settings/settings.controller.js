@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Upload','$scope', '$timeout', 'DateUtils'];
+    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate', 'Upload','$scope', '$timeout', 'DateUtils', '$rootScope'];
 
-    function SettingsController (Principal, Auth, JhiLanguageService, $translate, Upload, $scope, $timeout, DateUtils) {
+    function SettingsController (Principal, Auth, JhiLanguageService, $translate, Upload, $scope, $timeout, DateUtils, $rootScope) {
         var vm = this;
 
         vm.error = null;
@@ -65,6 +65,7 @@
                     vm.error = null;
                     vm.success = 'OK';
                     Principal.identity(true).then(function(account) {
+                        $rootScope.$broadcast("user-updated", copyAccount(account))
                         vm.settingsAccount = copyAccount(account);
                     });
                     JhiLanguageService.getCurrent().then(function(current) {
@@ -100,6 +101,7 @@
                     vm.error = null;
                     vm.success = 'OK';
                     Principal.identity(true).then(function(account) {
+                        $rootScope.$broadcast("user-updated", copyAccount(account))
                         vm.settingsAccount = copyAccount(account);
                     });
                     JhiLanguageService.getCurrent().then(function(current) {
