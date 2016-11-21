@@ -22,7 +22,12 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'recomendacionesTrabajo': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/recomendacions/trabajo/:id_trabajo'
+            }
         });
     }
 })();

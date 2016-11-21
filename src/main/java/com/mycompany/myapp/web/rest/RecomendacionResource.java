@@ -191,5 +191,15 @@ public class RecomendacionResource {
             .collect(Collectors.toList());
     }
 
+    /* OBTIENE LAS RECOMENDACIONES DE UN TRABAJO*/
+    @RequestMapping(value = "/recomendacions/trabajo/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Recomendacion> getRecomendacionesTrabajo(@PathVariable Long id) {
+        List<Recomendacion> recomendaciones = recomendacionRepository.findAllRecomendacionesTrabajo(id);
+        return recomendaciones;
+    }
+
 
 }

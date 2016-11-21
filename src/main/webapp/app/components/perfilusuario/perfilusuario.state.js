@@ -42,6 +42,31 @@
                     }]
                 }
             })
+            .state('perfil-recomendaciones', {
+                parent: 'perfil',
+                url: '/trabajo/{id_trabajo}/recomendations',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/components/perfilusuario/recomendaciones.html',
+                        controller: 'RecoTrabajoController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            recomendaciones: ["Recomendacion", function(Recomendacion){
+                                return Recomendacion.recomendacionesTrabajo({id_trabajo:$stateParams.id_trabajo});
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('perfil', {login:$stateParams.login}, { reload: false });
+                    }, function() {
+                        $state.go('perfil', {login:$stateParams.login});
+                    });
+                }]
+            });
     }
 
 })();

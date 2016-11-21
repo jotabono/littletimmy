@@ -65,10 +65,12 @@
         });
 
         vm.trabajos.$promise.then(function (response) {
+            console.log(response);
             for(var i=0; i<vm.trabajos.length; i++){
-                if (vm.trabajos[i].actualmente) {
-                    vm.trabajoactuales.push(vm.trabajos[i]);
-                }
+                /*if (vm.trabajos[i].actualmente) {
+                    
+                }*/
+                vm.trabajoactuales.push(vm.trabajos[i]);
             }
             vm.trabajoactual = vm.trabajoactuales[vm.trabajoactuales.length-1];
             if (vm.trabajoactual == null){
