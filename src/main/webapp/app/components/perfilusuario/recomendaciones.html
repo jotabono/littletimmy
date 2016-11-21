@@ -1,8 +1,29 @@
-<div>HELLo</div>
-<div>
-	<ul>
-		<li ng-repeat="recomendacion in vm.recomendaciones">
-			<pre><code>{{recomendacion | json}}</code></pre>
-		</li>
-	</ul>
+<div class="modal-inside" ng-if="vm.recomendaciones.length > 0">
+	<div>
+		<h3><i class="ion-ios-briefcase" aria-hidden="true"></i> {{vm.trabajo.cargo}} en {{vm.trabajo.empresa.nombre}}</h3>
+		<p>Desde {{vm.trabajo.fechaInicio | date: 'longDate'}} hasta {{vm.trabajo.actualmente && 'actualmente' || vm.trabajo.fechaFin | date : 'longDate'}}</p>
+	</div>
+	<div>
+		<ul class="recomendations">
+			<li ng-repeat="recomendacion in vm.recomendaciones">
+				<h4><i class="ion-star" aria-hidden="true"></i> Recomendacion de {{recomendacion.recomendador.firstName +' '+ recomendacion.recomendador.lastName}}</h4>
+				<div>
+					<span>{{recomendacion.texto}}</span>
+				</div>
+			</li>
+		</ul>
+	</div>
 </div>
+<div class="modal-inside" ng-if="vm.recomendaciones.length == 0">
+	<h3>No tiene recomendaciones</h3>
+</div>
+<style>
+	.recomendations{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.modal-inside{
+		padding: 15px;
+	}
+</style>
