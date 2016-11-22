@@ -54,6 +54,7 @@
                         controller: 'RecoTrabajoController',
                         controllerAs: 'vm',
                         backdrop: true,
+                        backdropClass: 'backdropBlurred',
                         size: 'lg',
                         resolve: {
                             recomendaciones: ["Recomendacion", function(Recomendacion){
