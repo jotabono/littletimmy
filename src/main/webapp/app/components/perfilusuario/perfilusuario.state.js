@@ -53,13 +53,17 @@
                         templateUrl: 'app/components/perfilusuario/recomendaciones.html',
                         controller: 'RecoTrabajoController',
                         controllerAs: 'vm',
-                        backdrop: 'static',
+                        backdrop: true,
                         size: 'lg',
                         resolve: {
                             recomendaciones: ["Recomendacion", function(Recomendacion){
                                 return Recomendacion.recomendacionesTrabajo({id_trabajo:$stateParams.id_trabajo});
                             }]
                         }
+                    }).result.then(function() {
+                        $state.go('perfil', {login:$stateParams.login}, { reload: false });
+                    }, function() {
+                        $state.go('perfil', {login:$stateParams.login});
                     });
                 }]
             });
