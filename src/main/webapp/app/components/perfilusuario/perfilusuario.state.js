@@ -60,10 +60,6 @@
                                 return Recomendacion.recomendacionesTrabajo({id_trabajo:$stateParams.id_trabajo});
                             }]
                         }
-                    }).result.then(function() {
-                        $state.go('perfil', {login:$stateParams.login}, { reload: false });
-                    }, function() {
-                        $state.go('perfil', {login:$stateParams.login});
                     });
                 }]
             });
