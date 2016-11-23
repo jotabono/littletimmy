@@ -5,11 +5,13 @@ import com.mycompany.myapp.domain.Recomendacion;
 import com.mycompany.myapp.domain.Trabajo;
 
 import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.repository.RecomendacionRepository;
 import com.mycompany.myapp.repository.TrabajoRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.TrabajoSearchRepository;
 import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.RecomendacionService;
+import com.mycompany.myapp.service.dto.TrabajoDTO;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -50,6 +53,9 @@ public class TrabajoResource {
 
     @Inject
     private RecomendacionService recomendacionService;
+
+    @Inject
+    private RecomendacionRepository recomendacionRepository;
 
     /**
      * POST  /trabajos : Create a new trabajo.
@@ -212,10 +218,19 @@ public class TrabajoResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Trabajo> getTrabajosUser(@PathVariable String login) {
+    public List<TrabajoDTO> getTrabajosUser(@PathVariable String login) {
         log.debug("REST request to get User Trabajos");
         List<Trabajo> trabajos = trabajoRepository.findByUserTrabajo(login);
-        return trabajos;
+        List<TrabajoDTO> trabajosDTO = new ArrayList<>();
+
+        for(Trabajo trabajo: trabajos){
+            List<Recomendacion> recomendaciones = recomendacionRepository.findAllRecomendacionesTrabajo(trabajo.getId());
+            TrabajoDTO trabajoDTO = new TrabajoDTO();
+            trabajoDTO.setRecomendacion(recomendaciones);
+            trabajoDTO.setTrabajo(trabajo);
+            trabajosDTO.add(trabajoDTO);
+        }
+        return trabajosDTO;
     }
 
 }

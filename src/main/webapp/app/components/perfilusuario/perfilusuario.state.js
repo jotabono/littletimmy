@@ -14,7 +14,7 @@
                 url: '/perfil/{user}',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: ''
+                    pageTitle: 'Perfil de Usuario'
                 },
                 views: {
                     'content@': {

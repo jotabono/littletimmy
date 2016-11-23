@@ -9,7 +9,7 @@
 				<!-- <h4><i class="ion-star" aria-hidden="true"></i> Recomendacion de {{recomendacion.recomendador.firstName +' '+ recomendacion.recomendador.lastName}}</h4> -->
 
 				<a class="user-image" href="/#/perfil/{{recomendacion.recomendador.login}}" ng-click="vm.toProfile()">
-					<img src="{{recomendacion.recomendador.imagen}}" alt="{{recomendacion.recomendador.firstName +' '+ recomendacion.recomendador.lastName}}">
+					<img style="border-radius:100%" src="{{recomendacion.recomendador.imagen}}" alt="{{recomendacion.recomendador.firstName +' '+ recomendacion.recomendador.lastName}}">
 				</a>
 				<div class="recomendationContent">
 					<p class="userName"><a href="/#/perfil/{{recomendacion.recomendador.login}}" ng-click="vm.toProfile()">{{recomendacion.recomendador.firstName +' '+ recomendacion.recomendador.lastName}}</a></p>
