@@ -1,7 +1,8 @@
-<div class="modal-inside" ng-if="vm.recomendaciones.length > 0">
+<div class="modal-inside">
 	<div>
-		<h3 class="title-job-recomendation"><i class="ion-ios-briefcase" aria-hidden="true"></i> {{vm.trabajo.cargo}} en {{vm.trabajo.empresa.nombre}}</h3>
-		<p>Desde {{vm.trabajo.fechaInicio | date: 'longDate'}} hasta {{vm.trabajo.actualmente && 'actualmente' || vm.trabajo.fechaFin | date : 'longDate'}}</p>
+		<div><h3 style="float:left" class="title-job-recomendation"><i class="ion-ios-briefcase" aria-hidden="true"></i> {{vm.trabajo.cargo}} en {{vm.trabajo.empresa.nombre}}</h3> <button ui-sref="perfil-recomendar" style="float:right" class="btn btn-primary"><i class="ion-edit"></i> Escribir una recomendación</button></div>
+		<div style="clear: both;"></div>
+        <p>Desde {{vm.trabajo.fechaInicio | date: 'longDate'}} hasta {{vm.trabajo.actualmente && 'actualmente' || vm.trabajo.fechaFin | date : 'longDate'}}</p>
 	</div>
 	<div>
 		<ul class="recomendations">
@@ -13,7 +14,7 @@
 				</a>
 				<div class="recomendationContent">
 					<p class="userName"><a href="/#/perfil/{{recomendacion.recomendador.login}}" ng-click="vm.toProfile()">{{recomendacion.recomendador.firstName +' '+ recomendacion.recomendador.lastName}}</a></p>
-					<p class="recomendationDate"><i class="ion-calendar"></i> {{recomendacion.fechaResolucion | date: 'longDate'}}</p>
+					<p class="recomendationDate"><i class="ion-calendar"></i> {{recomendacion.fechaEnvio | date: 'longDate'}}</p>
 					<span>{{recomendacion.texto}}</span>
 				</div>
 			</li>

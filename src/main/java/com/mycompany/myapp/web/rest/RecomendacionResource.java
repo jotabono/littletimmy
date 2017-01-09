@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -68,20 +69,22 @@ public class RecomendacionResource {
         if (recomendacion.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("recomendacion", "idexists", "A new recomendacion cannot already have an ID")).body(null);
         }
+        ZonedDateTime today = ZonedDateTime.now();
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
         recomendacion.setRecomendador(user);
         recomendacion.setAceptada(false);
         recomendacion.setEmpresa(recomendacion.getTrabajo().getEmpresa());
+        recomendacion.setFechaEnvio(today);
         Recomendacion result = recomendacionRepository.save(recomendacion);
         recomendacionSearchRepository.save(result);
         Recommend_notification notification = new Recommend_notification();
 
-        notification.setContenido("Tienes una nueva recomendación.");
         notification.setEmisor(recomendacion.getRecomendador());
         notification.setReceptor(recomendacion.getRecomendado());
         notification.setFechaRecibida(recomendacion.getFechaEnvio());
         notification.setLeida(false);
         notification.setRecomendacion(recomendacion);
+        notification.setContenido(notification.getEmisor().getFirstName() + " te ha recomendado.");
         recommend_notificationRepository.save(notification);
 
         return ResponseEntity.created(new URI("/api/recomendacions/" + result.getId()))

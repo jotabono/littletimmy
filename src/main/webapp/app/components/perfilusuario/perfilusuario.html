@@ -123,6 +123,7 @@
                         <div class="titulos"><i class="ion-briefcase botonredondo" style="background-color:#A2602B"></i>Experiencia laboral</div>
                         <div ng-repeat="trabajoDTO in vm.trabajos" class="bloqueperfil">
                             <button ng-if="trabajoDTO.recomendacion.length > 0" class="viewRecomendation_button btn btn-link"><a ui-sref="perfil-recomendaciones({id_trabajo:trabajoDTO.trabajo.id})"><i class="ion-android-done"></i> {{trabajoDTO.recomendacion.length}}{{trabajoDTO.recomendacion.length == 1 && ' recomendación' || ' recomendaciones'}} </a></button>
+                            <button class="viewRecomendation_button btn btn-link"><a ui-sref="perfil-recomendaciones({id_trabajo:trabajoDTO.trabajo.id})"> {{trabajoDTO.recomendacion.length == 0 && ' Escribe una recomendación' || ''}}</a></button>
                             <b>{{trabajoDTO.trabajo.cargo}} en {{trabajoDTO.trabajo.empresa.nombre}}</b>
                             <div class="fechaestudio">
                                 <b><i class="ion-calendar"></i> {{trabajoDTO.trabajo.fechaInicio | date:medium}} -

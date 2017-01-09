@@ -18,7 +18,8 @@
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar',
             'ngAnimate',
-            'xeditable'
+            'xeditable',
+            'ngMaterial'
         ])
         .run(run);
 

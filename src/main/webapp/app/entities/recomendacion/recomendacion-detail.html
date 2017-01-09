@@ -1,51 +1,12 @@
-
-<div>
-    <h2><span data-translate="littletimmyApp.recomendacion.detail.title">Recomendacion</span> {{vm.recomendacion.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="littletimmyApp.recomendacion.texto">Texto</span></dt>
-        <dd>
-            <span>{{vm.recomendacion.texto}}</span>
-        </dd>
-        <dt><span data-translate="littletimmyApp.recomendacion.fechaEnvio">Fecha Envio</span></dt>
-        <dd>
-            <span>{{vm.recomendacion.fechaEnvio | date:'medium'}}</span>
-        </dd>
-        <dt><span data-translate="littletimmyApp.recomendacion.fechaResolucion">Fecha Resolucion</span></dt>
-        <dd>
-            <span>{{vm.recomendacion.fechaResolucion | date:'medium'}}</span>
-        </dd>
-        <dt><span data-translate="littletimmyApp.recomendacion.aceptada">Aceptada</span></dt>
-        <dd>
-            <span>{{vm.recomendacion.aceptada}}</span>
-        </dd>
-        <dt><span data-translate="littletimmyApp.recomendacion.recomendador">Recomendador</span></dt>
-        <dd>
-            {{vm.recomendacion.recomendador.login}}
-        </dd>
-        <dt><span data-translate="littletimmyApp.recomendacion.recomendado">Recomendado</span></dt>
-        <dd>
-            {{vm.recomendacion.recomendado.login}}
-        </dd>
-        <dt><span data-translate="littletimmyApp.recomendacion.trabajo">Trabajo</span></dt>
-        <dd>
-            <a ui-sref="trabajo-detail({id:vm.recomendacion.trabajo.id})">{{vm.recomendacion.trabajo.cargo}}</a>
-        </dd>
-        <dt><span data-translate="littletimmyApp.recomendacion.empresa">Empresa</span></dt>
-        <dd>
-            <a ui-sref="empresa-detail({id:vm.recomendacion.empresa.id})">{{vm.recomendacion.empresa.nombre}}</a>
-        </dd>
-    </dl>
-
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
-
-    <button type="button" ui-sref="recomendacion-detail.edit({id:vm.recomendacion.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+<div class="container">
+    <h4>Nueva recomendacion de {{vm.recomendacion.recomendador.firstName}} {{vm.recomendacion.recomendador.lastName}}</h4>
+    <small>ID recomendacion: {{vm.recomendacion.id}}</small>
+    <div>
+        <span><b>Mensaje</b></span>
+        <p>{{vm.recomendacion.texto}}</p>
+        <span>Enviada el {{vm.recomendacion.fechaEnvio | date: 'longDate'}}</span>
+    </div>
+    <button ng-disabled="vm.recomendacion.aceptada" ng-click="vm.update()" ng-class="{true:'btn btn-success', false: 'btn btn-warning'}[vm.recomendacion.aceptada]">
+        {{vm.recomendacion.aceptada ? 'Aceptada' : 'Pendiente de aceptar'}}
     </button>
 </div>

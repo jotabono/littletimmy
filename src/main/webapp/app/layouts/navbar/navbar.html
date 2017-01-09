@@ -217,7 +217,7 @@
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu ng-if="vm.notifications.length >= 1">
                         <li ng-repeat="notification in vm.notifications">
-                            <a ng-click="vm.readNotifications()" ui-sref="recomendacion-detail({id: notification.recomendacion.id})">{{$index+1}} {{notification.contenido}}</a>
+                            <a ng-click="vm.readNotifications()" ui-sref="recomendacion-detail({id: notification.recomendacion.id})">{{notification.id}} {{notification.contenido}}</a>
                         </li>
                         <li class="view-all">
                             <a>VER TODAS</a>

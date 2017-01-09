@@ -179,7 +179,10 @@ public class Recommend_notificationResource {
 
         List<Recommend_notification> notifications = recommend_notificationRepository.findByRemitenteIsCurrentUser();
 
-        return new ResponseEntity<List<Recommend_notification>>(notifications, HttpStatus.OK);
+
+        List<Recommend_notification> notifications2 = notifications.stream().filter(recommend_notification -> recommend_notification.isLeida() == false).collect(Collectors.toList());
+
+        return new ResponseEntity<List<Recommend_notification>>(notifications2, HttpStatus.OK);
 
     }
 

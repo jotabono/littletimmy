@@ -67,7 +67,28 @@
                         $state.go('perfil', {login:$stateParams.login});
                     });
                 }]
+            })
+            .state('perfil-recomendar', {
+                parent: 'perfil-recomendaciones',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/components/perfilusuario/recomendar.html',
+                        controller: 'RecoDialogController',
+                        controllerAs: 'vm',
+                        backdrop: true,
+                        backdropClass: 'backdropBlurred',
+                        size: 'md'
+                    }).result.then(function(res) {
+                        console.log(res);
+                        $state.go('perfil-recomendaciones', {id_trabajo:$stateParams.id_trabajo}, { reload: false });
+                    }, function() {
+                        $state.go('perfil', {login:$stateParams.login});
+                    });
+                }]
             });
     }
-
 })();

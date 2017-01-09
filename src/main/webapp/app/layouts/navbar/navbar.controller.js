@@ -29,6 +29,10 @@
             }, timeRefresh);
         });
 
+        $rootScope.$on('updateNotifications',function(){
+            vm.notifications = Recommend_notification.getRNotificationsNotReaded();
+        });
+
         $rootScope.$on('authenticationSuccess',function(){
             vm.notifications = Recommend_notification.getRNotificationsNotReaded();
 
