@@ -36,6 +36,9 @@
                     userEstudio: ["User", "$stateParams", function(User, $stateParams){
                         return User.getEstudiosUser({login:$stateParams.user});
                     }],
+                    userFriendship: ["Friend_user", "$stateParams", function (Friend_user, $stateParams) {
+                         return Friend_user.isFriendship({login:$stateParams.user});
+                    }],
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();

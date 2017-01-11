@@ -21,7 +21,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'isFriendship': { method: 'GET', isArray: false, url: "api/friendship/:login"}
         });
     }
 })();

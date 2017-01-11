@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('PerfilUsuarioController', PerfilUsuarioController);
 
-    PerfilUsuarioController.$inject = ['$scope', '$state', 'userInfo', '$http', 'Auth', 'Principal', '$rootScope', 'userFriends', 'userTrabajo', 'userEstudio', '$window'];
+    PerfilUsuarioController.$inject = ['$scope', '$state', 'userInfo', '$http', 'Auth', 'Principal', '$rootScope', 'userFriends', 'userTrabajo', 'userEstudio', '$window', 'userFriendship','Friend_user'];
 
-    function PerfilUsuarioController ($scope, $state, userInfo, $http, Auth, Principal, $rootScope, userFriends, userTrabajo, userEstudio, $window) {
+    function PerfilUsuarioController ($scope, $state, userInfo, $http, Auth, Principal, $rootScope, userFriends, userTrabajo, userEstudio, $window, userFriendship, Friend_user) {
         var vm = this;
         vm.user = userInfo;
         vm.estudios = userEstudio;
@@ -17,10 +17,16 @@
         vm.trabajos = userTrabajo;
         vm.trabajoactuales = [];
         vm.trabajoactual = [];
+        vm.friend = userFriendship;
+        vm.isFriend = userFriendship;
         vm.saveContent = saveContent;
 
         vm.friends = userFriends;
+        vm.addFriend = addFriend;
 
+        vm.friends.$promise.then(function(res){
+            console.log(res);
+        });
 
         $scope.scroll = function () {
             $('html, body').stop().animate({
@@ -35,9 +41,48 @@
         });
 
         $rootScope.$on('emitUser',function(e,user){
-            console.log(user);
             $rootScope.account = user;
         });
+
+        function addFriend() {
+            if(vm.isFriend){
+                vm.friend.friendship = false;
+                Friend_user.update(vm.friend, function(res){
+                    vm.isFriend = false;
+
+                    console.log(res);
+                    var index = vm.friends.indexOf(res.friend_to);
+
+                    vm.friends.splice(index,1);
+
+                });
+            }else{
+                if(vm.isFriend == null || vm.isFriend == undefined){
+                    var newFriend = {
+                        "id": null,
+                        "friendship_date": new Date(),
+                        "friendship": true,
+                        "friend_from": vm.user,
+                        "friend_to": vm.user
+                    }
+                    Friend_user.save(newFriend, function(res){
+                        console.log("OK");
+                        vm.isFriend = true;
+                        vm.friends.push(res.friend_to);
+                    });
+                }else{
+                    vm.friend.friendship = true;
+                    Friend_user.update(vm.friend, function(res){
+                        vm.isFriend = true;
+                        vm.friends.push(res.friend_to);
+                    });
+                }
+
+
+
+
+            }
+        }
 
         function saveContent(user) {
             console.log(user);
@@ -52,6 +97,10 @@
                 vm.error = 'ERROR';
             });
         }
+
+        vm.isFriend.$promise.then(function (response) {
+            vm.isFriend = response.friendship;
+        });
 
         vm.user.$promise.then(function (response) {
             $window.document.title = "Perfil de " + vm.user.firstName + " " + vm.user.lastName;

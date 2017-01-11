@@ -9,6 +9,7 @@
 
     function RecoDialogController ($timeout, $scope, $rootScope, $stateParams, $uibModalInstance, $state, Recomendacion, User) {
         var vm = this;
+
         vm.postRecomendation = postRecomendation;
 
         console.log($stateParams.id_trabajo);

@@ -111,7 +111,6 @@ public class RecomendacionResource {
             return createRecomendacion(recomendacion);
         }
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
-        recomendacion.setRecomendador(user);
         recomendacion.setAceptada(recomendacion.isAceptada());
         recomendacion.setEmpresa(recomendacion.getTrabajo().getEmpresa());
         Recomendacion result = recomendacionRepository.save(recomendacion);

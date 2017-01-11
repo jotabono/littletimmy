@@ -1,4 +1,4 @@
-<div class="fixed-user">
+<div class="fixed-user" style="z-index:2">
     <div class="col-md-offset-2 fixed-user-container">
         <div ng-click="scroll()" class="fixed-user-image">
             <img class="imgcirculo" style="border-radius:100%; border:0px;" height="100%" width="100%" src="{{vm.user.imagen}}"/>
@@ -18,7 +18,7 @@
             <h1>{{vm.user.firstName}} {{vm.user.lastName}}</h1>
         </div>
         <div class="col-md-12 cabeceraperfil">
-            <button class="btn redondo" uib-popover="Añadir a contactos" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px mdi-account-plus"></i></button>
+            <button ng-click="vm.addFriend()" ng-style="vm.isFriend && {'background-color':'#55ACEE', 'color': '#fff', 'border': '1px solid #4d9dd6'}" ng-if="vm.user.login != account.login" class="btn redondo" uib-popover="{{vm.isFriend ? 'Eliminar contacto' : 'Añadir contacto'}}" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px" ng-class="{true: 'mdi-account-check', false: 'mdi-account-plus'}[vm.isFriend]"></i></button>
             <button class="btn redondo" uib-popover="Recomendar a este usuario" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px mdi-notification-clear-all"></i></button>
             <button class="btn redondo" uib-popover="Enviar un mensaje" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px mdi-wechat"></i></button>
         </div>
@@ -139,10 +139,11 @@
         <div class="col-nw-small card" style="margin-top:10px;">
 
             <div class="titulos"><i class="ion-android-people botonredondo" style="background-color:#2574A9"></i>Contactos</div>
-                <div ng-repeat="friend in vm.friends">
-                    <img class="friendspictures" src="{{friend.imagen}}">
+                <a class="friendlink" ng-repeat="friend in vm.friends" href="/#/perfil/{{friend.login}}"><div class="friendblock">
+                    <img style="object-fit: cover" class="friendspictures" src="{{friend.imagen}}">
                     <span>{{friend.firstName}} {{friend.lastName}}</span>
                 </div>
+                </a>
             </div>
         </div>
         </div>
@@ -474,6 +475,19 @@ i.ioniconbig{
         height:60px;
         border-radius:100%;
 
+    }
+
+    .friendblock:hover{
+        background-color:#efefef;
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+        transition: 0.5s;
+    }
+
+    .friendlink:hover{
+        text-decoration: none;
     }
 
 </style>
