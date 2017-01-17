@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -68,20 +69,22 @@ public class RecomendacionResource {
         if (recomendacion.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("recomendacion", "idexists", "A new recomendacion cannot already have an ID")).body(null);
         }
+        ZonedDateTime today = ZonedDateTime.now();
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
         recomendacion.setRecomendador(user);
         recomendacion.setAceptada(false);
         recomendacion.setEmpresa(recomendacion.getTrabajo().getEmpresa());
+        recomendacion.setFechaEnvio(today);
         Recomendacion result = recomendacionRepository.save(recomendacion);
         recomendacionSearchRepository.save(result);
         Recommend_notification notification = new Recommend_notification();
 
-        notification.setContenido("Tienes una nueva recomendación.");
         notification.setEmisor(recomendacion.getRecomendador());
         notification.setReceptor(recomendacion.getRecomendado());
         notification.setFechaRecibida(recomendacion.getFechaEnvio());
         notification.setLeida(false);
         notification.setRecomendacion(recomendacion);
+        notification.setContenido(notification.getEmisor().getFirstName() + " te ha recomendado.");
         recommend_notificationRepository.save(notification);
 
         return ResponseEntity.created(new URI("/api/recomendacions/" + result.getId()))
@@ -108,7 +111,6 @@ public class RecomendacionResource {
             return createRecomendacion(recomendacion);
         }
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
-        recomendacion.setRecomendador(user);
         recomendacion.setAceptada(recomendacion.isAceptada());
         recomendacion.setEmpresa(recomendacion.getTrabajo().getEmpresa());
         Recomendacion result = recomendacionRepository.save(recomendacion);
@@ -189,6 +191,16 @@ public class RecomendacionResource {
         return StreamSupport
             .stream(recomendacionSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+    }
+
+    /* OBTIENE LAS RECOMENDACIONES DE UN TRABAJO*/
+    @RequestMapping(value = "/recomendacions/trabajo/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Recomendacion> getRecomendacionesTrabajo(@PathVariable Long id) {
+        List<Recomendacion> recomendaciones = recomendacionRepository.findAllRecomendacionesTrabajo(id);
+        return recomendaciones;
     }
 
 

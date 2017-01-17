@@ -1,4 +1,4 @@
-<div class="fixed-user">
+<div class="fixed-user" style="z-index:2">
     <div class="col-md-offset-2 fixed-user-container">
         <div ng-click="scroll()" class="fixed-user-image">
             <img class="imgcirculo" style="border-radius:100%; border:0px;" height="100%" width="100%" src="{{vm.user.imagen}}"/>
@@ -18,13 +18,13 @@
             <h1>{{vm.user.firstName}} {{vm.user.lastName}}</h1>
         </div>
         <div class="col-md-12 cabeceraperfil">
-            <button class="btn redondo" uib-popover="Añadir a contactos" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px mdi-account-plus"></i></button>
+            <button ng-click="vm.addFriend()" ng-style="vm.isFriend && {'background-color':'#55ACEE', 'color': '#fff', 'border': '1px solid #4d9dd6'}" ng-if="vm.user.login != account.login" class="btn redondo" uib-popover="{{vm.isFriend ? 'Eliminar contacto' : 'Añadir contacto'}}" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px" ng-class="{true: 'mdi-account-check', false: 'mdi-account-plus'}[vm.isFriend]"></i></button>
             <button class="btn redondo" uib-popover="Recomendar a este usuario" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px mdi-notification-clear-all"></i></button>
             <button class="btn redondo" uib-popover="Enviar un mensaje" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px mdi-wechat"></i></button>
         </div>
     </div>
 
-            <div class="col-md-8 col-md-offset-2 hojaperfil" style="text-align:center">
+            <div class="col-md-8 col-md-offset-2 card cabecera" style="text-align:center">
                 <div class="row titulohoja">
                 <div class="col-md-4">
                     <div>
@@ -101,17 +101,17 @@
 
                 </div>
             </div>
-<div class="col-md-8 col-md-offset-2 hojacurriculum" style="text-align:center">
 
+<div class="col-md-8 col-md-offset-2 hojacurriculum" style="text-align:center">
     <div class="row">
-            <div class="col-md-8 columna">
+            <div class="col-md-8">
                 <div class="row curriculum">
-                    <div class="perfilblock">
-                        <div class="titulosperfil"><i class="mdi mdi-book-open-variant ioniconbig"></i><span style="font-size:28px"> Estudios</span></div>
+                    <div class="perfilblock card">
+                        <div class="titulos"><i class="ion-ios-book botonredondo" style="background-color:#019875"></i>Estudios</div>
                         <div ng-repeat="estudio in vm.estudios" class="bloqueperfil">
                             <b>{{estudio.curso}} en {{estudio.centro_estudios.nombre}}</b>
                             <div class="fechaestudio">
-                            <b>{{estudio.fechaInicio | date:medium}} -
+                            <b><i class="ion-calendar"></i> {{estudio.fechaInicio | date:medium}} -
                             <span ng-if="estudio.actualmente">Actualmente</span>
                             <span ng-if="!estudio.actualmente">{{estudio.fechaFinal | date: medium}}</span></b>
                             </div>
@@ -119,39 +119,61 @@
                             <p>{{estudio.descripcion}}</p>
                         </div>
                     </div>
-                    <div class="perfilblock">
-                        <div class="titulosperfil"><i class="mdi mdi-briefcase ioniconbig"></i><span style="font-size:28px"> Experiencia laboral</span></div>
-                        <div ng-repeat="trabajo in vm.trabajos" class="bloqueperfil">
-                            <b>{{trabajo.cargo}} en {{trabajo.empresa.nombre}}</b>
+                    <div class="perfilblock card">
+                        <div class="titulos"><i class="ion-briefcase botonredondo" style="background-color:#A2602B"></i>Experiencia laboral</div>
+                        <div ng-repeat="trabajoDTO in vm.trabajos" class="bloqueperfil">
+                            <button ng-if="trabajoDTO.recomendacion.length > 0" class="viewRecomendation_button btn btn-link"><a ui-sref="perfil-recomendaciones({id_trabajo:trabajoDTO.trabajo.id})"><i class="ion-android-done"></i> {{trabajoDTO.recomendacion.length}}{{trabajoDTO.recomendacion.length == 1 && ' recomendación' || ' recomendaciones'}} </a></button>
+                            <button class="viewRecomendation_button btn btn-link"><a ui-sref="perfil-recomendaciones({id_trabajo:trabajoDTO.trabajo.id})"> {{trabajoDTO.recomendacion.length == 0 && ' Escribe una recomendación' || ''}}</a></button>
+                            <b>{{trabajoDTO.trabajo.cargo}} en {{trabajoDTO.trabajo.empresa.nombre}}</b>
                             <div class="fechaestudio">
-                                <b>{{trabajo.fechaInicio | date:medium}} -
-                                    <span ng-if="trabajo.actualmente">Actualmente</span>
-                                    <span ng-if="!trabajo.actualmente">{{trabajo.fechaFin | date: medium}}</span></b>
+                                <b><i class="ion-calendar"></i> {{trabajoDTO.trabajo.fechaInicio | date:medium}} -
+                                    <span ng-if="trabajoDTO.trabajo.actualmente">Actualmente</span>
+                                    <span ng-if="!trabajoDTO.trabajo.actualmente">{{trabajoDTO.trabajo.fechaFin | date: medium}}</span></b>
                             </div>
                             <p></p>
-                            <p>{{trabajo.descripcionCargo}}</p>
+                            <p>{{trabajoDTO.trabajo.descripcionCargo}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-        <div class="col-nw-small columna">
-            <div>
-                <div class="titulohoja">
-                    Amigos de {{vm.user.firstName}}
-                </div>
-                <div ng-repeat="friend in vm.friends">
-                    <img class="friendspictures" src="{{friend.imagen}}">
+        <div class="col-nw-small card" style="margin-top:10px;">
+
+            <div class="titulos"><i class="ion-android-people botonredondo" style="background-color:#2574A9"></i>Contactos</div>
+                <a class="friendlink" ng-repeat="friend in vm.friends" href="/#/perfil/{{friend.login}}"><div class="friendblock">
+                    <img style="object-fit: cover" class="friendspictures" src="{{friend.imagen}}">
                     <span>{{friend.firstName}} {{friend.lastName}}</span>
                 </div>
+                </a>
             </div>
         </div>
-            <div class="col-md-3 columna">
-            </div>
         </div>
 </div>
 
 <style>
 
+    .titulos{
+        display: inline-flex;
+        align-items: center;
+        color:#55ACEE;
+    }
+
+    .botonredondo{
+        border-radius: 100%;
+        padding: 5px;
+        font-size: 22px;
+        height: 32px;
+        width: 33px;
+        text-align:center;
+        display: inline-block;
+        margin: 10px;
+        line-height: 0;
+        color:white;
+    }
+.viewRecomendation_button {
+    position: absolute;
+    right: 10px;
+    top: -10px;
+}
     .topcabecera{
         margin-bottom:30px;
     }
@@ -232,7 +254,7 @@ i.ioniconbig{
         text-align:left;
         padding-top:10px;
         padding-bottom:10px;
-        background-color: rgba(235, 235, 235, 0.4);
+        //background-color: rgba(235, 235, 235, 0.4);
     }
 
     .curriculum{
@@ -243,7 +265,7 @@ i.ioniconbig{
     .titulosperfil{
         font-family:sans-serif;
         margin-left:20px;
-        color: #4d4d4d;
+        color: #55ACEE;
     }
 
     .titulohoja a{
@@ -272,6 +294,7 @@ i.ioniconbig{
         display: inline-block;
         width: 32.7%;
         float:left;
+        text-align:left;
         height:200px;
     }
 
@@ -300,16 +323,40 @@ i.ioniconbig{
     }
 
     .bloqueperfil{
-        width: 560px;
-        padding:15px 35px;
+        //width: 560px;
+        width: 100%;
+        //padding:15px 35px;
+        padding: 22px 35px 15px 35px;
         margin-bottom:5px;
-        margin-left: auto;
-        margin-right: auto;
-        background-color: rgba(245,245,245,0.6);
+        /*margin-left: auto;
+        margin-right: auto;*/
+        position: relative;
+    }
+
+    .cabecera{
+        margin-left: 17.4%;
+        width: 65.4%;
     }
 
     .bloqueperfil:last-child{
         margin-bottom:0px;
+        border:0;
+    }
+
+    .bloqueperfil:not(:last-child):after{
+        content: "";
+        position:absolute;
+        bottom:0;
+        left:50%;
+        transform:translateX(-50%);
+        height:1px;
+        width:80%;
+        background-color: rgba(204, 204, 204, 0.77);
+    }
+
+    .card{
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        background-color:white;
     }
 
     b{
@@ -428,6 +475,19 @@ i.ioniconbig{
         height:60px;
         border-radius:100%;
 
+    }
+
+    .friendblock:hover{
+        background-color:#efefef;
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+        transition: 0.5s;
+    }
+
+    .friendlink:hover{
+        text-decoration: none;
     }
 
 </style>

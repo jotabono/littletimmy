@@ -3,6 +3,7 @@ package com.mycompany.myapp.repository;
 import com.mycompany.myapp.domain.Recomendacion;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -17,5 +18,8 @@ public interface RecomendacionRepository extends JpaRepository<Recomendacion,Lon
 
     @Query("select recomendacion from Recomendacion recomendacion where recomendacion.recomendado.login = ?#{principal.username}")
     List<Recomendacion> findByRecomendadoIsCurrentUser();
+
+    @Query("select recomendacion from Recomendacion recomendacion where recomendacion.trabajo.id = :id_trabajo and recomendacion.aceptada = true")
+    List<Recomendacion> findAllRecomendacionesTrabajo(@Param("id_trabajo") Long id);
 
 }

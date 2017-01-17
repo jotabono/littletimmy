@@ -5,7 +5,9 @@ import com.mycompany.myapp.domain.Friend_user;
 
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.Friend_userRepository;
+import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.Friend_userSearchRepository;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -46,6 +48,9 @@ public class Friend_userResource {
     @Inject
     private Friend_userSearchRepository friend_userSearchRepository;
 
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /friend-users : Create a new friend_user.
      *
@@ -63,10 +68,13 @@ public class Friend_userResource {
         if (friend_user.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("friend_user", "idexists", "A new friend_user cannot already have an ID")).body(null);
         }
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        friend_user.setFriend_from(user);
         Friend_user exist = friend_userRepository.findExistFriendship(friend_user.getFriend_from().getLogin(), friend_user.getFriend_to().getLogin());
         if(exist != null){
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("friend_user", "friendshipexist", "You and "+friend_user.getFriend_to().getLogin()+" are already friends")).body(null);
         }
+
         friend_user.setFriendship(false);
         Friend_user result = friend_userRepository.save(friend_user);
         friend_userSearchRepository.save(result);
@@ -186,6 +194,8 @@ public class Friend_userResource {
 
         Set<Friend_user> friendsUser = friend_userRepository.findFriendsOfUser(login);
 
+        friendsUser = friendsUser.stream().filter(friend_user -> friend_user.isFriendship()).collect(Collectors.toSet());
+
         Set<User> friends = new HashSet<>();
 
         for(Friend_user friend_user:friendsUser){
@@ -203,4 +213,26 @@ public class Friend_userResource {
         return new ResponseEntity<>(friends,HttpStatus.OK);
     }
 
+
+    // Si son amigos
+
+    @RequestMapping(value = "/friendship/{login}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Friend_user> getFrienship(@PathVariable String login) {
+        log.debug("REST request to delete Friend_user : {}", login);
+
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+
+        Friend_user friendsUser = friend_userRepository.findExistFriendship(login, user.getLogin());
+
+        if (friendsUser == null){
+            Friend_user newFriend = new Friend_user();
+            newFriend.setFriendship(false);
+            friendsUser = newFriend;
+        }
+
+        return new ResponseEntity<>(friendsUser,HttpStatus.OK);
+    }
 }

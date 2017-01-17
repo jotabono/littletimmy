@@ -1,0 +1,24 @@
+
+
+<md-content layout-padding>
+    <div>
+        <form name="userForm" ng-submit="vm.postRecomendation()">
+            <md-input-container class="md-block">
+                <label>Escribir recomendación</label>
+                <textarea ng-model="text" md-maxlength="1000" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+            <div style="float:right">
+            <button type="button" ng-click="vm.clear()" class="btn btn-link">Cancelar</button>
+            <button type="submit" class="btn btn-link">Enviar</button>
+            </div>
+        </form>
+    </div>
+</md-content>
+
+<style>
+    textarea{
+        resize:none !important;
+        max-height:300px !important;
+        min-height:300px !important;
+    }
+</style>

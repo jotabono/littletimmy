@@ -35,9 +35,9 @@
             if (!titleKey && $state.$current.data && $state.$current.data.pageTitle) {
                 titleKey = $state.$current.data.pageTitle;
             }
+            $window.document.title = titleKey;/*
             $translate(titleKey || 'global.title').then(function (title) {
-                $window.document.title = title;
-            });
+            });*/
         }
     }
 })();

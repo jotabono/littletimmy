@@ -1,0 +1,98 @@
+<div class="modal-inside">
+    <!--
+    <pre><code>{{vm.account | json}}</code></pre>
+    <pre><code>{{vm.trabajo | json}}</code></pre>-->
+	<div>
+		<div><h3 style="float:left" class="title-job-recomendation"><i class="ion-ios-briefcase" aria-hidden="true"></i> {{vm.trabajo.cargo}} en {{vm.trabajo.empresa.nombre}}</h3> <button ng-if="vm.account.login != vm.trabajo.trabajador.login" ui-sref="perfil-recomendar" style="float:right" class="btn btn-primary"><i class="ion-edit"></i> Escribir una recomendación</button></div>
+		<div style="clear: both;"></div>
+        <p>Desde {{vm.trabajo.fechaInicio | date: 'longDate'}} hasta {{vm.trabajo.actualmente && 'actualmente' || vm.trabajo.fechaFin | date : 'longDate'}}</p>
+	</div>
+	<div>
+		<ul class="recomendations">
+			<li ng-repeat="recomendacion in vm.recomendaciones" class="userRecomendation">
+				<!-- <h4><i class="ion-star" aria-hidden="true"></i> Recomendacion de {{recomendacion.recomendador.firstName +' '+ recomendacion.recomendador.lastName}}</h4> -->
+
+				<a class="user-image" href="/#/perfil/{{recomendacion.recomendador.login}}" ng-click="vm.toProfile()">
+					<img style="border-radius:100%" src="{{recomendacion.recomendador.imagen}}" alt="{{recomendacion.recomendador.firstName +' '+ recomendacion.recomendador.lastName}}">
+				</a>
+				<div class="recomendationContent">
+					<p class="userName"><a href="/#/perfil/{{recomendacion.recomendador.login}}" ng-click="vm.toProfile()">{{recomendacion.recomendador.firstName +' '+ recomendacion.recomendador.lastName}}</a></p>
+					<p class="recomendationDate"><i class="ion-calendar"></i> {{recomendacion.fechaEnvio | date: 'longDate'}}</p>
+					<span>{{recomendacion.texto}}</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+    <div class="modal-inside" ng-if="vm.recomendaciones.length == 0">
+        <h3>{{vm.account.login != vm.trabajo.trabajador.login ? 'No tiene recomendaciones' : 'No tienes recomendaciones' }}</h3>
+    </div>
+</div>
+<style>
+	.backdropBlurred{
+		background-color: #000;
+	}
+	#contentapp,.navbar{
+		-webkit-filter: blur(5px);
+	  	-moz-filter: blur(5px);
+	 	-o-filter: blur(5px);
+	  	-ms-filter: blur(5px);
+	  	filter: blur(5px);
+	}
+	.recomendations{
+		list-style: none;
+	    margin: 0;
+	    padding: 0;
+	    width: 100%;
+	    height: auto;
+	    max-height: 500px;
+	    overflow-x: auto;
+	}
+	.recomendations > .userRecomendation{
+		margin-top: 28px;
+	}
+	.recomendationContent{
+		padding-left: 57px;
+		width: 100%;
+		height: auto;
+	}
+	.recomendations a.user-image > img{
+		float: left;
+		height: 50px;
+	    margin-right: 5px;
+	    width: 50px;
+	}
+	.recomendations .userRecomendation > .recomendationContent > p.userName{
+		font-size: 16px;
+		margin-bottom: 0px;
+	}
+	.recomendations .userRecomendation > .recomendationContent > .recomendationDate{
+		color: gray;
+		margin-bottom: 0px;
+	}
+	.title-job-recomendation{
+		margin-top: 0px;
+	}
+	.modal-inside{
+		padding: 45px;
+	}
+	.modal {
+	  	text-align: center;
+	  	padding: 0!important;
+	}
+	.modal-content{
+		border-radius: 0px;
+	}
+	.modal:before {
+	  	content: '';
+	 	display: inline-block;
+	  	height: 100%;
+	  	vertical-align: middle;
+	  	margin-right: -4px; /* Adjusts for spacing */
+	}
+	.modal-dialog {
+	  	display: inline-block;
+	  	text-align: left;
+	  	vertical-align: middle;
+	}
+</style>
+
