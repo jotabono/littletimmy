@@ -1,0 +1,103 @@
+<div style="overflow-y: auto; max-height: calc(100% - 50px); overflow-x: hidden;">
+    <div class="chat-title"><h3>{{vm.chat.name}}</h3></div>
+    <div class="messages-block clearfix" ng-repeat="message in vm.chat.messages">
+        <span ng-class="{true: 'logged-msg',false: 'normal-msg'}[message.sender.login == account.login]">{{message.text}}</span>
+    </div>
+    <div class="chat-input">
+        <input ng-model="msg" my-enter="vm.post(msg)" type="text" placeholder="Escribe tu mensaje."/>
+    </div>
+</div>
+
+<style>
+    .chat-title{
+        width:100%;
+        border-bottom: 1px solid rgba(93, 93, 93, 0.2);
+    }
+    .messages-block{
+        display:block;
+        width:100%;
+        height:98%;
+        margin:5px;
+        font-size: 16px;
+    }
+    .chat-input{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width:100%;
+        z-index: 44;
+    }
+    .chat-input input{
+        width:100%;
+        height:50px;
+        border-right:none;
+        border-left:none;
+        border-bottom:none;
+        border-top: 1px solid rgba(93, 93, 93, 0.2);
+        font-size:18px;
+        padding-left:10px;
+    }
+
+    .logged-msg{
+        float: right;
+        background-color: #27ae60;
+        color:white;
+        padding:5px;
+        margin-right: 10px;
+        border-radius:5px;
+    }
+
+    .normal-msg{
+        float: left;
+        background-color:#03497B;
+        color:white;
+        padding:5px;
+        border-radius:5px;
+    }
+    .clearfix:after{
+        content: "";
+        display:block;
+        clear: both;
+        position: relative;
+    }
+</style>
+
+<!--
+
+<div>
+    <h2><span data-translate="littletimmyApp.chat.detail.title">Chat</span> {{vm.chat.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="littletimmyApp.chat.name">Name</span></dt>
+        <dd>
+            <span>{{vm.chat.name}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.chat.creationDate">Creation Date</span></dt>
+        <dd>
+            <span>{{vm.chat.creationDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.chat.owner">Owner</span></dt>
+        <dd>
+            {{vm.chat.owner.id}}
+        </dd>
+        <dt><span data-translate="littletimmyApp.chat.users">Users</span></dt>
+        <dd>
+            <span ng-repeat="users in vm.chat.users">
+                {{users.id}}{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="chat-detail.edit({id:vm.chat.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+-->

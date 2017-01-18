@@ -1,0 +1,25 @@
+{
+    "littletimmyApp": {
+        "messages" : {
+            "home": {
+                "title": "Messages",
+                "createLabel": "Crear nuevo Messages",
+                "createOrEditLabel": "Crear o editar Messages",
+                "search": "Search for Messages"
+            },
+            "created": "Un nuevo Messages ha sido creado con el identificador {{ param }}",
+            "updated": "Un Messages ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Messages ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Messages {{ id }}?"
+            },
+            "detail": {
+                "title": "Messages"
+            },
+            "text": "Text",
+            "sendDate": "Send Date",
+            "sender": "Sender",
+            "chat": "Chat"
+        }
+    }
+}
