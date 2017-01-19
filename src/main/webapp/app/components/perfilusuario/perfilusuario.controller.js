@@ -25,7 +25,6 @@
         vm.addFriend = addFriend;
 
         vm.friends.$promise.then(function(res){
-            console.log(res);
         });
 
         $scope.scroll = function () {
