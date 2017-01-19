@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "owner",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "users",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-many",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "creationDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20170117182916",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "chat",
+    "pagination": "no"
+}

@@ -1,0 +1,63 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myChatLabel" data-translate="littletimmyApp.chat.home.createOrEditLabel">Create or edit a Chat</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.chat.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.chat.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.chat.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.chat.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="littletimmyApp.chat.creationDate" for="field_creationDate">Creation Date</label>
+                <div class="input-group">
+                    <input id="field_creationDate" type="text" class="form-control" name="creationDate" datetime-picker="{{dateformat}}" ng-model="vm.chat.creationDate" is-open="vm.datePickerOpenStatus.creationDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('creationDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="littletimmyApp.chat.owner" for="field_owner">Owner</label>
+            <select class="form-control" id="field_owner" name="owner" ng-model="vm.chat.owner" ng-options="user as user.id for user in vm.users track by user.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.owner.$invalid">
+            <p class="help-block"
+                ng-show="editForm.owner.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label data-translate="littletimmyApp.chat.users" for="field_users">Users</label>
+            <select class="form-control" id="field_users" multiple name="users" ng-model="vm.chat.users" ng-options="user as user.id for user in vm.users track by user.id" required></select>
+        </div>
+        <div ng-show="editForm.users.$invalid">
+            <p class="help-block"
+                ng-show="editForm.users.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -17,7 +17,6 @@
                             response.data = angular.fromJson(response.data);
                             response.data.fecha_nacimiento = DateUtils.convertLocalDateFromServer(response.data.fecha_nacimiento);
                         }
-                        console.log(response);
                         return response;
                     }
                 }
