@@ -3,9 +3,11 @@
     <div class="messages" id="messagesId">
         <div class="messages-block clearfix" ng-repeat="message in vm.chat.messages">
             <span ng-class="{true: 'logged-msg',false: 'normal-msg'}[message.sender.login == account.login]">
-                <!--<img ng-src="{{message.sender.imagen}}" width="25" height="25" style="border-radius: 100%; border: none;">-->
-                <span>{{message.text}}</span>
-                <small style="font-size: 10px; color: #f1f1f1;">{{message.sendDate | date: 'dd/MM/yyyy'}}</small>
+                <div><span class="message-sender">{{message.sender.login}}</span></div>
+                <div>
+                    <span class="message-text">{{message.text}}</span>
+                    <!--<small style="font-size: 10px; color: #f1f1f1;">{{message.sendDate | date: 'dd/MM/yyyy'}}</small>-->
+                </div>
             </span>
         </div>
     </div>
@@ -15,6 +17,11 @@
 </div>
 
 <style>
+    .message-sender{
+        font-family: monospace;
+        font-size: 13px;
+        color: rgb(0, 0, 0);
+    }
     .chat-title{
         width:100%;
         border-bottom: 1px solid rgba(93, 93, 93, 0.2);
@@ -72,6 +79,14 @@
         padding-left:10px;
     }
 
+    .logged-msg .message-sender{
+        float: right;
+    }
+
+    .logged-msg .message-text{
+        float: right;
+    }
+
     .logged-msg{
         float: right;
         background-color: #27ae60;
@@ -83,7 +98,8 @@
 
     .normal-msg{
         float: left;
-        background-color:#03497B;
+        //background-color:#03497B;
+        background-color: #0089ea;
         color:white;
         padding:5px;
         border-radius:5px;
