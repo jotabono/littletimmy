@@ -4,8 +4,11 @@ import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Chat;
 
 import com.mycompany.myapp.domain.Messages;
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.ChatRepository;
+import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.ChatSearchRepository;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.dto.ChatDTO;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -20,8 +23,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -42,6 +44,9 @@ public class ChatResource {
     @Inject
     private ChatSearchRepository chatSearchRepository;
 
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /chats : Create a new chat.
      *
@@ -58,6 +63,14 @@ public class ChatResource {
         if (chat.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("chat", "idexists", "A new chat cannot already have an ID")).body(null);
         }
+
+        if(chat.getName() == null){
+            List<User> users = chat.getUsers().stream().collect(Collectors.toList());
+            String user = users.get(0).getFirstName() + " " + users.get(0).getLastName();
+            String chatName = "Conversation with " + user;
+            chat.setName(chatName);
+        }
+
         Chat result = chatRepository.save(chat);
         chatSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/chats/" + result.getId()))
@@ -101,7 +114,12 @@ public class ChatResource {
     @Timed
     public List<Chat> getAllChats() {
         log.debug("REST request to get all Chats");
-        List<Chat> chats = chatRepository.findAllWithEagerRelationships();
+        //List<Chat> chats = chatRepository.findAllWithEagerRelationships();
+
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+
+        List<Chat> chats = chatRepository.findUserChats(user.getLogin());
+
         return chats;
     }
 
@@ -119,15 +137,23 @@ public class ChatResource {
         log.debug("REST request to get Chat : {}", id);
         Chat chat = chatRepository.findOneWithEagerRelationships(id);
 
+        if(chat == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+
+        if(!chat.getUsers().contains(user)){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
         List<Messages> messages = chatRepository.findChatMessages(id);
+
+        Collections.sort((List<Messages>) messages, (obj1, obj2) -> obj1.getSendDate().compareTo(obj2.getSendDate()));
 
         ChatDTO chatDTO = new ChatDTO(chat.getId(), chat.getName(), chat.getCreationDate(), chat.getOwner(), chat.getUsers(), messages);
 
-        return Optional.ofNullable(chatDTO)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return new ResponseEntity<>(chatDTO, HttpStatus.OK);
     }
 
     /**

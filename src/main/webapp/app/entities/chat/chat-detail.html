@@ -3,8 +3,9 @@
     <div class="messages" id="messagesId">
         <div class="messages-block clearfix" ng-repeat="message in vm.chat.messages">
             <span ng-class="{true: 'logged-msg',false: 'normal-msg'}[message.sender.login == account.login]">
-                <img ng-src="{{message.sender.imagen}}" width="25" height="25" style="border-radius: 100%; border: none;">
+                <!--<img ng-src="{{message.sender.imagen}}" width="25" height="25" style="border-radius: 100%; border: none;">-->
                 <span>{{message.text}}</span>
+                <small style="font-size: 10px; color: #f1f1f1;">{{message.sendDate | date: 'dd/MM/yyyy'}}</small>
             </span>
         </div>
     </div>
@@ -20,7 +21,11 @@
         position: absolute;
         top: 0;
         left: 0;
-        background: #ebebeb;
+        //background: #ebebeb;
+        padding: 20px;
+
+
+        background: rgba(3, 73, 123, 0.77);
         padding: 20px;
     }
     .messages{

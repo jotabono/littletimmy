@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('ChatDetailController', ChatDetailController);
 
-    ChatDetailController.$inject = ['$scope', '$rootScope', '$timeout', '$interval', '$window', 'previousState', 'entity', 'Chat', 'User', 'Messages'];
+    ChatDetailController.$inject = ['$scope', '$rootScope', '$timeout', '$interval', '$window', 'previousState', 'entity', 'Chat', 'User', 'Messages', 'ChatTrackerService'];
 
-    function ChatDetailController($scope, $rootScope, $timeout, $interval, $window, previousState, entity, Chat, User, Messages) {
+    function ChatDetailController($scope, $rootScope, $timeout, $interval, $window, previousState, entity, Chat, User, Messages, ChatTrackerService) {
         var vm = this;
 
         vm.chat = entity;
@@ -16,35 +16,34 @@
         var unsubscribe = $rootScope.$on('littletimmyApp:chatUpdate', function(event, result) {
             vm.chat = result;
         });
+
         $scope.$on('$destroy', unsubscribe);
 
         $rootScope.$on('emitUser',function(e,user){
             $rootScope.account = user;
         });
 
-        entity.$promise.then(function(){
+        entity.$promise.then(function(res){
+
+            ChatTrackerService.connect('chat', res.id);
+
+            ChatTrackerService.receive().then(null, null, function(message) {
+                vm.chat.messages.push(message);
+                scrollChat();
+            });
+
             $window.document.title = "Chat: " + vm.chat.name;
             $timeout(function () {
-                $("#messagesId").animate({ scrollTop: $('#messagesId').prop("scrollHeight")}, 500);
-            }, 500);
+                $("#messagesId").scrollTop($('#messagesId').prop("scrollHeight"));
+            }, 10);
 
-            $interval(function() {
-                Chat.get({id: vm.chat.id}, function (result) {
-                    if(vm.chat.messages.length < result.messages.length){
-                        var dif = result.messages.length - vm.chat.messages.length;
-                        var start = (result.messages.length - dif);
-                        for(var i = start; i < result.messages.length; i++){
-                            vm.chat.messages.push(result.messages[i]);
-                            scrollChat();
-                        }
-                    }
-
-
-                });
-            }, 1000);
         });
 
         vm.post = post;
+
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+            ChatTrackerService.unsubscribe();
+        });
 
         function post(msg) {
             var post = {
@@ -62,7 +61,8 @@
         }
 
         function addMsg(res){
-            vm.chat.messages.push(res);
+            ChatTrackerService.sendActivity(vm.chat.id, res);
+            //vm.chat.messages.push(res);
             $scope.msg = "";
             scrollChat();
         }

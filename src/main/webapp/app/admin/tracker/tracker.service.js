@@ -35,6 +35,7 @@
             url += '?access_token=' + authToken;
             var socket = new SockJS(url);
             stompClient = Stomp.over(socket);
+            stompClient.debug = null;
             var stateChangeStart;
             var headers = {};
             stompClient.connect(headers, function() {

@@ -1,10 +1,14 @@
 package com.mycompany.myapp.web.websocket;
 
+import com.mycompany.myapp.domain.Messages;
 import com.mycompany.myapp.security.SecurityUtils;
+import com.mycompany.myapp.service.dto.ChatDTO;
 import com.mycompany.myapp.web.websocket.dto.ActivityDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
@@ -47,11 +51,19 @@ public class ActivityService implements ApplicationListener<SessionDisconnectEve
         return activityDTO;
     }
 
+    @MessageMapping("/topic/sendMessage/{chat_id}")
+    @SendTo("/topic/messages/{chat_id}")
+    public Messages receive(@DestinationVariable Long chat_id, Messages messages) throws Exception {
+        //Thread.sleep(3000); // simulated delay
+        //messagingTemplate.convertAndSend("/topic/messages/"+chat_id, messages);
+        return messages;
+    }
+
     @Override
     public void onApplicationEvent(SessionDisconnectEvent event) {
-        ActivityDTO activityDTO = new ActivityDTO();
+        /*ActivityDTO activityDTO = new ActivityDTO();
         activityDTO.setSessionId(event.getSessionId());
         activityDTO.setPage("logout");
-        messagingTemplate.convertAndSend("/topic/tracker", activityDTO);
+        messagingTemplate.convertAndSend("/topic/tracker", activityDTO);*/
     }
 }

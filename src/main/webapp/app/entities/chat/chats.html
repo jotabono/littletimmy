@@ -2,19 +2,42 @@
     <button class="btn btn-link" ui-sref="chat.new" >
         <span class="glyphicon glyphicon-plus"></span>
         <span class="hidden-xs"  data-translate="littletimmyApp.chat.home.createLabel">
-                        Create new Chat
-                    </span>
+            Create new Chat
+        </span>
     </button>
-    <div ui-sref-active="active" ng-repeat="chat in vm.chats track by chat.id" ui-sref="chat-detail({id:chat.id})" class="chat-blocks">
+    <div ui-sref-active="active" ng-repeat="chat in vm.chats track by chat.id" ui-sref="chat-detail({id:chat.id})" class="chat-blocks" ng-if="vm.chats.length > 0">
         <img src="{{chat.owner.imagen}}" class="img-chat" />  <span>{{chat.name}}</span> <span style="float:right; font-size:12px; font-weight:bold"> {{chat.users.length}}/10 </span>
+    </div>
+    <div class="help-chat" ng-if="vm.chats.length == 0">
+        <div style="text-align: center; color: #c5c5c5;text-shadow: 1px 4px 6px #f4f4f4, 0 0 0 #000,1px 4px 6px #f4f4f4;">
+            <span style="flex: 1;"><i class="ion-ios-chatboxes-outline" style="font-size: 70px;" aria-hidden="true"></i></span>
+            <span style="flex: 1;"><h3>No chats available</h3></span>
+        </div>
     </div>
 </div>
 <div ui-view="chat-detail" class="chat-detail">
-
+    <div class="help-chat">
+        <div style="text-align: center; color: #c5c5c5;text-shadow: 1px 4px 6px #f4f4f4, 0 0 0 #000,1px 4px 6px #f4f4f4;">
+            <span style="flex: 1;"><i class="ion-ios-chatboxes-outline" style="font-size: 70px;" aria-hidden="true"></i></span>
+            <span style="flex: 1;"><h3>SELECT A CHAT TO TALK</h3></span>
+        </div>
+    </div>
 </div>
 
 <style>
-
+    .help-chat {
+        height: 100%;
+        margin: 0;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .help-chat h3{
+        display: block;
+        position: relative;
+    }
     .chat-detail div::-webkit-scrollbar {
         width: 8px;
     }
@@ -41,7 +64,8 @@
         width: 21%;
         position: relative;
         float: left;
-        border-right: 1px solid rgba(93, 93, 93, 0.2);
+        //border-right: 1px solid rgba(93, 93, 93, 0.2);
+        border-right: 1px solid rgba(93, 93, 93, 0.1);
     }
     .chat-blocks {
         padding-top: 10px;
