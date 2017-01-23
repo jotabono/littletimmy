@@ -21,14 +21,14 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="text" type="varchar(255)">
+            <column name="text" type="text">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="send_date" type="timestamp">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="sender_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -40,6 +40,6 @@
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="messages" columnName="send_date" columnDataType="datetime"/>
-        
+
     </changeSet>
 </databaseChangeLog>

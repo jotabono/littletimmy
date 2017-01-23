@@ -8,6 +8,7 @@
             'pascalprecht.translate',
             'ngResource',
             'ngCookies',
+            'ngSanitize',
             'ngAria',
             'ngCacheBuster',
             'ngFileUpload',

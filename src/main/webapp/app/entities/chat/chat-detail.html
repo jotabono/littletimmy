@@ -3,20 +3,69 @@
     <div class="messages" id="messagesId">
         <div class="messages-block clearfix" ng-repeat="message in vm.chat.messages">
             <span ng-class="{true: 'logged-msg',false: 'normal-msg'}[message.sender.login == account.login]">
-                <div><span class="message-sender">{{message.sender.login}}</span></div>
                 <div>
-                    <span class="message-text">{{message.text}}</span>
+                    <span class="message-text" ng-bind-html="message.text"></span>
                     <!--<small style="font-size: 10px; color: #f1f1f1;">{{message.sendDate | date: 'dd/MM/yyyy'}}</small>-->
+                </div>
+                <div>
+                    <span class="message-sender">{{message.sender.login}}</span>
                 </div>
             </span>
         </div>
     </div>
-    <div class="chat-input">
-        <input ng-model="msg" my-enter="vm.post(msg)" type="text" placeholder="Escribe tu mensaje."/>
+    <div class="chat-input" style="background: #fff;border-top: 1px solid rgba(93, 93, 93, 0.2);">
+        <div style="width: 90%; display: inline-block; vertical-align: top;">
+            <textarea id="messageInputId" class="message-input" ng-model="msg" value="" style="max-width: 100%; word-wrap: break-word" placeholder="Send a message..." required minlength="1" maxlength="1500" msd-elastic></textarea>
+        </div>
+        <div class="button-send">
+            <button class="ion-paper-airplane" ng-click="vm.post(msg)"></button>
+        </div>
+        <!--<input ng-model="msg" my-enter="vm.post(msg)" type="text" placeholder="Escribe tu mensaje."/>-->
     </div>
 </div>
-
 <style>
+    .button-send{
+        width: 9%;
+        display: inline-flex;
+        vertical-align: top;
+        height: 50px;
+        align-items: center;
+        justify-content: center;
+    }
+    .chat-input textarea{
+        color: #444;
+        width: 100%;
+        display: block;
+        height: 50px;
+        vertical-align: middle;
+        line-height: 16px;
+
+        max-height: 234px;
+
+        resize: none;
+        border-right:none;
+        border-left:none;
+        border-bottom:none;
+        border-top: none;
+        font-size:18px;
+        padding: 15px;
+    }
+    .message-text{
+        white-space: pre-wrap;
+    }
+    .message-input{
+        width:50%;
+        height: 50px;
+        border-right:none;
+        border-left:none;
+        border-bottom:none;
+        //border-top: 1px solid rgba(93, 93, 93, 0.2);
+        font-size:15px;
+        //padding-left:10px;
+        overflow-y: auto;
+        padding-top: 6px;
+        vertical-align: top;
+    }
     .message-sender{
         font-family: monospace;
         font-size: 13px;
@@ -36,18 +85,12 @@
         padding: 20px;
     }
     .messages{
-        /*height: 98%;
-        display: block;
-        width:100%;
-        position: relative;
-        margin-top: 67px;
-        overflow-y: auto; max-height: calc(100% - 30px); overflow-x: hidden;*/
-
         overflow-y: auto;
         overflow-x: hidden;
         position: absolute;
         left: 0;
         right: 0;
+        //bottom: 50px;
         bottom: 50px;
         top: 67px;
     }
@@ -67,6 +110,7 @@
         left: 0;
         width:100%;
         z-index: 44;
+        background: #ebebeb;
     }
     .chat-input input{
         width:100%;
@@ -80,20 +124,28 @@
     }
 
     .logged-msg .message-sender{
-        float: right;
+       //float: right;
     }
 
     .logged-msg .message-text{
-        float: right;
+        //float: right;
     }
 
     .logged-msg{
         float: right;
         background-color: #27ae60;
         color:white;
-        padding:5px;
-        margin-right: 10px;
-        border-radius:5px;
+
+
+        border-radius: 5px;
+        display: inline-block;
+        padding: 10px 18px;
+        position: relative;
+        margin: 10px;
+        //max-width: 465px;
+        max-width: 80%;
+
+        word-break: break-all;
     }
 
     .normal-msg{
@@ -101,8 +153,15 @@
         //background-color:#03497B;
         background-color: #0089ea;
         color:white;
-        padding:5px;
-        border-radius:5px;
+
+        border-radius: 5px;
+        display: inline-block;
+        padding: 10px 18px;
+        position: relative;
+        margin: 10px;
+        max-width: 80%;
+
+        word-break: break-all;
     }
     .clearfix:after{
         content: "";
