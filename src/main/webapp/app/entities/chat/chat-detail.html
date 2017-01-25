@@ -15,7 +15,9 @@
     </div>
     <div class="chat-input" style="background: #fff;border-top: 1px solid rgba(93, 93, 93, 0.2);">
         <div style="width: 90%; display: inline-block; vertical-align: top;">
-            <textarea id="messageInputId" class="message-input" ng-model="msg" value="" style="max-width: 100%; word-wrap: break-word" placeholder="Send a message..." required minlength="1" maxlength="1500" msd-elastic></textarea>
+            <textarea id="messageInputId" class="message-input" ng-model="msg" value=""
+                      style="max-width: 100%; word-wrap: break-word" placeholder="Send a message..."
+                      minlength="1" maxlength="1500"></textarea>
         </div>
         <div class="button-send">
             <button class="ion-paper-airplane" ng-click="vm.post(msg)"></button>

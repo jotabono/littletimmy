@@ -1,14 +1,10 @@
 package com.mycompany.myapp.web.websocket;
 
-import com.mycompany.myapp.domain.Messages;
 import com.mycompany.myapp.security.SecurityUtils;
-import com.mycompany.myapp.service.dto.ChatDTO;
 import com.mycompany.myapp.web.websocket.dto.ActivityDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
@@ -18,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -49,14 +44,6 @@ public class ActivityService implements ApplicationListener<SessionDisconnectEve
         activityDTO.setTime(dateTimeFormatter.format(ZonedDateTime.ofInstant(instant, ZoneOffset.systemDefault())));
         log.debug("Sending user tracking data {}", activityDTO);
         return activityDTO;
-    }
-
-    @MessageMapping("/topic/sendMessage/{chat_id}")
-    @SendTo("/topic/messages/{chat_id}")
-    public Messages receive(@DestinationVariable Long chat_id, Messages messages) throws Exception {
-        //Thread.sleep(3000); // simulated delay
-        //messagingTemplate.convertAndSend("/topic/messages/"+chat_id, messages);
-        return messages;
     }
 
     @Override
