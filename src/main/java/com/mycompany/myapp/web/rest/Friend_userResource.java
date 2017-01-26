@@ -185,35 +185,6 @@ public class Friend_userResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/{login}/friends",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<Set<User>> getFriendsUser(@PathVariable String login) {
-        log.debug("REST request to delete Friend_user : {}", login);
-
-        Set<Friend_user> friendsUser = friend_userRepository.findFriendsOfUser(login);
-
-        friendsUser = friendsUser.stream().filter(friend_user -> friend_user.isFriendship()).collect(Collectors.toSet());
-
-        Set<User> friends = new HashSet<>();
-
-        for(Friend_user friend_user:friendsUser){
-            String from = friend_user.getFriend_from().getLogin();
-            String to = friend_user.getFriend_to().getLogin();
-            String sad = "das";
-            if(from.equals(login)){
-                friends.add(friend_user.getFriend_to());
-            }
-            else{
-                friends.add(friend_user.getFriend_from());
-            }
-        }
-
-        return new ResponseEntity<>(friends,HttpStatus.OK);
-    }
-
-
     // Si son amigos
 
     @RequestMapping(value = "/friendship/{login}",

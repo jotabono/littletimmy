@@ -5,10 +5,15 @@
         .module('littletimmyApp')
         .controller('PerfilUsuarioController', PerfilUsuarioController);
 
-    PerfilUsuarioController.$inject = ['$scope', '$state', 'userInfo', '$http', 'Auth', 'Principal', '$rootScope', 'userFriends', 'userTrabajo', 'userEstudio', '$window', 'userFriendship','Friend_user'];
+    PerfilUsuarioController.$inject = ['$scope', 'userInfo', '$stateParams', 'Auth', 'Principal', '$rootScope', 'userTrabajo', 'userEstudio', '$window', 'Friend_user', 'userFriendship', 'userFriends', 'User'];
 
-    function PerfilUsuarioController ($scope, $state, userInfo, $http, Auth, Principal, $rootScope, userFriends, userTrabajo, userEstudio, $window, userFriendship, Friend_user) {
+    function PerfilUsuarioController ($scope, userInfo, $stateParams, Auth, Principal, $rootScope, userTrabajo, userEstudio, $window, Friend_user, userFriendship, userFriends, User) {
         var vm = this;
+
+        // userFriends
+        // userFriendship
+        // userFriendship
+
         vm.user = userInfo;
         vm.estudios = userEstudio;
         vm.estudioactuales = [];
@@ -17,15 +22,12 @@
         vm.trabajos = userTrabajo;
         vm.trabajoactuales = [];
         vm.trabajoactual = [];
-        vm.friend = userFriendship;
-        vm.isFriend = userFriendship;
-        vm.saveContent = saveContent;
 
-        vm.friends = userFriends;
+        vm.saveContent = saveContent;
         vm.addFriend = addFriend;
 
-        vm.friends.$promise.then(function(res){
-        });
+        vm.friendUser = userFriendship;
+        vm.friends = userFriends;
 
         $scope.scroll = function () {
             $('html, body').stop().animate({
@@ -44,19 +46,13 @@
         });
 
         function addFriend() {
-            if(vm.isFriend){
-                vm.friend.friendship = false;
-                Friend_user.update(vm.friend, function(res){
-                    vm.isFriend = false;
-
-                    console.log(res);
-                    var index = vm.friends.indexOf(res.friend_to);
-
-                    vm.friends.splice(index,1);
-
+            if(vm.friendUser.friendship){
+                vm.friendUser.friendship = false;
+                Friend_user.update(vm.friendUser, function(res){
+                    vm.friendUser = res;
                 });
             }else{
-                if(vm.isFriend == null || vm.isFriend == undefined){
+                if(!vm.friendUser.friendship && (vm.friendUser.friend_from == null || vm.friendUser.friend_to == null)){
                     var newFriend = {
                         "id": null,
                         "friendship_date": new Date(),
@@ -65,22 +61,19 @@
                         "friend_to": vm.user
                     }
                     Friend_user.save(newFriend, function(res){
-                        console.log("OK");
-                        vm.isFriend = true;
-                        vm.friends.push(res.friend_to);
-                    });
-                }else{
-                    vm.friend.friendship = true;
-                    Friend_user.update(vm.friend, function(res){
-                        vm.isFriend = true;
-                        vm.friends.push(res.friend_to);
+                        vm.friendUser = res;
                     });
                 }
-
-
-
-
+                else{
+                    vm.friendUser.friendship = true;
+                    Friend_user.update(vm.friendUser, function(res){
+                        vm.friendUser = res;
+                    });
+                }
             }
+            User.getFriendsUser({login:$stateParams.user},function(res){
+                vm.friends = res;
+            });
         }
 
         function saveContent(user) {
@@ -96,10 +89,6 @@
                 vm.error = 'ERROR';
             });
         }
-
-        vm.isFriend.$promise.then(function (response) {
-            vm.isFriend = response.friendship;
-        });
 
         vm.user.$promise.then(function (response) {
             $window.document.title = "Perfil de " + vm.user.firstName + " " + vm.user.lastName;
@@ -118,7 +107,6 @@
         });
 
         vm.trabajos.$promise.then(function (response) {
-            console.log(response);
             for(var i=0; i<vm.trabajos.length; i++){
                 if (vm.trabajos[i].trabajo.actualmente) {
                     vm.trabajoactual = vm.trabajos[i].trabajo;
@@ -132,7 +120,6 @@
         })
 
         $(window).on("scroll",function(){
-            console.log($(this).scrollTop());
             if($(this).scrollTop() <= 500){
                 $('.fixed-user').css("height","0px");
             }

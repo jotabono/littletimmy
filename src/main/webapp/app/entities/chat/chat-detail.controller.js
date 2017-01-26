@@ -5,16 +5,21 @@
         .module('littletimmyApp')
         .controller('ChatDetailController', ChatDetailController);
 
-    ChatDetailController.$inject = ['$scope', '$rootScope', '$timeout', '$interval', '$window', 'previousState', 'entity', 'Chat', 'User', 'Messages', 'ChatTrackerService'];
+    ChatDetailController.$inject = ['$scope', '$rootScope', '$timeout', '$interval', '$window', 'previousState', 'entity', 'Chat', 'User', 'ChatTrackerService', 'Principal'];
 
-    function ChatDetailController($scope, $rootScope, $timeout, $interval, $window, previousState, entity, Chat, User, Messages, ChatTrackerService) {
+    function ChatDetailController($scope, $rootScope, $timeout, $interval, $window, previousState, entity, Chat, User, ChatTrackerService, Principal) {
         var vm = this;
 
         vm.chat = entity;
         vm.previousState = previousState.name;
+        vm.account = [];
 
         var unsubscribe = $rootScope.$on('littletimmyApp:chatUpdate', function(event, result) {
             vm.chat = result;
+        });
+
+        Principal.identity().then(function (account) {
+            vm.account = account;
         });
 
         $scope.$on('$destroy', unsubscribe);
@@ -44,6 +49,15 @@
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
             ChatTrackerService.unsubscribe();
         });
+
+        vm.addMember = addMember;
+
+        function addMember(){
+            vm.friends = [];
+            User.getFriendsUser({login: vm.account.login}, function(res){
+                vm.friends = res;
+            });
+        }
 
         function post(msg) {
             var post = {

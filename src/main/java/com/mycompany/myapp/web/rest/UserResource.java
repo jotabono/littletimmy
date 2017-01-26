@@ -230,18 +230,21 @@ public class UserResource {
             .collect(Collectors.toList());
     }
 
-    @RequestMapping(value = "/user/logged/friends",
+    @RequestMapping(value = "/user/{login}/friends",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<User> getFriendsUser() {
+    public ResponseEntity<Set<User>> getFriendsUser(@PathVariable String login) {
 
-        return friend_userRepository.findByFriendOfUser()
-            .stream()
-            .filter(friend_user -> friend_user.isFriendship())
-            .map(friend_user -> friend_user.getFriend_to())
-            .collect(Collectors.toList());
+        Set<Friend_user> friends = friend_userRepository.findFriendsOfUser(login);
+        Set<User> friendU = new HashSet<>();
 
+        for(Friend_user friend_user: friends){
+            if(friend_user.getFriend_to().getLogin().equals(login)) friendU.add(friend_user.getFriend_from());
+            else friendU.add(friend_user.getFriend_to());
+        }
+
+        return new ResponseEntity<>(friendU, HttpStatus.OK);
     }
 
 }

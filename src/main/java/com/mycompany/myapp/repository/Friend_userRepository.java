@@ -23,7 +23,7 @@ public interface Friend_userRepository extends JpaRepository<Friend_user,Long> {
     @Query("select friend_user from Friend_user friend_user where friend_user.friend_to.login = ?#{principal.username} OR friend_user.friend_from.login = ?#{principal.username}")
     List<Friend_user> findByFriendOfUser();
 
-    @Query("select friend_user from Friend_user friend_user where friend_user.friendship = true AND friend_user.friend_to.login = :login OR friend_user.friend_from.login = :login")
+    @Query("select friend_user from Friend_user friend_user where friend_user.friendship = true AND (friend_user.friend_to.login = :login OR friend_user.friend_from.login = :login)")
     Set<Friend_user> findFriendsOfUser(@Param("login") String login);
 
     @Query("select friend_user from Friend_user friend_user where (friend_user.friend_from.login = :login AND friend_user.friend_to.login = :login2) " +

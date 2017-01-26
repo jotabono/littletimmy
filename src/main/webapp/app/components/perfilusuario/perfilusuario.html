@@ -18,7 +18,7 @@
             <h1>{{vm.user.firstName}} {{vm.user.lastName}}</h1>
         </div>
         <div class="col-md-12 cabeceraperfil">
-            <button ng-click="vm.addFriend()" ng-style="vm.isFriend && {'background-color':'#55ACEE', 'color': '#fff', 'border': '1px solid #4d9dd6'}" ng-if="vm.user.login != account.login" class="btn redondo" uib-popover="{{vm.isFriend ? 'Eliminar contacto' : 'Añadir contacto'}}" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px" ng-class="{true: 'mdi-account-check', false: 'mdi-account-plus'}[vm.isFriend]"></i></button>
+            <button ng-click="vm.addFriend()" ng-style="vm.friendUser.friendship && {'background-color':'#55ACEE', 'color': '#fff', 'border': '1px solid #4d9dd6'}" ng-if="vm.user.login != account.login" class="btn redondo" uib-popover="{{vm.friendUser.friendship ? 'Eliminar contacto' : 'Añadir contacto'}}" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px" ng-class="{true: 'mdi-account-check', false: 'mdi-account-plus'}[vm.friendUser.friendship]"></i></button>
             <button class="btn redondo" uib-popover="Recomendar a este usuario" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px mdi-notification-clear-all"></i></button>
             <button class="btn redondo" uib-popover="Enviar un mensaje" popover-trigger="mouseenter" popover-placement="bottom"><i class="mdi mdi-24px mdi-wechat"></i></button>
         </div>
