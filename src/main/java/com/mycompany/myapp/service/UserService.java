@@ -1,8 +1,10 @@
 package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.Authority;
+import com.mycompany.myapp.domain.Friend_user;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.AuthorityRepository;
+import com.mycompany.myapp.repository.Friend_userRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.UserSearchRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
@@ -45,6 +47,9 @@ public class UserService {
 
     @Inject
     private AuthorityRepository authorityRepository;
+
+    @Inject
+    private Friend_userRepository friend_userRepository;
 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
@@ -248,4 +253,70 @@ public class UserService {
             userSearchRepository.delete(user);
         }
     }
+
+
+    public Set<User> getFriends(String login){
+        Set<Friend_user> friends = friend_userRepository.findFriendsOfUser(login);
+        Set<User> friendU = new HashSet<>();
+
+        for(Friend_user friend_user: friends){
+            if(friend_user.getFriend_to().getLogin().equals(login)) friendU.add(friend_user.getFriend_from());
+            else friendU.add(friend_user.getFriend_to());
+        }
+        return friendU;
+    }
+
+    public List<User> getConectionPath (Long idUserSrc, Long idUserDst) {
+
+        User primeroLista=userRepository.findOne(idUserSrc);
+        User personaDestino = userRepository.findOne(idUserDst);
+
+        Set<User> visitado = new HashSet<>();
+        Map<User, User> predecesor = new HashMap<>();
+
+        List<User> camino = new LinkedList();
+        Queue<User> cola = new LinkedList();
+
+        cola.add(primeroLista);
+        visitado.add(primeroLista);
+
+        boolean encontrado=false;
+
+        while(!cola.isEmpty()){
+            primeroLista = cola.poll();
+            System.out.println("Voy a visitar la persona: ");
+            System.out.println(primeroLista);
+            if (primeroLista.equals(personaDestino)){
+                encontrado=true;
+                break;
+            }else{
+                for(User amigo : getFriends(primeroLista.getLogin())){
+                    if(!visitado.contains(amigo)){
+                        cola.add(amigo);
+                        visitado.add(amigo);
+                        predecesor.put(amigo, primeroLista);
+                    }
+                }
+            }
+        }
+
+        if(encontrado){
+            for(User persona = personaDestino;
+                persona != null;
+                persona = predecesor.get(persona)) {
+
+                camino.add(persona);
+            }
+            Collections.reverse(camino);
+            log.debug("Muestro el camino mínimo entre "+primeroLista.getFirstName()+" "+primeroLista.getLastName()
+                +" y "+personaDestino.getFirstName()+" "+personaDestino.getLastName());
+        }else
+        {
+            log.debug("No hay conexión entre "+primeroLista.getFirstName()+" "+primeroLista.getLastName()
+                +" y "+personaDestino.getFirstName()+" "+personaDestino.getLastName());
+        }
+            log.debug("Shortest path between ", camino);
+        return camino;
+    }
 }
+

@@ -75,7 +75,7 @@ public class Friend_userResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("friend_user", "friendshipexist", "You and "+friend_user.getFriend_to().getLogin()+" are already friends")).body(null);
         }
 
-        friend_user.setFriendship(false);
+        //friend_user.setFriendship(false);
         Friend_user result = friend_userRepository.save(friend_user);
         friend_userSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/friend-users/" + result.getId()))

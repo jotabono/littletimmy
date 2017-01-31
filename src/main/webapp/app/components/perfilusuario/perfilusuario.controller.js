@@ -35,14 +35,8 @@
             }, 500);
         };
 
-        $rootScope.$on('authenticationSuccess',function(){
-            Principal.identity().then(function(account) {
-                $rootScope.account = account;
-            });
-        });
-
-        $rootScope.$on('emitUser',function(e,user){
-            $rootScope.account = user;
+        Principal.identity().then(function(account) {
+            $rootScope.account = account;
         });
 
         function addFriend() {

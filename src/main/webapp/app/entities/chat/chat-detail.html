@@ -1,5 +1,5 @@
 <div>
-    <div class="chat-title"><h3>{{vm.chat.name}}</h3><button ng-click="vm.addMember()">ADD MEMBERS</button></div>
+    <div class="chat-title"><h3>{{vm.chat.name}}</h3><div class="users-in-chat"> Members: <code ng-repeat="user in vm.chat.users">{{user.login}}</code></div><button class="btn redondo" ng-click="toggleRight()"><i class="ion ion-person-add add-members-icon"></i></button></div>
     <div class="messages" id="messagesId">
         <div class="messages-block clearfix" ng-repeat="message in vm.chat.messages">
             <span ng-class="{true: 'logged-msg',false: 'normal-msg'}[message.sender.login == account.login]">
@@ -24,10 +24,26 @@
         </div>
         <!--<input ng-model="msg" my-enter="vm.post(msg)" type="text" placeholder="Escribe tu mensaje."/>-->
     </div>
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+
+        <md-toolbar class="md-theme-light">
+            <h1 class="md-toolbar-tools addfriend-title">Add friends to conversation</h1>
+        </md-toolbar>
+        <md-content>
+            <div ng-repeat="friend in vm.friends">
+                <div class="friendblock">
+                    <img style="object-fit: cover" class="friendspictures" src="{{friend.imagen}}">
+                    <span>{{friend.firstName}} {{friend.lastName}} </span>
+                    <code>{{friend.login}}</code>
+                </div>
+            </div>
+        </md-content>
+
+    </md-sidenav>
 </div>
 <style>
     .chat-title h3{
-        flex: 1;
+        /*flex: 1;*/
     }
     .button-send{
         width: 9%;
@@ -82,13 +98,11 @@
         position: absolute;
         top: 0;
         left: 0;
-        //background: #ebebeb;
         padding: 20px;
-
         display: flex;
-
-        background: rgba(3, 73, 123, 0.77);
         padding: 20px;
+        background-color:#f9f9f9;
+        color: #c5c5c5;
     }
     .messages{
         overflow-y: auto;
@@ -98,7 +112,7 @@
         right: 0;
         //bottom: 50px;
         bottom: 50px;
-        top: 67px;
+        top: 79px;
     }
     .chat-title h3{
         margin: 0;
@@ -174,6 +188,53 @@
         display:block;
         clear: both;
         position: relative;
+    }
+    .friendspictures{
+        margin:10px;
+        width:60px;
+        height:60px;
+        border-radius:100%;
+
+    }
+    .friendblock:hover{
+        cursor: pointer;
+        background-color:#efefef;
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+        transition: 0.5s;
+    }
+    .addfriend-title{
+        background-color: #55ACEE !important;
+    }
+    .users-in-chat{
+        text-align: center;
+        flex:5;
+        padding-top: 3px;
+    }
+    .users-in-chat code{
+        margin-left:10px;
+    }
+    .add-members-icon{
+        font-size:30px;
+    }
+    .redondo{
+        border:1px solid #ccc;
+        background-color:#ebebeb;
+        color:grey;
+        max-width:90px;
+        max-height:90px;
+
+    }
+    .redondo:hover{
+        background-color:#55ACEE;
+        color:white;
+        border:1px solid #4d9dd6;
+    }
+
+    .btn{
+        padding:3px 6px !important;
     }
 </style>
 

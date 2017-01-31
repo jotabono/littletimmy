@@ -230,21 +230,28 @@ public class UserResource {
             .collect(Collectors.toList());
     }
 
+    // AMISTAD
+
     @RequestMapping(value = "/user/{login}/friends",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Set<User>> getFriendsUser(@PathVariable String login) {
-
-        Set<Friend_user> friends = friend_userRepository.findFriendsOfUser(login);
-        Set<User> friendU = new HashSet<>();
-
-        for(Friend_user friend_user: friends){
-            if(friend_user.getFriend_to().getLogin().equals(login)) friendU.add(friend_user.getFriend_from());
-            else friendU.add(friend_user.getFriend_to());
-        }
-
-        return new ResponseEntity<>(friendU, HttpStatus.OK);
+        return new ResponseEntity<>(userService.getFriends(login), HttpStatus.OK);
     }
+
+
+    // CAMINO MINIMO
+
+    @RequestMapping(value = "/userSource/{idSrc}/userDestination/{idDst}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<User>> getFriendsUser(@PathVariable Long idSrc, @PathVariable Long idDst) {
+        return new ResponseEntity<>(userService.getConectionPath(idSrc, idDst), HttpStatus.OK);
+    }
+
+
+
 
 }

@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('ChatDetailController', ChatDetailController);
 
-    ChatDetailController.$inject = ['$scope', '$rootScope', '$timeout', '$interval', '$window', 'previousState', 'entity', 'Chat', 'User', 'ChatTrackerService', 'Principal'];
+    ChatDetailController.$inject = ['$scope', '$rootScope', '$timeout', '$interval', '$window', 'previousState', 'entity', 'Chat', 'User', 'ChatTrackerService', 'Principal', '$mdSidenav'];
 
-    function ChatDetailController($scope, $rootScope, $timeout, $interval, $window, previousState, entity, Chat, User, ChatTrackerService, Principal) {
+    function ChatDetailController($scope, $rootScope, $timeout, $interval, $window, previousState, entity, Chat, User, ChatTrackerService, Principal, $mdSidenav) {
         var vm = this;
 
         vm.chat = entity;
@@ -20,6 +20,10 @@
 
         Principal.identity().then(function (account) {
             vm.account = account;
+            vm.friends = [];
+            User.getFriendsUser({login: vm.account.login}, function(res){
+                vm.friends = res;
+            });
         });
 
         $scope.$on('$destroy', unsubscribe);
@@ -27,7 +31,20 @@
         $rootScope.$on('emitUser',function(e,user){
             $rootScope.account = user;
         });
+        $scope.toggleRight = buildToggler('right');
+        $scope.isOpenRight = function(){
+            return $mdSidenav('right').isOpen();
+        };
+        function buildToggler(navID) {
+            return function () {
+                // Component lookup should always be available since we are not using `ng-if`
+                $mdSidenav(navID)
+                    .toggle()
+                    .then(function () {
 
+                    });
+            }
+        }
         entity.$promise.then(function(res){
 
             ChatTrackerService.connect('chat', res.id);
@@ -49,15 +66,6 @@
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
             ChatTrackerService.unsubscribe();
         });
-
-        vm.addMember = addMember;
-
-        function addMember(){
-            vm.friends = [];
-            User.getFriendsUser({login: vm.account.login}, function(res){
-                vm.friends = res;
-            });
-        }
 
         function post(msg) {
             var post = {
