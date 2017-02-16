@@ -12,6 +12,7 @@
         </div>
     </div>
 </div>
+
 <div class="row topcabecera">
         <div class="col-md-12 cabeceraperfil">
             <div class="circulo"><img class="imgcirculo" height="100%" width="100%" src="{{vm.user.imagen}}"/></div>
@@ -92,7 +93,7 @@
                     </div>
                     <div ng-if="vm.user.github" class="col-md-4">
                         <div>
-                            <i class="mdi mdi-github-circle" style="color:#0D2636; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.facebook.com/{{vm.user.github}}" buttons="no" editable-text="vm.user.github" e-form="userGithub" onaftersave="vm.saveContent(vm.user)">{{vm.user.github}}</a></b></span>
+                            <i class="mdi mdi-github-circle" style="color:#0D2636; font-size:28px;"> </i><span style="vertical-align:super"><b><a target="_blank" href="http://www.github.com/{{vm.user.github}}" buttons="no" editable-text="vm.user.github" e-form="userGithub" onaftersave="vm.saveContent(vm.user)">{{vm.user.github}}</a></b></span>
                             <button class="editbuttons2" ng-click="userGithub.$show()" ng-if="account.login == vm.user.login" ng-hide="userGithub.$visible">
                                 <i class="ion-edit" style=""></i>
                             </button>
@@ -147,8 +148,6 @@
             </div>
         </div>
         </div>
-</div>
-
 <style>
 
     .titulos{
@@ -490,4 +489,16 @@ i.ioniconbig{
         text-decoration: none;
     }
 
+    .col-nw-small{
+        height:auto !important;
+        padding-bottom:10px;
+    }
+
+    .content-profile{
+        background-color: white;
+        margin-right:10%;
+        margin-left:10%;
+        padding-top:20px;
+        padding-bottom:20px;
+    }
 </style>

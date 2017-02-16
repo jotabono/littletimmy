@@ -7,9 +7,12 @@ a:active{
 }
 
 body {
-    background: #FFFFFF;
     font-family: 'Roboto', sans-serif;
     color: #333;
+}
+
+.container-fluid{
+    background: #E9EBEE;
 }
 
 /* ==========================================================================
