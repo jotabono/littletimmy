@@ -242,8 +242,9 @@ public class UserResource {
 
 
     // CAMINO MINIMO
+    // /users/connectionDegree/from/{idSrc}/to/{idDst}
 
-    @RequestMapping(value = "/userSource/{idSrc}/userDestination/{idDst}",
+    @RequestMapping(value = "/users/connectionDegree/from/{idSrc}/to/{idDst}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
