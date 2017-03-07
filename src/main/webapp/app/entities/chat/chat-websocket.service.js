@@ -35,7 +35,7 @@ function ChatTrackerService ($rootScope, $window, $cookies, $http, $q, $localSto
         /*jshint camelcase: false */
         var socket = new SockJS(url);
         stompClient = Stomp.over(socket);
-        stompClient.debug = null;
+        //stompClient.debug = null;
         var stateChangeStart;
         var headers = {};
         stompClient.connect(headers, function() {

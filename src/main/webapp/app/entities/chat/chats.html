@@ -6,7 +6,7 @@
         </span>
     </button>
     <div ui-sref-active="active" ng-repeat="chat in vm.chats track by chat.id" ui-sref="chat-detail({id:chat.id})" class="chat-blocks" ng-if="vm.chats.length > 0">
-        <img src="{{chat.owner.imagen}}" class="img-chat" />  <span>{{chat.name}}</span> <span style="float:right; font-size:12px; font-weight:bold"> {{chat.users.length}}/10 </span>
+        <img src="{{chat.owner.imagen}}" class="img-chat" />  <span>{{chat.name}}</span> <span style="float:right; font-size:12px; font-weight:bold"> </span>
     </div>
     <div class="help-chat" ng-if="vm.chats.length == 0">
         <div style="text-align: center; color: #c5c5c5;text-shadow: 1px 4px 6px #f4f4f4, 0 0 0 #000,1px 4px 6px #f4f4f4;">
@@ -55,9 +55,6 @@
         background: rgba(100,100,100,0.4);
     }
 
-    html, body{
-        height:100%;
-    }
     .all-chats{
         display: block;
         height: 93vh;
@@ -113,91 +110,3 @@
         max-height: 100vh;
     }
 </style>
-
-<!--
-<div>
-    <h2 data-translate="littletimmyApp.chat.home.title">Chats</h2>
-    <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="chat.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs"  data-translate="littletimmyApp.chat.home.createLabel">
-                        Create new Chat
-                    </span>
-                </button>
-            </div>
-            <div class="col-xs-8 no-padding-right">
-                <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'littletimmyApp.chat.home.search' | translate }}">
-                        <span  class="input-group-btn width-min" >
-                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
-                            <button class="btn btn-info" ng-click="vm.clear()">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr>
-                    <th><span data-translate="global.field.id">ID</span></th>
-                    <th><span data-translate="littletimmyApp.chat.name">Name</span></th>
-                    <th><span data-translate="littletimmyApp.chat.creationDate">Creation Date</span></th>
-                    <th><span data-translate="littletimmyApp.chat.owner">Owner</span></th>
-                    <th><span data-translate="littletimmyApp.chat.users">Users</span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="chat in vm.chats track by chat.id">
-                    <td><a ui-sref="chat-detail({id:chat.id})">{{chat.id}}</a></td>
-                    <td>{{chat.name}}</td>
-                    <td>{{chat.creationDate | date:'medium'}}</td>
-                    <td>
-                        {{chat.owner.id}}
-                    </td>
-                    <td>
-                        <span ng-repeat="users in chat.users">
-                            {{users.id}}{{$last ? '' : ', '}}
-                        </span>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="chat-detail({id:chat.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="chat.edit({id:chat.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="chat.delete({id:chat.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
--->
