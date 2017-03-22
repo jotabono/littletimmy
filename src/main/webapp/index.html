@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.min.css">
     <link rel="stylesheet" href="content/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css">
     <!-- endinject -->
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
@@ -35,10 +36,10 @@
         <div ui-view="content">
             <!-- Angular views -->
         </div>
-
     </div>
     <div class="footer" ng-cloak>
     </div>
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'progress-bar': 'true'}"></toaster-container>
     <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
     <script>
         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -77,6 +78,7 @@
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
     <script src="bower_components/angular-xeditable/dist/js/xeditable.min.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/AngularJS-Toaster/toaster.min.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 
@@ -256,8 +258,12 @@
     <script src="app/account/activate/activate.controller.js"></script>
     <script src="app/account/account.state.js"></script>
     <script src="app/entities/chat/chat-websocket.service.js"></script>
+    <script src="app/components/perfilusuario/connection-path.controller.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 
+    <script type="text/ng-template" id="renderNotificationChat.html">
+        <p ng-click="chat.detail({id: toaster.data})">New message in! {{toaster.data}}</p>
+    </script>
 </body>
 </html>

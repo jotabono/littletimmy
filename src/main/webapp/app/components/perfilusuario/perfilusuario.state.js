@@ -71,6 +71,27 @@
                     });
                 }]
             })
+            .state('perfil-path', {
+                parent: 'perfil',
+                url: '/connection-path/from/{user_src}',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/components/perfilusuario/connection-path.html',
+                        controller: 'ConnectionPathController',
+                        controllerAs: 'vm',
+                        backdrop: true,
+                        backdropClass: 'backdropBlurred',
+                        size: 'sm'
+                    }).result.then(function() {
+
+                    }, function() {
+                        $state.go('perfil', {login:$stateParams.login});
+                    });
+                }]
+            })
             .state('perfil-recomendar', {
                 parent: 'perfil-recomendaciones',
                 url: '/new',

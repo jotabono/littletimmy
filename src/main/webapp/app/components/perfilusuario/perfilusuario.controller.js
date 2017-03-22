@@ -5,9 +5,9 @@
         .module('littletimmyApp')
         .controller('PerfilUsuarioController', PerfilUsuarioController);
 
-    PerfilUsuarioController.$inject = ['$scope', 'userInfo', '$stateParams', 'Auth', 'Principal', '$rootScope', 'userTrabajo', 'userEstudio', '$window', 'Friend_user', 'userFriendship', 'userFriends', 'User'];
+    PerfilUsuarioController.$inject = ['$scope', 'userInfo', '$stateParams', 'Auth', 'Principal', '$rootScope', 'userTrabajo', 'userEstudio', '$window', 'Friend_user', 'userFriendship', 'userFriends', 'User', '$http'];
 
-    function PerfilUsuarioController ($scope, userInfo, $stateParams, Auth, Principal, $rootScope, userTrabajo, userEstudio, $window, Friend_user, userFriendship, userFriends, User) {
+    function PerfilUsuarioController ($scope, userInfo, $stateParams, Auth, Principal, $rootScope, userTrabajo, userEstudio, $window, Friend_user, userFriendship, userFriends, User, $http) {
         var vm = this;
 
         // userFriends
@@ -22,6 +22,7 @@
         vm.trabajos = userTrabajo;
         vm.trabajoactuales = [];
         vm.trabajoactual = [];
+        vm.userConnectionPath = [];
 
         vm.saveContent = saveContent;
         vm.addFriend = addFriend;
@@ -85,7 +86,22 @@
         }
 
         vm.user.$promise.then(function (response) {
+
             $window.document.title = "Perfil de " + vm.user.firstName + " " + vm.user.lastName;
+
+            $http({
+                method: 'GET',
+                url: '/api/users/'+$rootScope.account.login
+            }).then(function successCallback(resp) {
+                var user = resp.data;
+                $http({
+                    method: 'GET',
+                    url: '/api/users/connectionDegree/from/'+user.id+'/to/'+response.id
+                }).then(function successCallback(res) {
+                    vm.userConnectionPath = res.data;
+                    console.log(res.data);
+                });
+            });
         });
 
         vm.estudios.$promise.then(function (response) {

@@ -138,18 +138,59 @@
                 </div>
             </div>
         <div class="col-nw-small card" style="margin-top:10px;">
-
-            <div class="titulos"><i class="ion-android-people botonredondo" style="background-color:#2574A9"></i>Contactos</div>
-                <a class="friendlink" ng-repeat="friend in vm.friends" href="/#/perfil/{{friend.login}}"><div class="friendblock">
+            <div class="titulos">
+                <i class="ion-android-people botonredondo" style="background-color:#2574A9"></i>
+                Contactos
+            </div>
+            <a class="friendlink" ng-repeat="friend in vm.friends" href="/#/perfil/{{friend.login}}">
+                <div class="friendblock">
                     <img style="object-fit: cover" class="friendspictures" src="{{friend.imagen}}">
                     <span>{{friend.firstName}} {{friend.lastName}}</span>
                 </div>
-                </a>
+            </a>
+            <div ng-if="account.login != vm.user.login">
+                <div class="titulos">
+                    <i class="ion-map botonredondo" style="background-color:#2574A9"></i>
+                    <span>Conexión de nivel {{vm.userConnectionPath.length - 1}} </span>
+                </div>
+                <div>
+                    <div class="user_tree">
+                        <div>
+                            <img src="{{account.imagen}}" height="40px" width="40px">
+                            <span>You</span>
+                        </div>
+                    </div>
+                    <div ng-repeat="userTree in vm.userConnectionPath | limitTo: 3" class="user_tree" ng-if="userTree.login != account.login">
+                        <div style="z-index: 2222; position: relative;">
+                            <img src="{{userTree.imagen}}" height="40px" width="40px">
+                            <span>{{userTree.login}}</span>
+                            <span ng-if="userTree.login != vm.user.login"><button ui-sref="perfil({user:userTree.login})" class="btn redondo" style="margin: 0;">Ir a perfil</button></span>
+                        </div>
+                    </div>
+                    <div ng-if="vm.userConnectionPath.length > 3" style="text-align: center;">
+                        <i class="ion-chevron-down"></i><br>
+                        <span ui-sref="perfil-path({user_src: account.login})">Ver conexión completa</span>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
+    </div>
 <style>
-
+    .user_tree{
+        position: relative;
+        padding: 12px;
+        z-index: 22;
+    }
+    .user_tree:not(:first-child):after{
+        content: '';
+        position: absolute;
+        height: 25px;
+        width: 1px;
+        top: -12px;
+        left: 11%;
+        background: rgba(13, 13, 13, 0.59);
+        z-index: -1;
+    }
     .titulos{
         display: inline-flex;
         align-items: center;
