@@ -252,7 +252,4 @@ public class UserResource {
         return new ResponseEntity<>(userService.getConectionPath(idSrc, idDst), HttpStatus.OK);
     }
 
-
-
-
 }

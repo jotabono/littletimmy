@@ -71,7 +71,7 @@ public class OAuth2ServerConfiguration {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/api/authenticate").permitAll()
-                .antMatchers("/api/register").permitAll()
+                .antMatchers("/api/register", "/api/register/app").permitAll()
                 .antMatchers("/api/profile-info").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/websocket/tracker").hasAuthority(AuthoritiesConstants.ADMIN)
