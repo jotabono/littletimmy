@@ -5,10 +5,33 @@
         .module('littletimmyApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', 'Recommend_notification', '$interval', '$rootScope'];
+    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', 'Recommend_notification', 'Friendship_notification', '$interval', '$rootScope',  '$scope', '$http'];
 
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService, Recommend_notification, $interval, $rootScope) {
+    function NavbarController ($state, Auth, Principal, ProfileService, LoginService, Recommend_notification, Friendship_notification, $interval, $rootScope, $scope, $http) {
         var vm = this;
+        $scope.resultsSearch = [];
+
+        $scope.search = function(query){
+            $http({
+                method: 'GET',
+                url: 'api/_search/'+query
+            }).then(function successCallback(response) {
+                $scope.resultsSearch = response.data;
+            }, function errorCallback(response) {
+            });
+        }
+
+        $scope.go = function () {
+            $state.go('search',{q: $scope.searchQuery});
+        }
+
+        $scope.clearFinder = function () {
+            $('#resultSearch').hide();
+        };
+
+        $scope.showResults = function () {
+            $('#resultSearch').show();
+        }
 
         var timeRefresh = 60000 * 3;
 
@@ -19,6 +42,7 @@
 
         Principal.identity().then(function(account) {
             vm.notifications = Recommend_notification.getRNotificationsNotReaded();
+            vm.friendship = Friendship_notification.getFNotificationsNotReaded();
 
             vm.account = account;
 
@@ -26,6 +50,7 @@
 
             $interval(function() {
                 vm.notifications = Recommend_notification.getRNotificationsNotReaded();
+                vm.friendship = Friendship_notification.getFNotificationsNotReaded();
             }, timeRefresh);
         });
 
@@ -33,8 +58,17 @@
             vm.notifications = Recommend_notification.getRNotificationsNotReaded();
         });
 
+        $rootScope.$on('updateFriendships', function(){
+            vm.friendship = Friendship_notification.getFNotificationsNotReaded();
+        });
+
         $rootScope.$on('authenticationSuccess',function(){
             vm.notifications = Recommend_notification.getRNotificationsNotReaded();
+            vm.friendship = Friendship_notification.getFNotificationsNotReaded();
+
+            vm.friendship.$promise.then(function (res) {
+                console.log(res);
+            });
 
             Principal.identity().then(function(account) {
                 vm.account = account;
@@ -43,6 +77,7 @@
 
             $interval(function() {
                 vm.notifications = Recommend_notification.getRNotificationsNotReaded();
+                vm.friendship = Friendship_notification.getFNotificationsNotReaded();
             }, timeRefresh);
         });
 
@@ -59,6 +94,11 @@
         vm.readNotifications = function (index) {
             vm.notifications[index].leida = true;
             Recommend_notification.update(vm.notifications[i]);
+        }
+
+        vm.readFriendships = function (index) {
+            vm.friendship[index].friendship = true;
+            Friendship_notification.update(vm.friendship[i]);
         }
 
         vm.isNavbarCollapsed = true;
@@ -82,6 +122,7 @@
 
         function logout() {
             vm.notifications = null;
+            vm.friendship = null;
             collapseNavbar();
             Auth.logout();
             $state.go('home');

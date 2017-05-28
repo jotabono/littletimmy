@@ -3,8 +3,11 @@ package com.mycompany.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Friend_user;
 
+import com.mycompany.myapp.domain.Friendship_notification;
+import com.mycompany.myapp.domain.Recommend_notification;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.Friend_userRepository;
+import com.mycompany.myapp.repository.Friendship_notificationRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.Friend_userSearchRepository;
 import com.mycompany.myapp.security.SecurityUtils;
@@ -51,6 +54,9 @@ public class Friend_userResource {
     @Inject
     private UserRepository userRepository;
 
+    @Inject
+    private Friendship_notificationRepository friendship_notificationRepository;
+
     /**
      * POST  /friend-users : Create a new friend_user.
      *
@@ -77,6 +83,16 @@ public class Friend_userResource {
 
         //friend_user.setFriendship(false);
         Friend_user result = friend_userRepository.save(friend_user);
+
+        Friendship_notification notification = new Friendship_notification();
+
+        notification.setEmisor(friend_user.getFriend_from());
+        notification.setReceptor(friend_user.getFriend_to());
+        notification.setFechaRecibida(friend_user.getFriendship_date());
+        notification.setLeida(false);
+        notification.setFriendship(friend_user);
+        friendship_notificationRepository.save(notification);
+
         friend_userSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/friend-users/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("friend_user", result.getId().toString()))
@@ -101,8 +117,24 @@ public class Friend_userResource {
         if (friend_user.getId() == null) {
             return createFriend_user(friend_user);
         }
+
         Friend_user result = friend_userRepository.save(friend_user);
         friend_userSearchRepository.save(result);
+
+        if(result.isFriendship()){
+
+            Friendship_notification notification = new Friendship_notification();
+
+            notification.setEmisor(friend_user.getFriend_from());
+            notification.setReceptor(friend_user.getFriend_to());
+            notification.setFechaRecibida(friend_user.getFriendship_date());
+            notification.setLeida(false);
+            notification.setFriendship(friend_user);
+            friendship_notificationRepository.save(notification);
+
+            friend_userSearchRepository.save(result);
+        }
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("friend_user", friend_user.getId().toString()))
             .body(result);

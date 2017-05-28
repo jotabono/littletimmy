@@ -12,7 +12,8 @@ body {
 }
 
 .container-fluid{
-    background: #E9EBEE;
+    background: #fafafa;
+    height:100%;
 }
 
 /* ==========================================================================
@@ -342,4 +343,185 @@ ui bootstrap tweaks
 
 
 
-/* jhipster-needle-css-add-main JHipster will add new css style */
+/* ESTILO BUSCADOR INDEX */
+
+.buscadorindex{
+    font-family:Roboto;
+    font-size: 20px;
+    font-weight: bold;
+    color: #03497B;
+    width:100%;
+    height:50px;
+    display:block;
+    background:transparent;
+}
+.buscadorindex:focus{
+    border-color: #333333;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(0, 33, 92, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.buscadorindexbutton{
+    border-color: #ccc;
+    height:50px;
+    display:block;
+    background:transparent;
+    color:white;
+}
+
+.buscadorindexbutton:hover{
+    background-color: transparent;
+    color: #007cbd;
+    transition:0.6s;
+    border-color: #007cbd;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(0, 124, 189, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+.buscadorindex::-webkit-input-placeholder {
+    font-family:Roboto;
+    font-weight: 300;
+    font-size: 20px;
+    color: #03497B;
+}
+
+.buscadorindex:-moz-placeholder { /* Firefox 18- */
+    font-family:Roboto;
+    font-weight: 300;
+    font-size: 20px;
+    color: #03497B;
+}
+
+.buscadorindex::-moz-placeholder {  /* Firefox 19+ */
+    font-family:Roboto;
+    font-weight: 300;
+    font-size: 20px;
+    color: #03497B;
+}
+
+.buscadorindex:-ms-input-placeholder {
+    font-family:Roboto;
+    font-weight: 300;
+    font-size: 20px;
+    color: #03497B;
+}
+#resultSearch{
+    position: absolute;
+    width:450px;
+    height: auto;
+    overflow-y: auto;
+    color: #fff;
+    border-radius: 0px 0px 5px 5px;
+    background: #03426F;
+}
+#resultSearch::-webkit-scrollbar {
+    width: 12px;
+}
+#resultSearch::-webkit-scrollbar {
+    width: 6px;
+}
+#resultSearch::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #eee;
+}
+#resultSearch::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #888;
+}
+#resultSearch::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(100,100,100,0.4);
+}
+#resultSearch::-webkit-scrollbar {
+    width: 12px;
+}
+#resultSearch::-webkit-scrollbar {
+    width: 6px;
+}
+#resultSearch::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #eee;
+}
+#resultSearch::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #888;
+}
+#resultSearch::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(100,100,100,0.4);
+}
+
+#inputor{
+    width:450px;
+    outline: 0!important;
+    background: #11649b;
+    color: #fff;
+    height:50px;
+    border-top:none;
+    border-bottom: none;
+    border-radius:0px;
+    border-color: #033660;
+}
+#inputor:focus{
+    outline: 0;
+}
+.search-row {
+    padding: 10px;
+    max-width: 100%;
+    width: 100%;
+    height: 38px;
+    display: block;
+}
+.search-row *{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    /*display: inline-block;*/
+    max-width: 100%;
+    overflow: hidden;
+    height: 100%;
+    line-height: 19px;
+    background: none;
+}
+.search-row:hover{
+    background: #03497B;
+}
+#search-wrapper{
+    /*position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 222;*/
+}
+.searcherlink{
+    color:white;
+}
+.searcherlink:hover{
+    text-decoration: none;
+    color:white;
+}
+
+#inputor::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #FFFFFF;
+}
+#inputor::-moz-placeholder { /* Firefox 19+ */
+    color: #FFFFFF;
+}
+#inputor:-ms-input-placeholder { /* IE 10+ */
+    color: #FFFFFF;
+}
+#inputor:-moz-placeholder { /* Firefox 18- */
+    color: #FFFFFF;
+}
+
+/* Perfil usuario background */
+
+#perfilbackground{
+    top:20%;
+    left:20%;
+    position:absolute;
+    width:60%;
+    height:200%;
+    background-color: #03497B;
+    opacity: 0.1;
+    border:10px solid #ccc;
+}
