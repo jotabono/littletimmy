@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "receptor",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "friendship",
+            "otherEntityName": "friend_user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "emisor",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "fechaRecibida",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "leida",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170327183722",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "friendship_notification",
+    "pagination": "no"
+}

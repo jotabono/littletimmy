@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="littletimmyApp.friendship_notification.detail.title">Friendship Notification</span> {{vm.friendship_notification.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="littletimmyApp.friendship_notification.fechaRecibida">Fecha Recibida</span></dt>
+        <dd>
+            <span>{{vm.friendship_notification.fechaRecibida | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.friendship_notification.leida">Leida</span></dt>
+        <dd>
+            <span>{{vm.friendship_notification.leida}}</span>
+        </dd>
+        <dt><span data-translate="littletimmyApp.friendship_notification.receptor">Receptor</span></dt>
+        <dd>
+            {{vm.friendship_notification.receptor.login}}
+        </dd>
+        <dt><span data-translate="littletimmyApp.friendship_notification.friendship">Friendship</span></dt>
+        <dd>
+            <a ui-sref="friend-user-detail({id:vm.friendship_notification.friendship.id})">{{vm.friendship_notification.friendship.id}}</a>
+        </dd>
+        <dt><span data-translate="littletimmyApp.friendship_notification.emisor">Emisor</span></dt>
+        <dd>
+            {{vm.friendship_notification.emisor.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="friendship-notification-detail.edit({id:vm.friendship_notification.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

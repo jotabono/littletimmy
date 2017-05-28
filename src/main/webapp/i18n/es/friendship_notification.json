@@ -1,0 +1,26 @@
+{
+    "littletimmyApp": {
+        "friendship_notification" : {
+            "home": {
+                "title": "Friendship Notifications",
+                "createLabel": "Crear nuevo Friendship Notification",
+                "createOrEditLabel": "Crear o editar Friendship Notification",
+                "search": "Search for Friendship Notification"
+            },
+            "created": "Un nuevo Friendship Notification ha sido creado con el identificador {{ param }}",
+            "updated": "Un Friendship Notification ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Friendship Notification ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Friendship Notification {{ id }}?"
+            },
+            "detail": {
+                "title": "Friendship Notification"
+            },
+            "fechaRecibida": "Fecha Recibida",
+            "leida": "Leida",
+            "receptor": "Receptor",
+            "friendship": "Friendship",
+            "emisor": "Emisor"
+        }
+    }
+}
